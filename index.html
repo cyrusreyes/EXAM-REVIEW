@@ -55,7 +55,7 @@
             <label for="randomize-toggle"><strong>Randomize Order?</strong> (Questions will shuffle every time)</label>
         </div>
 
-<div class="menu-grid">
+        <div class="menu-grid">
             <div class="menu-card" onclick="startQuiz('gi')">
                 <span style="font-size:3rem;">🩺</span>
                 <h3>GI Disorders</h3>
@@ -87,8 +87,7 @@
                 <p style="color:#777; font-size:0.9rem;">Schizophrenia, Bipolar, Personality</p>
             </div>
         </div>
-
-    <div id="view-quiz" class="view">
+    </div> <div id="view-quiz" class="view">
         <div class="progress-container"><div class="progress-fill" id="progress-fill"></div></div>
         <div style="margin-top:10px; color:#666; font-size:0.9rem; display:flex; justify-content:space-between;">
             <span>Question <span id="q-current">1</span> of <span id="q-total">10</span></span>
@@ -127,9 +126,9 @@
 <script>
     // ================= FULL DATASETS =================
     
-    // 80 Psych Questions (Includes the new Neuro ones)
+    // 80 Psych Questions
     const psychQuestions = [
-{ q: "A client diagnosed with Schizophrenia has been taking Haloperidol (Haldol) for 3 days. The nurse assesses high fever (39.5°C), severe muscle rigidity, tachycardia, and diaphoresis. What is the priority action?", options: ["Administer PRN Benztropine (Cogentin).", "Hold the medication and notify the healthcare provider immediately.", "Document the findings and continue to monitor.", "Administer acetaminophen for the fever."], answer: 1, rationale: "These are classic signs of Neuroleptic Malignant Syndrome (NMS), a potentially fatal reaction. Priority is to stop the offending agent and seek immediate help. Benztropine is for EPS, not NMS." },
+        { q: "A client diagnosed with Schizophrenia has been taking Haloperidol (Haldol) for 3 days. The nurse assesses high fever (39.5°C), severe muscle rigidity, tachycardia, and diaphoresis. What is the priority action?", options: ["Administer PRN Benztropine (Cogentin).", "Hold the medication and notify the healthcare provider immediately.", "Document the findings and continue to monitor.", "Administer acetaminophen for the fever."], answer: 1, rationale: "These are classic signs of Neuroleptic Malignant Syndrome (NMS), a potentially fatal reaction. Priority is to stop the offending agent and seek immediate help. Benztropine is for EPS, not NMS." },
         { q: "A client prescribed Phenelzine (Nardil) selects pepperoni pizza for lunch. What is the nurse's concern?", options: ["High sodium content causes lithium toxicity.", "High fat content causes diarrhea.", "High Tyramine content risks Hypertensive Crisis.", "The client needs a gluten-free diet."], answer: 2, rationale: "MAOIs require a Tyramine-restricted diet. Cured meats (pepperoni) and aged cheeses are high in Tyramine, leading to Hypertensive Crisis." },
         { q: "A client on Lithium Carbonate has diarrhea, vomiting, tremors, and a serum level of 1.6 mEq/L. How is this interpreted?", options: ["Sub-therapeutic level.", "Therapeutic range (0.6–1.2 mEq/L).", "Mild to moderate toxicity.", "Expected side effects."], answer: 2, rationale: "Therapeutic range is 0.6–1.2 mEq/L. A level >1.5 mEq/L with GI symptoms indicates toxicity." },
         { q: "A client on Clozapine (Clozaril) requires which weekly lab monitoring due to fatal side effects?", options: ["Liver Function Tests (AST/ALT)", "WBC and Absolute Neutrophil Count (ANC)", "BUN and Creatinine", "Serum Glucose and HbA1c"], answer: 1, rationale: "Clozapine is associated with Agranulocytosis (severe drop in WBCs), causing vulnerability to fatal infections." },
@@ -159,8 +158,6 @@
         { q: "In family therapy, the 'identified patient' is viewed as:", options: ["The cause of problems.", "The healthiest member.", "The symptom bearer for the family dysfunction.", "The only one needing help."], answer: 2, rationale: "The identified patient expresses the symptoms of the larger family system issue." },
         { q: "Which Philippine law is the Mental Health Act?", options: ["RA 9165", "RA 11036", "RA 7160", "RA 10354"], answer: 1, rationale: "Republic Act No. 11036 is the Mental Health Act." },
         { q: "Conducting a stress management seminar for healthy students is which level of care?", options: ["Primary Level", "Secondary Level", "Tertiary Level", "Rehabilitative Level"], answer: 0, rationale: "Primary Level is health promotion and illness prevention before a condition occurs." },
-        
-        // NEW 50 QUESTIONS (Neuroanatomy & Psychopharmacology)
         { q: "A client has become impulsive, sexually inappropriate, and aggressive after a head injury. The nurse suspects injury to which lobe?", options: ["Parietal Lobe", "Temporal Lobe", "Frontal Lobe", "Occipital Lobe"], answer: 2, rationale: "The Frontal Lobe controls organization of thought, body movement, memories, emotions, and moral behavior. Injury here often results in personality changes and loss of impulse control." },
         { q: "A client with severe anxiety is pacing and hyperventilating. The nurse understands that the 'emotional brain' is known as the:", options: ["Cerebellum", "Limbic System", "Reticular Activating System", "Brain Stem"], answer: 1, rationale: "The Limbic System (including amygdala and hippocampus) is the center for emotions, memory, and learning. It regulates the 'fight or flight' response." },
         { q: "A client is having difficulty maintaining balance and coordination while walking. This symptom suggests a disturbance in which brain structure?", options: ["Cerebellum", "Hypothalamus", "Thalamus", "Pons"], answer: 0, rationale: "The Cerebellum is responsible for coordination of voluntary movements and maintenance of balance and equilibrium." },
@@ -213,7 +210,7 @@
 
     // 100 GI Questions
     const giQuestions = [
-{ q: "A client with Peptic Ulcer Disease (PUD) arrives at the ED reporting sudden, severe, sharp upper abdominal pain that radiates to the shoulder. The nurse notes the abdomen is rigid and board-like. Which action is the priority?", options: ["Administer an antacid to neutralize stomach acid.", "Place the patient in a High-Fowler’s position.", "Notify the healthcare provider immediately.", "Ask the patient to describe their diet over the last 24 hours."], answer: 2, rationale: "A rigid, board-like abdomen and shoulder pain are classic signs of perforation and peritonitis, which is a surgical emergency." },
+        { q: "A client with Peptic Ulcer Disease (PUD) arrives at the ED reporting sudden, severe, sharp upper abdominal pain that radiates to the shoulder. The nurse notes the abdomen is rigid and board-like. Which action is the priority?", options: ["Administer an antacid to neutralize stomach acid.", "Place the patient in a High-Fowler’s position.", "Notify the healthcare provider immediately.", "Ask the patient to describe their diet over the last 24 hours."], answer: 2, rationale: "A rigid, board-like abdomen and shoulder pain are classic signs of perforation and peritonitis, which is a surgical emergency." },
         { q: "A nurse is providing discharge teaching to a client with GERD. Which statement by the client indicates a need for further teaching?", options: ["I will wait 2 hours after eating before I go to bed.", "I will try to eat smaller, more frequent meals.", "I will drink a glass of peppermint tea to settle my stomach after dinner.", "I will elevate the head of my bed on 6-inch blocks."], answer: 2, rationale: "Peppermint decreases Lower Esophageal Sphincter (LES) pressure, worsening reflux. It should be avoided." },
         { q: "A client post-Billroth II surgery (gastrectomy) experiences dizziness, sweating, and palpitations 20 minutes after eating. Which intervention is most appropriate?", options: ["Encourage the client to drink more fluids with meals.", "Administer a fast-acting carbohydrate.", "Instruct the client to lie down for 30 minutes after eating.", "Increase the carbohydrate content of the next meal."], answer: 2, rationale: "This is Dumping Syndrome. Lying down slows gastric emptying. Fluids and high carbs worsen the symptoms." },
         { q: "A client with a duodenal ulcer typically reports pain associated with which timing?", options: ["Immediately after eating.", "30-60 minutes after eating.", "2-3 hours after eating and during the night.", "Only when lying flat."], answer: 2, rationale: "Duodenal ulcer pain occurs when the stomach is empty (2-3 hrs post-meal) and is often relieved by food." },
@@ -313,7 +310,8 @@
         { q: "A client has 'rebound tenderness' at McBurney’s Point. This suggests:", options: ["Cholecystitis.", "Appendicitis.", "Gastritis.", "Kidney Stones."], answer: 1, rationale: "RLQ pain specifically indicates Appendicitis." },
         { q: "A client with Pancreatitis has elevated glucose (Hyperglycemia). The nurse treats this with:", options: ["Oral hypoglycemics.", "Insulin sliding scale.", "Glucagon.", "Glucose tabs."], answer: 1, rationale: "Needs insulin replacement because the pancreas is damaged." },
         { q: "Which hepatitis viruses are prevented by vaccines?", options: ["Hep C and D.", "Hep A and B.", "Hep E and C.", "Only Hep B."], answer: 1, rationale: "Vaccines exist for A and B. There is no vaccine for C." }
-    
+    ];
+
     // 60 Endocrine Questions
     const endocrineQuestions = [
         {q: "A patient is 12 hours post-operative following a transsphenoidal hypophysectomy. Which finding most strongly indicates Diabetes Insipidus?", options: ["A) Decrease in level of consciousness and new headache.", "B) Urine specific gravity of 1.002 and output of 400 mL/hr.", "C) Serum sodium of 132 mEq/L and weight gain.", "D) Bilateral crackles in the lung bases."], answer: 1, rationale: "Surgery on the pituitary gland is a major risk factor for Central DI. Without ADH, the kidneys cannot conserve water, leading to massive polyuria and highly dilute urine (low specific gravity)." },
@@ -475,8 +473,8 @@
         {q: "Client obsesses over purely organic food, panic attacks if eating 'unhealthy', significant weight loss. Condition is:", options: ["A) Muscle Dysmorphic", "B) Orthorexia Nervosa", "C) Rumination", "D) Pica"], answer: 1, rationale: "Orthorexia is a pathological obsession with eating 'healthy' or 'pure' foods causing emotional distress." },
         {q: "Anorexia client refuses meal and asks for a salad. Most therapeutic response?", options: ["A) I will get a salad this time.", "B) You must eat what is on your tray. No food substitutions allowed.", "C) Placed on bed rest.", "D) Why is a salad better?"], answer: 1, rationale: "A strict treatment guideline is no food substitutions to prevent manipulation of caloric intake." }
     ];
-    
-   // ================= APP LOGIC =================
+
+    // ================= APP LOGIC =================
     let activeDeck = [];
     let currentIdx = 0;
     let score = 0;
