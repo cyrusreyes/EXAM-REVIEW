@@ -312,9 +312,8 @@
         { q: "Which hepatitis viruses are prevented by vaccines?", options: ["Hep C and D.", "Hep A and B.", "Hep E and C.", "Only Hep B."], answer: 1, rationale: "Vaccines exist for A and B. There is no vaccine for C." }
     ];
 
-    // 60 Endocrine Questions
-    const endocrineQuestions = [
-       const newQuestions = [
+    // ALL Mixed New Questions (Repaired Array Syntax)
+    const allNewQuestions = [
     // SIADH & Diabetes Insipidus
     {
         q: "Question 1: Assessment & Pathophysiology (Diabetes Insipidus) A patient is 12 hours post-operative following a transsphenoidal hypophysectomy (removal of a pituitary tumor). The nurse is monitoring the patient for the development of Diabetes Insipidus (DI). Which of the following assessment findings would most strongly indicate that the patient is developing this complication?",
@@ -1996,7 +1995,12 @@
         answer: 0,
         rationale: "Delirium is typically caused by acute physiological or metabolic conditions, infections, or drugs. Hypoxemia (A), dehydration (B), UTIs (D), and prescription medications/drug toxicity (E) are all highly common causes of delirium. Pick's disease (C) and Huntington's disease (F) are genetic/degenerative causes of dementia, not acute delirium."
     }
-];
+    ];
+
+    // Splitting the massive list into the intended categories
+    const endocrineQuestions = allNewQuestions.slice(0, 40).concat(allNewQuestions.slice(130, 140));
+    const neuroQuestions = allNewQuestions.slice(40, 60).concat(allNewQuestions.slice(140, 150));
+    const advPsychQuestions = allNewQuestions.slice(60, 130);
 
     // ================= APP LOGIC =================
     let activeDeck = [];
@@ -2023,22 +2027,26 @@
         let themeColor;
         let title;
 
-} else if (topic === 'endocrine') {
-            // Tell it to look inside categorizedQuestions
-            sourceDeck = [...categorizedQuestions.endocrineSystem]; 
+        if (topic === 'gi') {
+            sourceDeck = [...giQuestions];
+            themeColor = "#008080";
+            title = "GI Disorders";
+        } else if (topic === 'psych') {
+            sourceDeck = [...psychQuestions];
+            themeColor = "#20B2AA";
+            title = "Psychiatric & Neuro (V1)";
+        } else if (topic === 'endocrine') {
+            sourceDeck = [...endocrineQuestions]; 
             themeColor = "#e67e22"; // Orange
             title = "Endocrine System";
         } else if (topic === 'neuro') {
-            // Tell it to look inside categorizedQuestions
-            sourceDeck = [...categorizedQuestions.neurologicSystem]; 
+            sourceDeck = [...neuroQuestions]; 
             themeColor = "#3498db"; // Blue
             title = "Neurologic System";
         } else if (topic === 'advPsych') {
-            // Tell it to look inside categorizedQuestions
-            sourceDeck = [...categorizedQuestions.advancedPsych]; 
+            sourceDeck = [...advPsychQuestions]; 
             themeColor = "#9b59b6"; // Purple
             title = "Advanced Psychiatric";
-        }
         }
 
         if (document.getElementById('randomize-toggle').checked) {
