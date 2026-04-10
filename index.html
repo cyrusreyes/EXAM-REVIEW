@@ -476,9 +476,6 @@
         {q: "Anorexia client refuses meal and asks for a salad. Most therapeutic response?", options: ["A) I will get a salad this time.", "B) You must eat what is on your tray. No food substitutions allowed.", "C) Placed on bed rest.", "D) Why is a salad better?"], answer: 1, rationale: "A strict treatment guideline is no food substitutions to prevent manipulation of caloric intake." }
     ];
     
-    ];
-    
-
     // ================= APP LOGIC =================
     let activeDeck = [];
     let currentIdx = 0;
@@ -540,7 +537,6 @@
         userHistory = [];
         showView('view-quiz');
         loadQuestion();
-    }
     }
 
     function loadQuestion() {
@@ -611,7 +607,6 @@
         } else {
             finishQuiz();
         }
-    }
 
     function finishQuiz() {
         showView('view-results');
