@@ -170,7 +170,6 @@
         </div>
     </div>
 
-    <!-- THIS IS THE QUIZ VIEW YOU WERE MISSING -->
     <div id="view-quiz" class="view">
         <div class="progress-container"><div class="progress-fill" id="progress-fill"></div></div>
         <div style="margin-top:10px; color:#666; font-size:0.9rem; display:flex; justify-content:space-between;">
@@ -191,7 +190,6 @@
         </div>
     </div>
 
-    <!-- THIS IS THE RESULTS VIEW YOU WERE MISSING -->
     <div id="view-results" class="view">
         <div class="score-box">
             <h2>Exam Complete</h2>
@@ -210,9 +208,9 @@
 </div>
 
 <script>
-    // ================= FULL DATASETS =================
-    
-    // 80 Psych Questions
+// =================================================================
+    // 1. PASTE YOUR EXISTING MASSIVE ARRAYS INTO THESE BRACKETS
+    // =================================================================
     const psychQuestions = [
         { q: "A client diagnosed with Schizophrenia has been taking Haloperidol (Haldol) for 3 days. The nurse assesses high fever (39.5°C), severe muscle rigidity, tachycardia, and diaphoresis. What is the priority action?", options: ["Administer PRN Benztropine (Cogentin).", "Hold the medication and notify the healthcare provider immediately.", "Document the findings and continue to monitor.", "Administer acetaminophen for the fever."], answer: 1, rationale: "These are classic signs of Neuroleptic Malignant Syndrome (NMS), a potentially fatal reaction. Priority is to stop the offending agent and seek immediate help. Benztropine is for EPS, not NMS." },
         { q: "A client prescribed Phenelzine (Nardil) selects pepperoni pizza for lunch. What is the nurse's concern?", options: ["High sodium content causes lithium toxicity.", "High fat content causes diarrhea.", "High Tyramine content risks Hypertensive Crisis.", "The client needs a gluten-free diet."], answer: 2, rationale: "MAOIs require a Tyramine-restricted diet. Cured meats (pepperoni) and aged cheeses are high in Tyramine, leading to Hypertensive Crisis." },
@@ -294,8 +292,8 @@
         { q: "Genetic testing (Pharmacogenomics) in psychiatry is primarily used to:", options: ["Diagnose schizophrenia.", "Predict drug metabolism.", "Determine IQ.", "Cure illness."], answer: 1, rationale: "It identifies liver enzyme variants (CYP450) that affect drug metabolism." }
     ];
 
-    // 100 GI Questions
     const giQuestions = [
+   const giQuestions = [
         { q: "A client with Peptic Ulcer Disease (PUD) arrives at the ED reporting sudden, severe, sharp upper abdominal pain that radiates to the shoulder. The nurse notes the abdomen is rigid and board-like. Which action is the priority?", options: ["Administer an antacid to neutralize stomach acid.", "Place the patient in a High-Fowler’s position.", "Notify the healthcare provider immediately.", "Ask the patient to describe their diet over the last 24 hours."], answer: 2, rationale: "A rigid, board-like abdomen and shoulder pain are classic signs of perforation and peritonitis, which is a surgical emergency." },
         { q: "A nurse is providing discharge teaching to a client with GERD. Which statement by the client indicates a need for further teaching?", options: ["I will wait 2 hours after eating before I go to bed.", "I will try to eat smaller, more frequent meals.", "I will drink a glass of peppermint tea to settle my stomach after dinner.", "I will elevate the head of my bed on 6-inch blocks."], answer: 2, rationale: "Peppermint decreases Lower Esophageal Sphincter (LES) pressure, worsening reflux. It should be avoided." },
         { q: "A client post-Billroth II surgery (gastrectomy) experiences dizziness, sweating, and palpitations 20 minutes after eating. Which intervention is most appropriate?", options: ["Encourage the client to drink more fluids with meals.", "Administer a fast-acting carbohydrate.", "Instruct the client to lie down for 30 minutes after eating.", "Increase the carbohydrate content of the next meal."], answer: 2, rationale: "This is Dumping Syndrome. Lying down slows gastric emptying. Fluids and high carbs worsen the symptoms." },
@@ -398,9 +396,8 @@
         { q: "Which hepatitis viruses are prevented by vaccines?", options: ["Hep C and D.", "Hep A and B.", "Hep E and C.", "Only Hep B."], answer: 1, rationale: "Vaccines exist for A and B. There is no vaccine for C." }
     ];
 
-    // ALL Mixed New Questions (Repaired Array Syntax)
     const allNewQuestions = [
-    // SIADH & Diabetes Insipidus
+  // SIADH & Diabetes Insipidus
     {
         q: ": Assessment & Pathophysiology (Diabetes Insipidus) A patient is 12 hours post-operative following a transsphenoidal hypophysectomy (removal of a pituitary tumor). The nurse is monitoring the patient for the development of Diabetes Insipidus (DI). Which of the following assessment findings would most strongly indicate that the patient is developing this complication?",
         options: [
@@ -2081,7 +2078,16 @@
         answer: 0,
         rationale: "Delirium is typically caused by acute physiological or metabolic conditions, infections, or drugs. Hypoxemia (A), dehydration (B), UTIs (D), and prescription medications/drug toxicity (E) are all highly common causes of delirium. Pick's disease (C) and Huntington's disease (F) are genetic/degenerative causes of dementia, not acute delirium."
     }
-        const eyeQuestions = [
+];
+        
+        // Splitting the massive list into the intended categories
+    const endocrineQuestions = allNewQuestions.slice(0, 40).concat(allNewQuestions.slice(130, 140));
+    const neuroQuestions = allNewQuestions.slice(40, 60).concat(allNewQuestions.slice(140, 150));
+    const advPsychQuestions = allNewQuestions.slice(60, 130);
+// =================================================================
+    // 2. NEW FORMATTED ARRAYS
+    // =================================================================
+    const eyeQuestions = [
         {q: "A patient is being discharged after undergoing cataract surgery. Which instruction should the nurse include in the discharge teaching to prevent complications?", options: ["A) \"You may sleep on the operated side to promote fluid drainage.\"", "B) \"If you need to sneeze or cough, make sure to keep your mouth open.\"", "C) \"You can resume bending forward and lifting objects after 24 hours.\"", "D) \"Expect to feel severe, sharp pain in your eye for the first few days.\""], answer: 1, rationale: "After eye surgeries, a general goal is to prevent increased intraocular pressure (IOP) and stress on the suture line. Patients should be instructed to open their mouths if they need to sneeze or cough to minimize pressure. Patients should lie on their back or with the unoperated side down. Bending, stooping, and lifting should be avoided for several weeks. A sensation of pressure and sharp pain may indicate bleeding and is not an expected finding."},
         {q: "A 70-year-old client comes to the clinic reporting a gradual change in their vision. Which of the following client statements is most characteristic of a developing cataract?", options: ["A) \"I suddenly lost vision in the center of my eye.\"", "B) \"It looks like a dark curtain has been pulled over my eye.\"", "C) \"My vision is foggy, and I have a lot of trouble with the glare from car headlights at night.\"", "D) \"I am having severe eye pain and seeing halos around all the lights.\""], answer: 2, rationale: "Symptoms of a cataract include filmy, foggy, or cloudy vision, needing more light to read, and having difficulty with glare from bright lights and headlights at night. \"Sudden central vision loss\" is associated with wet macular degeneration. A \"curtain being drawn\" is a classic sign of a retinal detachment. Severe pain and halos are signs of acute closed-angle glaucoma."},
         {q: "A patient arrives at the emergency department stating, \"I see sudden flashes of light and floaters, and it looks like a dark curtain is falling over my vision.\" The nurse suspects a retinal detachment. Which of the following is the most appropriate immediate nursing intervention?", options: ["A) Encourage the client to ambulate to promote circulation.", "B) Cover both of the patient's eyes with patches and place them on bedrest.", "C) Administer miotic eye drops to increase aqueous humor outflow.", "D) Elevate the patient's legs to prevent shock."], answer: 1, rationale: "Flashes of light, floaters, and a sense of a curtain being drawn are symptoms of retinal detachment. Immediate care requires placing the patient on bedrest, covering both eyes with patches to minimize eye stress, and instructing the patient to avoid jerky head movements."},
@@ -2105,9 +2111,9 @@
         {q: "A post-operative client who just had a cataract extraction complains of a burning sensation in the operated eye one hour after the surgery. What is the nurse's most appropriate action?", options: ["A) Notify the surgeon immediately, as this is a sign of hemorrhage.", "B) Administer an intravenous osmotic agent to reduce pressure.", "C) Reassure the client that this is an expected sensation as the anesthetic wears off.", "D) Check the surgical dressing for signs of purulent drainage and infection."], answer: 2, rationale: "A burning sensation 1 hour after eye surgery is expected because the local anesthetic is wearing off. The nurse should advise the client of this. Sharp pain or a sensation of pressure within the eye would be an unexpected finding that indicates bleeding and requires notifying the surgeon."},
         {q: "A 45-year-old client reports difficulty focusing on close objects, such as reading a menu, which started recently. The nurse understands this is a natural, age-related loss of accommodation known as:", options: ["A) Myopia", "B) Hypermetropia", "C) Astigmatism", "D) Presbyopia"], answer: 3, rationale: "Presbyopia is the \"aging eye,\" defined as the natural, age-related loss of the eye's ability to focus on close objects, typically beginning after age 40. It is often corrected with bifocal lenses."},
         {q: "A client with a newly diagnosed refractive error asks the nurse how myopia is corrected. The nurse correctly explains that nearsightedness is typically corrected with:", options: ["A) Bifocal lenses", "B) A concave lens", "C) A convex lens", "D) A cylindrical lens"], answer: 1, rationale: "Myopia (short sight / nearsightedness) occurs when light rays focus in front of the retina. It is typically corrected with a concave lens. Hypermetropia (farsightedness) is corrected with a convex lens, and astigmatism is corrected with a cylindrical lens."},
-   ];
-     {   
-        const earQuestions = [
+    ];
+
+    const earQuestions = [
         {q: "A client reports a slowly progressive conductive hearing loss that began at age 20. The client mentions that they hear their own voice very loudly compared to the environment. Which diagnosis should the nurse suspect?", options: ["A) Meniere's Disease", "B) Otosclerosis", "C) Sensorineural Hearing Loss", "D) Presbycusis"], answer: 1, rationale: "Otosclerosis typically begins around age 20. A classic symptom is that the patient hears their own voice very loudly because the sound is conducted via the skull bones rather than through the air (conductive loss)."},
         {q: "Which finding on an otoscopic exam is considered a classic diagnostic sign of Otosclerosis?", options: ["A) Perforation of the tympanic membrane", "B) Schwartze's sign", "C) Excessive cerumen impaction", "D) Fluid in the middle ear"], answer: 1, rationale: "Schwartze's sign is a pink blush hue seen behind the tympanic membrane, indicating the hypervascularity of the spongy bone phase in otosclerosis."},
         {q: "A client with Otosclerosis undergoes a stapedectomy. Which post-operative instruction is most important to protect the surgical site?", options: ["A) Change the ear cotton ball every 4 hours.", "B) Keep the ear dry for 6 weeks post-op.", "C) Use a straw for all liquid intake.", "D) Elevate the head of the bed for 3 months."], answer: 1, rationale: "Post-operative instructions for ear surgery include keeping the ear dry for 6 weeks. Cotton balls should be changed daily, not every 4 hours."},
@@ -2129,8 +2135,8 @@
         {q: "A client recovering from ear surgery asks why they cannot watch TV for a week. The nurse explains it is because:", options: ["A) It increases intracranial pressure.", "B) It causes eye movement that can lead to dizziness or lightheadedness.", "C) It interferes with the healing of the tympanic membrane.", "D) It prevents the client from hearing properly."], answer: 1, rationale: "The client should avoid reading, watching TV, or looking at fast-moving objects for 1 week post-operatively because these activities involve eye tracking, which can lead to dizziness or lightheadedness while the inner ear is healing."},
         {q: "What should the nurse assess for when a patient with Otosclerosis is undergoing a Weber's test?", options: ["A) The sound lateralizes to the unaffected ear.", "B) The sound lateralizes to the affected ear.", "C) The sound is heard equally in both ears.", "D) The patient cannot hear the tuning fork at all."], answer: 1, rationale: "In Otosclerosis (a conductive hearing loss), the sound heard during a Weber test will lateralize (be heard louder) in the affected ear."}
     ];
-// --- NEW CATEGORY: NEURO DISORDERS (NEW) ---
-const neuroNewQuestions = [
+
+    const neuroNewQuestions = [
     { 
         q: "The nurse is reviewing the pathophysiology of a client newly diagnosed with Parkinson's disease. The nurse correctly understands that the motor control issues in this disease are primarily caused by:", 
         options: ["The accumulation of beta-amyloid plaques outside the neurons.", "The degeneration of motor neurons in the anterior horns of the spinal cord.", "The degeneration of dopaminergic neurons in the substantia nigra, leading to decreased dopamine and increased acetylcholine activity.", "A severe viral infection that causes bilateral demyelination of the peripheral nerves."], 
@@ -2312,9 +2318,9 @@ const neuroNewQuestions = [
         rationale: "In ALS, the progressive degeneration affects motor neurons, leaving the patient's intellect fully intact as they enter a state of progressive paralysis. Therefore, providing emotional support is a critical collaborative management intervention as the patient faces complete dependency as the disease progresses[cite: 1]." 
     }
 ];
+    ];
 
-// --- NEW CATEGORY: NEURODEVELOPMENTAL DISORDERS ---
-const neurodevQuestions = [
+    const neurodevQuestions = [
     { 
         q: "The nurse is assessing a pediatric client who has difficulty communicating, lacks abstract cognitive abilities, and cannot describe their feelings. The nurse understands that diagnosing psychiatric disorders in children is often difficult primarily because:", 
         options: ["Children have a fully developed and stable sense of a normal self.", "Children usually lack the abstract cognitive abilities and verbal skills to describe what is happening.", "Children do not experience the same mental health problems as adults.", "Psychiatric disorders in children use entirely different diagnostic criteria than adults."], 
@@ -2677,10 +2683,193 @@ const behaviorSubstanceQuestions = [
         answer: 2, 
         rationale: "Interventions for withdrawal include cardiac monitoring and diagnostic tests such as an ECG and Cardiac markers because there is a risk for cardiac damage[cite: 1]." 
     }
+    ];
+
+    const behaviorSubstanceQuestions = [
+    { 
+        q: "The nurse is assessing a 4-year-old child whose parents report an enduring pattern of uncooperative, defiant, and disobedient behavior toward them. The child does not engage in major antisocial violations like property destruction. The nurse suspects which of the following disorders?", 
+        options: ["Conduct Disorder", "Intermittent Explosive Disorder", "Oppositional Defiant Disorder", "Antisocial Personality Disorder"], 
+        answer: 2, 
+        rationale: "Oppositional Defiant Disorder is an enduring pattern of uncooperative, defiant, disobedient, and hostile behavior towards authority figures without major antisocial violations. The onset typically occurs between 2 to 3 years old and early adolescence[cite: 1]." 
+    },
+    { 
+        q: "A 15-year-old client has a history of aggression toward people and animals, destruction of property, and serious violations of rules. The nurse identifies these behaviors as characteristic of which disorder?", 
+        options: ["Oppositional Defiant Disorder", "Conduct Disorder", "Intermittent Explosive Disorder", "Pyromania"], 
+        answer: 1, 
+        rationale: "Conduct Disorder is characterized by persistent behavior that violates societal norms, rules, laws, and the rights of others. Signs and symptoms include aggression to people and animals, destruction of property, deceitfulness and theft, and serious violation of rules[cite: 1]." 
+    },
+    { 
+        q: "The nurse is reviewing the history of a client diagnosed with Intermittent Explosive Disorder (IED). The nurse understands that the typical duration of an explosive episode in this disorder is approximately:", 
+        options: ["5 minutes", "30 minutes", "2 hours", "24 hours"], 
+        answer: 1, 
+        rationale: "Intermittent Explosive Disorder involves repeated episodes of impulsive, aggressive, violent behavior, and angry verbal outbursts, with a typical duration of 30 minutes[cite: 1]." 
+    },
+    { 
+        q: "A client with Intermittent Explosive Disorder (IED) asks the nurse about the long-term physical risks associated with their condition. The nurse should educate the client about an increased risk for which adverse physical outcomes?", 
+        options: ["Renal failure and hepatic cirrhosis", "Coronary heart disease, hypertension, stroke, and diabetes", "Pulmonary fibrosis and chronic obstructive pulmonary disease", "Peptic ulcer disease and ulcerative colitis"], 
+        answer: 1, 
+        rationale: "Adverse physical outcomes associated with Intermittent Explosive Disorder include coronary heart disease, hypertension, stroke, and diabetes[cite: 1]." 
+    },
+    { 
+        q: "When assessing an adolescent for Conduct Disorder, the nurse categorizes the client's behaviors. Which of the following is considered an 'internalizing' behavior rather than an 'externalizing' behavior?", 
+        options: ["Vandalism", "Swearing", "Somatic aches and pains", "Truancy"], 
+        answer: 2, 
+        rationale: "Internalizing behaviors include somatic aches and pains, preferring to be alone, withdrawing, sulking, being overly shy, and crying spells. Vandalism, swearing, and truancy are externalizing behaviors[cite: 1]." 
+    },
+    { 
+        q: "A pediatric client with Conduct Disorder is caught participating in minor shoplifting, repeated lying, and staying out late without permission. The nurse classifies the intensity of these behaviors as:", 
+        options: ["Mild", "Moderate", "Severe", "Profound"], 
+        answer: 0, 
+        rationale: "Mild intensity behaviors associated with Conduct Disorder include the child having some conduct problems that cause minor harm to others, repeated lying, truancy, minor shoplifting, and staying out late without permission[cite: 1]." 
+    },
+    { 
+        q: "A client is admitted to the psychiatric unit with a diagnosis of Pyromania. The nurse understands that the client's primary motivation for setting fires is:", 
+        options: ["To conceal evidence of other crimes.", "For monetary gain through insurance fraud.", "Fascination with fire and a feeling of pleasure or relief of tension.", "To seek revenge against an authority figure."], 
+        answer: 2, 
+        rationale: "In Pyromania, the person is fascinated by fire and feels pleasure or relief of tension while setting and watching the fires. There is no monetary gain, revenge, or other reason such as concealing other crimes[cite: 1]." 
+    },
+    { 
+        q: "Which of the following classes of medications should the nurse anticipate the healthcare provider prescribing to manage the impulsive and aggressive outbursts in a client with Intermittent Explosive Disorder?", 
+        options: ["CNS Depressants", "Anticonvulsants and SSRIs", "Opiate agonists", "Cholinesterase inhibitors"], 
+        answer: 1, 
+        rationale: "Medications used to treat Intermittent Explosive Disorder include Fluoxetine (Prozac), Lithium, Anticonvulsants (such as Valproic Acid and Phenytoin), and SSRIs[cite: 1]." 
+    },
+    { 
+        q: "When distinguishing between normal adolescent behavior and abnormal behavior, the nurse recognizes which of the following as a sign of abnormal behavior?", 
+        options: ["Eagerness for peer approval", "Competitiveness in play", "Occasional psychosomatic complaints", "Inability to postpone gratification"], 
+        answer: 3, 
+        rationale: "An inability to postpone gratification is an abnormal behavior in adolescence. Acceptable characteristics include an eagerness for peer approval, competitiveness in play, and occasional psychosomatic complaints[cite: 1]." 
+    },
+    { 
+        q: "A client diagnosed with Kleptomania describes their experience to the nurse. Which pattern of feelings does the nurse expect the client to report surrounding the act of theft?", 
+        options: ["High tension and anxiety prior to the theft, followed by relief, exhilaration, or gratification.", "Extreme guilt and depression prior to the theft, followed by paranoia.", "Complete apathy before, during, and after the theft.", "Intense anger prior to the theft, followed by violent outbursts."], 
+        answer: 0, 
+        rationale: "Kleptomania involves high tension and anxiety prior to the theft, followed by relief, exhilaration, or gratification when committing the theft[cite: 1]." 
+    },
+    { 
+        q: "The nurse is planning care for an adolescent with Conduct Disorder. The nurse recognizes that clients with this disorder typically exhibit which emotional trait?", 
+        options: ["Intense guilt after acting out", "Hyper-empathy for others", "Callous and unemotional traits", "High self-esteem"], 
+        answer: 2, 
+        rationale: "Signs and symptoms of Conduct Disorder include a callous and unemotional trait, little empathy for others, not feeling bad or guilty, shallow and superficial emotion, and low self-esteem[cite: 1]." 
+    },
+    { 
+        q: "Which psychotherapeutic intervention is considered an effective specific behavioral intervention model for treating Oppositional Defiant Disorder?", 
+        options: ["Psychoanalysis", "Parent Management Training Models and Coping Power Program", "Electroconvulsive Therapy (ECT)", "Exposure and Response Prevention (ERP)"], 
+        answer: 1, 
+        rationale: "Treatments for Oppositional Defiant Disorder include Parent Management Training Models of Behavioral Intervention and the Coping Power Program[cite: 1]." 
+    },
+    { 
+        q: "The nurse evaluates a client with Intermittent Explosive Disorder immediately after an explosive verbal and physical outburst. The nurse anticipates the client will display which emotional response?", 
+        options: ["Pride and boastfulness", "Feeling embarrassed, guilty, and remorseful", "Callousness and a lack of empathy", "Persistent, escalating rage"], 
+        answer: 1, 
+        rationale: "After an episode of Intermittent Explosive Disorder, the individual typically experiences feelings of being embarrassed, guilty, and remorseful[cite: 1]." 
+    },
+    { 
+        q: "A mother states that her 12-year-old son began showing signs of physical aggression, deceitfulness, and severe rule violations at age 8. The nurse documents this as which subtype of Conduct Disorder?", 
+        options: ["Adolescent-onset", "Mild-intensity onset", "Before 10 years old (childhood-onset)", "Intermittent-onset"], 
+        answer: 2, 
+        rationale: "The subtype of Conduct Disorder with onset before 10 years old is characterized by physical aggression toward others, disturbed peer relationships, and persistent conduct disorder that can develop into antisocial personality disorder as an adult[cite: 1]." 
+    },
+    { 
+        q: "The nurse notes that a client with Intermittent Explosive Disorder (IED) also has a comorbid psychiatric diagnosis. According to statistical prevalence, which comorbid disorder is the most common in clients with IED?", 
+        options: ["Schizophrenia", "Bipolar I Disorder", "Substance Use Disorder", "Obsessive-Compulsive Disorder"], 
+        answer: 2, 
+        rationale: "In clients with Intermittent Explosive Disorder, the most common comorbid psychiatric disorder is Substance Use Disorder. Other comorbidities include ADHD, Conduct Disorder, and ODD[cite: 1]." 
+    },
+    { 
+        q: "A client is admitted for alcohol withdrawal. The nurse observes the client for early signs of withdrawal. Which timeline accurately reflects when early signs of alcohol withdrawal typically develop and peak?", 
+        options: ["Develops within 1-2 weeks; peaks at 1 month.", "Develops within a few hours after cessation; peaks at 24 to 48 hours.", "Develops exactly at 48 hours; peaks at 72 hours.", "Develops after 7 days; peaks at 14 days."], 
+        answer: 1, 
+        rationale: "Early signs of alcohol withdrawal develop within a few hours after the cessation of alcohol intake, and they peak at 24 to 48 hours[cite: 1]." 
+    },
+    { 
+        q: "The nurse is caring for a client with a long history of chronic alcohol use. The client presents with severe memory problems. The nurse understands that this alcohol-induced persistent amnestic disorder (Korsakoff’s syndrome) is caused by a deficiency in which vitamin?", 
+        options: ["Vitamin C", "Vitamin D", "Thiamine", "Riboflavin"], 
+        answer: 2, 
+        rationale: "Thiamine deficiency associated with chronic alcohol use causes Korsakoff’s syndrome, and an alcohol-induced persistent amnestic disorder leading to severe memory problems[cite: 1]." 
+    },
+    { 
+        q: "A client is brought to the emergency department comatose after overdosing on a benzodiazepine. The nurse should anticipate the healthcare provider ordering which specific intravenous antidote?", 
+        options: ["Naloxone", "Flumazenil", "Phenobarbital", "Bupropion"], 
+        answer: 1, 
+        rationale: "Flumazenil (IV) is used for the overdose of Benzodiazepines[cite: 1]." 
+    },
+    { 
+        q: "A client asks the nurse what the term 'codependency' means in the context of their spouse's alcoholism. The nurse accurately explains that codependency is:", 
+        options: ["The physical biological need for alcohol to avoid withdrawal.", "A psychological craving for the subjective effect of alcohol.", "The presence of coexisting behaviors in significant others that serves to enable the alcoholic to continue irresponsible patterns without experiencing consequences.", "Using rationalization to justify unacceptable behavior."], 
+        answer: 2, 
+        rationale: "Codependency is the presence of coexisting behaviors present in significant others, which serves to enable the addict or alcoholic to continue the irresponsible patterns of use without experiencing consequences[cite: 1]." 
+    },
+    { 
+        q: "The nurse is utilizing the CAGE questionnaire to screen a client for potential alcohol use problems. What does the 'E' in the CAGE acronym stand for?", 
+        options: ["Escalation - Have your drinking habits escalated recently?", "Eye-opener - Have you ever had a drink first thing in the morning to steady your nerves or get rid of a hangover?", "Emotion - Do you lack emotion when you drink?", "Energy - Do you drink to increase your energy?"], 
+        answer: 1, 
+        rationale: "In the CAGE questionnaire, 'Eye-opener' stands for: Have you ever had a drink first thing in the morning to steady your nerves or get rid of a hangover?[cite: 1]." 
+    },
+    { 
+        q: "The nurse assesses a client who recently used an opioid. Which of the following classic physical signs indicates opioid intoxication?", 
+        options: ["Dilated pupils and tachycardia", "Constricted pupils and bradypnea", "Rhinorrhea and lacrimation", "Diarrhea and vomiting"], 
+        answer: 1, 
+        rationale: "Signs of opioid intoxication include constricted pupils, bradypnea, drowsiness, hypotension, and psychomotor retardation. Dilated pupils, rhinorrhea, lacrimation, and diarrhea are signs of opioid withdrawal[cite: 1]." 
+    },
+    { 
+        q: "A client is admitted to the emergency department after an overdose of Phencyclidine (PCP). The nurse should anticipate which specific medical treatment to facilitate the excretion of the drug?", 
+        options: ["Administration of IV Flumazenil", "Gastric lavage and acidifying the urine", "Administration of anxiolytics in a low stimuli environment", "Immediate hemodialysis"], 
+        answer: 1, 
+        rationale: "The treatment for Phencyclidine (PCP) overdose involves gastric lavage and acidifying the urine to excrete the drug[cite: 1]." 
+    },
+    { 
+        q: "A client experiencing alcohol withdrawal delirium (Delirium Tremens) requires close monitoring. How frequently should the nurse monitor the client's vital signs and neurological signs?", 
+        options: ["Every 15 minutes", "Every 1 hour", "Every 4 hours", "Once a shift"], 
+        answer: 0, 
+        rationale: "Interventions for alcohol withdrawal include monitoring vital signs and neurological signs every 15 minutes[cite: 1]." 
+    },
+    { 
+        q: "Which of the following clinical assessment tools is specifically designed to assess the severity of opiate withdrawal symptoms?", 
+        options: ["CIWA (Clinical Institute Withdrawal Assessment)", "MAST (Michigan-Alcohol Screening Test)", "COWS (Clinical Opiate Withdrawal Scale)", "DAST (Drug Abuse Screening Test)"], 
+        answer: 2, 
+        rationale: "The COWS (Clinical Opiate Withdrawal Scale) is a withdrawal assessment tool specifically used for opioid withdrawal[cite: 1]." 
+    },
+    { 
+        q: "A young adult is brought to the emergency department after consuming MDMA (Ecstasy) at a club. The client is presenting with hyperthermia and muscle tissue breakdown. The nurse recognizes this life-threatening adverse effect as:", 
+        options: ["Wernicke’s encephalopathy", "Korsakoff's syndrome", "Rhabdomyolysis", "Delirium tremens"], 
+        answer: 2, 
+        rationale: "An adverse effect of recreational and club drugs like MDMA (Ecstasy) is Rhabdomyolysis, a life-threatening condition where muscle tissues breakdown and release toxic substances into the bloodstream[cite: 1]." 
+    },
+    { 
+        q: "The nurse is caring for a client attempting to quit smoking. The healthcare provider prescribes a medication to aid in the reduction of withdrawal symptoms and cravings. The nurse anticipates administering:", 
+        options: ["Bupropion", "Phenobarbital", "Bromocriptine", "Methadone"], 
+        answer: 0, 
+        rationale: "Bupropion is used in psychopharmacology for nicotine withdrawal to aid in the reduction of withdrawal symptoms and cravings[cite: 1]." 
+    },
+    { 
+        q: "A client is diagnosed with a 'Dual Diagnosis.' The nurse understands that to accurately make this separate psychiatric diagnosis alongside a substance use disorder, it must be done:", 
+        options: ["Within 24 hours of hospital admission.", "During the peak of the withdrawal phase.", "Over time after a sustained period of abstinence.", "Only through the use of the DAST screening tool."], 
+        answer: 2, 
+        rationale: "A dual diagnosis occurs when a psychiatric disorder and substance use are present together. A separate diagnosis can only be done over time after a sustained period of abstinence[cite: 1]." 
+    },
+    { 
+        q: "A nursing supervisor is observing staff for suspicious signs of addiction and substance use. Which of the following work patterns should alert the supervisor to potential impairment in a nurse?", 
+        options: ["Consistently avoiding assignments in the Trauma or Anesthesia units.", "Always volunteering to carry the narcotics key (opioids).", "Requesting to work shifts with maximum supervision and mentorship.", "Refusing to administer maximum dosages of controlled substances to clients."], 
+        answer: 1, 
+        rationale: "Suspicious work patterns for addiction and substance use in healthcare professionals include always volunteering to carry the narcotics key (opioids), choosing shifts in which less supervision is present, and choosing work areas where the use of controlled substances is high (CCU, OR, Trauma, Anesthesia)[cite: 1]." 
+    },
+    { 
+        q: "A client is admitted to the medical unit undergoing withdrawal from a CNS depressant. The nurse anticipates the provider will initiate withdrawal treatment using a carefully titrated dose of which type of medication?", 
+        options: ["A barbiturate (such as phenobarbital)", "A dopamine agonist", "An SSRI antidepressant", "An opioid antagonist"], 
+        answer: 0, 
+        rationale: "Withdrawal from CNS depressants is generally treated with a carefully titrated similar drug, typically a barbiturate such as phenobarbital[cite: 1]." 
+    },
+    { 
+        q: "The nurse is planning care for a client in acute substance withdrawal. Due to the severe physiological stress of withdrawal, the nurse ensures which of the following diagnostic tests is prioritized to monitor for organ damage?", 
+        options: ["Electroencephalogram (EEG)", "Lumbar puncture", "ECG and Cardiac markers", "Pulmonary function tests"], 
+        answer: 2, 
+        rationale: "Interventions for withdrawal include cardiac monitoring and diagnostic tests such as an ECG and Cardiac markers because there is a risk for cardiac damage[cite: 1]." 
+    }
 ];
 
-// --- NEW CATEGORY: ABUSE & VIOLENCE ---
-const abuseViolenceQuestions = [
+
+    const abuseViolenceQuestions = [
     { 
         q: "The nurse is approached by a client who is pacing, agitated, and making verbal threats. To de-escalate the situation safely, which physical posture should the nurse adopt?", 
         options: ["Stand close to the client with arms folded across the chest to establish authority.", "Maintain a large personal space with hands and arms placed on the hips.", "Maintain a large personal space with hands and arms kept at the side.", "Sit down immediately to show submission and calm the client."], 
@@ -2861,9 +3050,9 @@ const abuseViolenceQuestions = [
         answer: 2, 
         rationale: "Seclusion is a type of restraint in which a client is confined in a room specially designed for protection and close supervision from which the client cannot freely exit. Physical restraints (like wrist restraints and tray tables) control behavior by inhibiting free movement, and chemical restraints use medications[cite: 1]." 
     }
-];
-         // --- NEW CATEGORY: SLEEP DISORDERS ---
-const sleepQuestions = [
+    ];
+
+    const sleepQuestions = [
     { 
         q: "The nurse is educating a client about the stages of sleep. The nurse correctly identifies that Rapid Eye Movement (REM) sleep is primarily important for:", 
         options: ["Deep, restorative physical healing", "Memory and learning", "Restoring immune function only", "Decreasing daytime irritability"], 
@@ -2954,10 +3143,9 @@ const sleepQuestions = [
         answer: 1, 
         rationale: "Narcolepsy is characterized by repeated irresistible sleep attacks where the person sleeps for 10-20 minutes and is briefly refreshed until the next attack[cite: 1]." 
     }
-];
+    ];
 
-// --- NEW CATEGORY: SEXUAL & GENDER DISORDERS ---
-const sexualGenderQuestions = [
+    const sexualGenderQuestions = [
     { 
         q: "The nurse is educating a client about the physiological stages of the human sexual response cycle. In which order do these stages occur?", 
         options: ["Arousal, Excitement, Plateau, Resolution", "Excitement, Plateau, Orgasm, Resolution", "Desire, Plateau, Excitement, Orgasm", "Excitement, Orgasm, Plateau, Resolution"], 
@@ -3048,9 +3236,9 @@ const sexualGenderQuestions = [
         answer: 3, 
         rationale: "Female Orgasmic Disorder is a persistent or recurrent delay in, or absence of orgasm, following a normal sexual excitement phase, causing marked distress or interpersonal difficulty[cite: 1]." 
     }
-];
-         // --- NEW CATEGORY: MUSCULOSKELETAL DISORDERS (JOINT DISEASES) ---
-const musculoskeletalQuestions = [
+    ];
+
+    const musculoskeletalQuestions = [
     { 
         q: "The nurse is reviewing the pathophysiology of Rheumatoid Arthritis (RA). The nurse understands that the thickening of the synovium and the formation of hyperplastic synovial tissue is referred to as:", 
         options: ["Tophi", "Pannus", "Bouchard’s nodes", "Heberden’s nodes"], 
@@ -3231,15 +3419,10 @@ const musculoskeletalQuestions = [
         answer: 1, 
         rationale: "Boutonniere’s deformity is listed as a manifestation of Rheumatoid Arthritis characterized by DIP extension and DIP flexion. Swan Neck is characterized by DIP hyperflexion and DIP hyperextension." 
     }
+    ];
 
-];
-    // Splitting the massive list into the intended categories
-    const endocrineQuestions = allNewQuestions.slice(0, 40).concat(allNewQuestions.slice(130, 140));
-    const neuroQuestions = allNewQuestions.slice(40, 60).concat(allNewQuestions.slice(140, 150));
-    const advPsychQuestions = allNewQuestions.slice(60, 130);
 
-    // ================= APP LOGIC =================
-    let activeDeck = [];
+let activeDeck = [];
     let currentIdx = 0;
     let score = 0;
     let isAnswered = false;
@@ -3270,66 +3453,27 @@ const musculoskeletalQuestions = [
         let themeColor;
         let title;
 
-        // --- MED-SURG ---
-        if (topic === 'gi') {
-            sourceDeck = [...giQuestions];
-            themeColor = "#008080";
-            title = "GI Disorders";
-        } else if (topic === 'endocrine') {
-            sourceDeck = [...endocrineQuestions]; 
-            themeColor = "#e67e22"; 
-            title = "Endocrine System";
-        } else if (topic === 'neuro') {
-            sourceDeck = [...neuroQuestions]; 
-            themeColor = "#3498db"; 
-            title = "Neurologic System";
-        } else if (topic === 'neuro_new') {
-            sourceDeck = [...neuroNewQuestions]; 
-            themeColor = "#2980b9"; 
-            title = "Neuro Disorders (New)";
-        } else if (topic === 'eye') {
-            sourceDeck = [...eyeQuestions]; 
-            themeColor = "#1abc9c"; 
-            title = "Eye Disorders";
-        } else if (topic === 'ear') {
-            sourceDeck = [...earQuestions]; 
-            themeColor = "#16a085"; 
-            title = "Ear Disorders";
-        } else if (topic === 'msk') {
-            sourceDeck = [...musculoskeletalQuestions]; 
-            themeColor = "#d35400"; 
-            title = "Musculoskeletal System";
-        
-        // --- PSYCH ---
-        } else if (topic === 'psych') {
-            sourceDeck = [...psychQuestions];
-            themeColor = "#20B2AA";
-            title = "Psychiatric & Neuro (V1)";
-        } else if (topic === 'advPsych') {
-            sourceDeck = [...advPsychQuestions]; 
-            themeColor = "#9b59b6"; 
-            title = "Advanced Psychiatric";
-        } else if (topic === 'neurodev') {
-            sourceDeck = [...neurodevQuestions]; 
-            themeColor = "#f1c40f"; 
-            title = "Neurodevelopmental Disorders";
-        } else if (topic === 'behavior_substance') {
-            sourceDeck = [...behaviorSubstanceQuestions]; 
-            themeColor = "#c0392b"; 
-            title = "Behavior & Substance Disorders";
-        } else if (topic === 'abuse_violence') {
-            sourceDeck = [...abuseViolenceQuestions]; 
-            themeColor = "#e74c3c"; 
-            title = "Abuse & Violence";
-        } else if (topic === 'sleep') {
-            sourceDeck = [...sleepQuestions]; 
-            themeColor = "#34495e"; 
-            title = "Sleep Disorders";
-        } else if (topic === 'sexual_gender') {
-            sourceDeck = [...sexualGenderQuestions]; 
-            themeColor = "#e84393"; 
-            title = "Sexual & Gender Dysphoria";
-        }
+        const topicMap = {
+            'gi': { deck: giQuestions, color: "#008080", title: "GI Disorders" },
+            'endocrine': { deck: endocrineQuestions, color: "#e67e22", title: "Endocrine System" },
+            'neuro': { deck: neuroQuestions, color: "#3498db", title: "Neurologic System" },
+            'neuro_new': { deck: neuroNewQuestions, color: "#2980b9", title: "Neuro Disorders (New)" },
+            'eye': { deck: eyeQuestions, color: "#1abc9c", title: "Eye Disorders" },
+            'ear': { deck: earQuestions, color: "#16a085", title: "Ear Disorders" },
+            'msk': { deck: musculoskeletalQuestions, color: "#d35400", title: "Musculoskeletal System" },
+            'psych': { deck: psychQuestions, color: "#20B2AA", title: "Psychiatric & Neuro (V1)" },
+            'advPsych': { deck: advPsychQuestions, color: "#9b59b6", title: "Advanced Psychiatric" },
+            'neurodev': { deck: neurodevQuestions, color: "#f1c40f", title: "Neurodevelopmental Disorders" },
+            'behavior_substance': { deck: behaviorSubstanceQuestions, color: "#c0392b", title: "Behavior & Substance Disorders" },
+            'abuse_violence': { deck: abuseViolenceQuestions, color: "#e74c3c", title: "Abuse & Violence" },
+            'sleep': { deck: sleepQuestions, color: "#34495e", title: "Sleep Disorders" },
+            'sexual_gender': { deck: sexualGenderQuestions, color: "#e84393", title: "Sexual & Gender Dysphoria" }
+        };
+
+        const config = topicMap[topic];
+        sourceDeck = [...config.deck];
+        themeColor = config.color;
+        title = config.title;
 
         if (document.getElementById('randomize-toggle').checked) {
             sourceDeck.sort(() => Math.random() - 0.5);
