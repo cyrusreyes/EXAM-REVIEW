@@ -49,30 +49,20 @@
 </head>
 <body>
 
-<div class="app-container">
-    <header>
-        <h1 id="header-title">EXAM REVIEW</h1>
-        <div class="badge" id="topic-badge">Menu</div>
-    </header>
-
-    <div id="view-menu" class="view active">
+<div id="view-menu" class="view active">
         <div class="controls-area">
             <input type="checkbox" id="randomize-toggle" checked style="transform: scale(1.5);">
             <label for="randomize-toggle"><strong>Randomize Order?</strong> (Questions will shuffle every time)</label>
         </div>
 
+        <!-- MED-SURG SECTION -->
+        <h2 style="border-bottom: 2px solid var(--primary); padding-bottom: 10px; color: var(--primary); margin-top: 30px;">Medical-Surgical Nursing</h2>
         <div class="menu-grid">
             <div class="menu-card" onclick="startQuiz('gi')">
                 <span style="font-size:3rem;">🩺</span>
                 <h3>GI Disorders</h3>
                 <p>100 Questions</p>
                 <p style="color:#777; font-size:0.9rem;">GERD, IBD, Liver, Pancreas</p>
-            </div>
-            <div class="menu-card" onclick="startQuiz('psych')">
-                <span style="font-size:3rem;">🧠</span>
-                <h3>Psychiatric & Neuro (V1)</h3>
-                <p>80 Questions</p>
-                <p style="color:#777; font-size:0.9rem;">Meds, Neuroanatomy, Legal</p>
             </div>
             <div class="menu-card" onclick="startQuiz('endocrine')">
                 <span style="font-size:3rem;">🦋</span>
@@ -86,30 +76,46 @@
                 <p>30 Questions</p>
                 <p style="color:#777; font-size:0.9rem;">Diagnostics, SCI, Trauma, Cognitive</p>
             </div>
-            <div class="menu-card" onclick="startQuiz('advPsych')">
-                <span style="font-size:3rem;">🧩</span>
-                <h3>Advanced Psych</h3>
-                <p>70 Questions</p>
-                <p style="color:#777; font-size:0.9rem;">Schizophrenia, Bipolar, Personality</p>
-            </div>
-            <!-- NEW CATEGORIES -->
-            <div class="menu-card" onclick="startQuiz('eye')">
-                <span style="font-size:3rem;">👁️</span>
-                <h3>Eye Disorders</h3>
-                <p>30 Questions</p>
-                <p style="color:#777; font-size:0.9rem;">Cataracts, Glaucoma, Macular</p>
-            </div>
-            <div class="menu-card" onclick="startQuiz('ear')">
-                <span style="font-size:3rem;">👂</span>
-                <h3>Ear Disorders</h3>
-                <p>20 Questions</p>
-                <p style="color:#777; font-size:0.9rem;">Otosclerosis, Meniere's, Surgery</p>
-            </div>
             <div class="menu-card" onclick="startQuiz('neuro_new')">
                 <span style="font-size:3rem;">🔬</span>
                 <h3>Neuro Disorders (New)</h3>
                 <p>30 Questions</p>
                 <p style="color:#777; font-size:0.9rem;">Parkinson's, Alzheimer's, ALS</p>
+            </div>
+            <div class="menu-card" onclick="startQuiz('eye')">
+                <span style="font-size:3rem;">👁️</span>
+                <h3>Eye Disorders</h3>
+                <p>10 Questions</p>
+                <p style="color:#777; font-size:0.9rem;">Cataracts, Glaucoma, Macular</p>
+            </div>
+            <div class="menu-card" onclick="startQuiz('ear')">
+                <span style="font-size:3rem;">👂</span>
+                <h3>Ear Disorders</h3>
+                <p>5 Questions</p>
+                <p style="color:#777; font-size:0.9rem;">Otosclerosis, Meniere's, Surgery</p>
+            </div>
+            <div class="menu-card" onclick="startQuiz('msk')">
+                <span style="font-size:3rem;">🦴</span>
+                <h3>Musculoskeletal</h3>
+                <p>30 Questions</p>
+                <p style="color:#777; font-size:0.9rem;">RA, OA, Gout</p>
+            </div>
+        </div>
+
+        <!-- PSYCH SECTION -->
+        <h2 style="border-bottom: 2px solid var(--accent); padding-bottom: 10px; color: var(--accent); margin-top: 40px;">Psychiatric Nursing</h2>
+        <div class="menu-grid">
+            <div class="menu-card" onclick="startQuiz('psych')">
+                <span style="font-size:3rem;">🧠</span>
+                <h3>Psychiatric & Neuro (V1)</h3>
+                <p>80 Questions</p>
+                <p style="color:#777; font-size:0.9rem;">Meds, Neuroanatomy, Legal</p>
+            </div>
+            <div class="menu-card" onclick="startQuiz('advPsych')">
+                <span style="font-size:3rem;">🧩</span>
+                <h3>Advanced Psych</h3>
+                <p>70 Questions</p>
+                <p style="color:#777; font-size:0.9rem;">Schizophrenia, Bipolar, Personality</p>
             </div>
             <div class="menu-card" onclick="startQuiz('neurodev')">
                 <span style="font-size:3rem;">🧸</span>
@@ -143,44 +149,6 @@
             </div>
         </div>
     </div>
-
-    <div id="view-quiz" class="view">
-        <div class="progress-container"><div class="progress-fill" id="progress-fill"></div></div>
-        <div style="margin-top:10px; color:#666; font-size:0.9rem; display:flex; justify-content:space-between;">
-            <span>Question <span id="q-current">1</span> of <span id="q-total">10</span></span>
-            <span id="score-tracker" style="font-weight:bold; color:var(--primary);">Score: 0</span>
-        </div>
-        
-        <div class="question-text" id="question-text"></div>
-        <div id="options-container"></div>
-        
-        <div style="text-align:right; margin-top: 20px;">
-            <button class="btn btn-skip" id="btn-skip" onclick="skipQuestion()">Skip Question ⏭</button>
-            <button class="btn" id="btn-next" onclick="nextQuestion()" style="display:none;">Next Question ➜</button>
-        </div>
-
-        <div class="rationale" id="rationale-display">
-            <strong>Rationale:</strong> <span id="rationale-text"></span>
-        </div>
-    </div>
-
-    <div id="view-results" class="view">
-        <div class="score-box">
-            <h2>Exam Complete</h2>
-            <span class="score-number"><span id="final-score">0</span>%</span>
-            <p id="final-stats">You answered X out of Y correctly.</p>
-            <button class="btn" onclick="showMenu()" style="background:transparent; border:2px solid var(--primary); color:var(--primary);">Return to Menu</button>
-        </div>
-
-        <h3>Question Breakdown:</h3>
-        <div id="rundown-container"></div>
-        
-        <div style="text-align:center; margin-top:30px;">
-            <button class="btn" onclick="window.scrollTo(0,0); showMenu();">Take Another Quiz</button>
-        </div>
-    </div>
-</div>
-
 <script>
     // ================= FULL DATASETS =================
     
@@ -2101,7 +2069,1110 @@
         {q: "A client recovering from ear surgery asks why they cannot watch TV for a week. The nurse explains it is because:", options: ["A) It increases intracranial pressure.", "B) It causes eye movement that can lead to dizziness or lightheadedness.", "C) It interferes with the healing of the tympanic membrane.", "D) It prevents the client from hearing properly."], answer: 1, rationale: "The client should avoid reading, watching TV, or looking at fast-moving objects for 1 week post-operatively because these activities involve eye tracking, which can lead to dizziness or lightheadedness while the inner ear is healing."},
         {q: "What should the nurse assess for when a patient with Otosclerosis is undergoing a Weber's test?", options: ["A) The sound lateralizes to the unaffected ear.", "B) The sound lateralizes to the affected ear.", "C) The sound is heard equally in both ears.", "D) The patient cannot hear the tuning fork at all."], answer: 1, rationale: "In Otosclerosis (a conductive hearing loss), the sound heard during a Weber test will lateralize (be heard louder) in the affected ear."}
     ];
+// --- NEW CATEGORY: NEURO DISORDERS (NEW) ---
+const neuroNewQuestions = [
+    { 
+        q: "The nurse is reviewing the pathophysiology of a client newly diagnosed with Parkinson's disease. The nurse correctly understands that the motor control issues in this disease are primarily caused by:", 
+        options: ["The accumulation of beta-amyloid plaques outside the neurons.", "The degeneration of motor neurons in the anterior horns of the spinal cord.", "The degeneration of dopaminergic neurons in the substantia nigra, leading to decreased dopamine and increased acetylcholine activity.", "A severe viral infection that causes bilateral demyelination of the peripheral nerves."], 
+        answer: 2, 
+        rationale: "Parkinson's disease is caused by the degeneration of dopaminergic neurons in the substantia nigra pars compacta. This leads to decreased dopamine production, creating an imbalance characterized by low dopamine and high acetylcholine, which impairs motor signal regulation[cite: 1]." 
+    },
+    { 
+        q: "A client with Parkinson's disease is prescribed Levodopa. The nurse is providing dietary teaching. Which of the following food choices by the client indicates a need for further education?", 
+        options: ["A baked potato with a side of steamed carrots.", "A grilled tuna steak with a side of dried beans.", "An apple and a slice of whole-wheat toast.", "A bowl of oatmeal with sliced strawberries."], 
+        answer: 1, 
+        rationale: "Patients on Levodopa therapy must avoid foods rich in Vitamin B6 (Pyridoxine), such as tuna, pork, dried beans, salmon, and beef liver. Vitamin B6 blocks the effects of Levodopa[cite: 1]." 
+    },
+    { 
+        q: "The nurse is assessing a client with Parkinson's disease. Which of the following is a classic clinical manifestation the nurse should expect to observe?", 
+        options: ["An intentional tremor that worsens when reaching for an object.", "A shuffling, festinating gait and a mask-like facial appearance.", "A complete loss of sensation in the lower extremities.", "A hyperactive, loud, and rapid speech pattern."], 
+        answer: 1, 
+        rationale: "Classic clinical manifestations of Parkinson's disease include a shuffling, festinating gait (walking on tiptoes starting at a slow pace that keeps increasing), a mask-like appearance of the face, resting (non-intentional) tremors, and microphonia (a slow, monotonous voice). The disease involves no true paralysis and no loss of sensation[cite: 1]." 
+    },
+    { 
+        q: "A client with Parkinson's disease is prescribed Benztropine Mesylate (Cogentin). The nurse monitors the client for which of the following expected side effects of this anticholinergic medication?", 
+        options: ["Excessive drooling and diarrhea.", "Bradycardia and pinpoint pupils.", "Blurring of vision, dryness of the mouth, and urinary retention.", "Orthostatic hypotension and reddish urine."], 
+        answer: 2, 
+        rationale: "Anticholinergic drugs like Cogentin are used to reduce tremors. Common side effects of these medications include blurring of vision, dryness of the mouth/throat, constipation, urinary retention, and mental disturbances[cite: 1]." 
+    },
+    { 
+        q: "A client with Parkinson's disease frequently leans forward with a stooped posture known as 'camptocormia.' To prevent contractures and counteract this posture, how should the nurse instruct the client to position themselves when resting in bed?", 
+        options: ["In a high-Fowler's position with a large pillow behind the head.", "In a prone position on a firm bed with no pillows.", "In a lateral recumbent position with a pillow between the knees.", "In a supine position with the knees flexed."], 
+        answer: 1, 
+        rationale: "To counteract the forward-bending (stooped) posture (camptocormia) and prevent contractures, the client should be instructed to lie in a prone position on a firm bed with no pillows[cite: 1]." 
+    },
+    { 
+        q: "A client takes Carbidopa-Levodopa (Sinemet) for Parkinson's disease. The client asks the nurse why Carbidopa is included in the medication. What is the nurse's best response?", 
+        options: ["\"It completely cures the disease by regenerating dopamine cells.\"", "\"It acts as a muscle relaxant to decrease your rigidity.\"", "\"It reduces the destruction of levodopa in your peripheral body, allowing more to reach your brain.\"", "\"It helps reverse the memory loss associated with your condition.\""], 
+        answer: 2, 
+        rationale: "Carbidopa is combined with Levodopa (Sinemet) because Carbidopa reduces the destruction of levodopa at the periphery, allowing the drug to work more effectively[cite: 1]." 
+    },
+    { 
+        q: "A client on Levodopa calls the clinic panicking because their urine has turned a reddish color. What is the nurse's priority action?", 
+        options: ["Instruct the client to go to the emergency department immediately for suspected renal failure.", "Hold the next dose of Levodopa and notify the physician.", "Reassure the client that reddish urine is a harmless side effect of the medication.", "Request an order for a urinalysis and culture."], 
+        answer: 2, 
+        rationale: "The nurse should teach the patient that a reddish discoloration of the urine is a harmless side effect of Levodopa therapy[cite: 1]." 
+    },
+    { 
+        q: "The nurse is reviewing the medication administration record of a client with Parkinson's disease. Which of the following classes of medications, if prescribed concurrently with Levodopa, would prompt the nurse to immediately intervene due to the risk of a hypertensive crisis?", 
+        options: ["Antihistamines", "Monoamine Oxidase Inhibitors (MAOIs)", "Cholinesterase inhibitors", "Antiviral agents"], 
+        answer: 1, 
+        rationale: "MAOIs (such as Parnate, Marplan, or Nardil) enhance norepinephrine activity. If taken with Levodopa, a severe hypertensive crisis may occur[cite: 1]." 
+    },
+    { 
+        q: "The physician prescribes Diphenhydramine (Benadryl) for a client with Parkinson's disease. The client asks why an allergy medication was prescribed for their neurological condition. The nurse explains that in Parkinson's, antihistamines are used to:", 
+        options: ["Decrease tremors and anxiety.", "Prevent upper respiratory infections.", "Improve the patient's handwriting (micrographia).", "Reverse orthostatic hypotension."], 
+        answer: 0, 
+        rationale: "In the collaborative management of Parkinson's disease, antihistamines like Benadryl are utilized specifically to decrease tremors and anxiety[cite: 1]." 
+    },
+    { 
+        q: "A client with Parkinson's disease complains of frequent dizziness when getting out of bed. The nurse understands this is likely a side effect of Levodopa known as orthostatic hypotension. What patient teaching should the nurse provide?", 
+        options: ["\"You should decrease your daily caloric intake.\"", "\"Change your positions gradually and wear elastic stockings.\"", "\"Stop taking the Levodopa immediately.\"", "\"Drink a glass of red wine before getting out of bed.\""], 
+        answer: 1, 
+        rationale: "Orthostatic hypotension is a known side effect of Levodopa. Patient teachings to manage this include instructing the client to change positions gradually and to wear elastic stockings. Red wine must be avoided as it contains Tyramine[cite: 1]." 
+    },
+    { 
+        q: "A nurse is describing the pathophysiology of Alzheimer's disease to a caregiver. The nurse correctly states that the disease is characterized by the abnormal accumulation of:", 
+        options: ["Excessive dopamine and serotonin in the basal ganglia.", "Spongy bone formation in the cerebral cortex.", "Beta-amyloid plaques outside the neurons and Tau tangles inside the neurons.", "Demyelination of the upper and lower motor neurons."], 
+        answer: 2, 
+        rationale: "Alzheimer's disease is characterized by an abnormal protein accumulation of Beta-amyloid plaques (outside neurons) and Tau tangles (inside neurons), which disrupts communication and causes neuronal damage[cite: 1]." 
+    },
+    { 
+        q: "During a clinic visit, the family of an older adult client reports that the client has recently started misplacing things, forgetting words, and struggling to remember recent events, though others outside the family haven't noticed. The nurse recognizes these symptoms are most consistent with which stage of Alzheimer's disease?", 
+        options: ["Stage I: No Impairment", "Stage II: Mild Cognitive Decline", "Stage V: Moderate Alzheimer's", "Stage VII: Severe Alzheimer's"], 
+        answer: 1, 
+        rationale: "Stage II (Mild Cognitive Decline) is characterized by remembering recent events poorly, forgetting words, and misplacing things, but others generally do not notice the impairment yet[cite: 1]." 
+    },
+    { 
+        q: "A client in the moderate stage of Alzheimer's disease becomes severely agitated during bath time. To avoid triggering agitation or violence, which action should the nurse strictly avoid?", 
+        options: ["Addressing the client by their name.", "Changing the client's established daily routine.", "Promoting physical activity earlier in the day.", "Assisting the client with choosing appropriate clothes."], 
+        answer: 1, 
+        rationale: "To avoid agitation and violence in a client with Alzheimer's, the nurse must avoid causing fatigue and minimize physical stressors, excessive demands, and changes of routine. The nurse should address the client by their name[cite: 1]." 
+    },
+    { 
+        q: "A client in the early stages of Alzheimer's disease is prescribed Lecanemab. The nurse understands that the primary goal of this disease-modifying therapy is to:", 
+        options: ["Cure the disease entirely by regenerating the cerebral cortex.", "Decrease amyloid plaques and slow cognitive decline.", "Regulate glutamate levels to rapidly improve memory.", "Act as a muscle relaxant to prevent spasticity."], 
+        answer: 1, 
+        rationale: "Lecanemab is a disease-modifying therapy used in the early stages of Alzheimer's to decrease amyloid plaques and slow cognitive decline[cite: 1]." 
+    },
+    { 
+        q: "A client with moderate to severe Alzheimer's disease is prescribed Memantine. The nurse knows that the mechanism of action for this medication is to:", 
+        options: ["Prevent the breakdown of acetylcholine.", "Block the destruction of levodopa.", "Regulate glutamate to improve memory, attention, and reasoning.", "Reverse the formation of Tau tangles inside the neurons."], 
+        answer: 2, 
+        rationale: "Memantine is used for moderate to severe Alzheimer's disease; it works by regulating glutamate to improve memory, attention, and reasoning[cite: 1]." 
+    },
+    { 
+        q: "Which neurotransmitter is significantly decreased in clients with Alzheimer's disease due to neuronal damage?", 
+        options: ["Dopamine", "Glutamate", "Acetylcholine", "Norepinephrine"], 
+        answer: 2, 
+        rationale: "The disruption of neuron communication and subsequent neuronal damage/death in Alzheimer's disease leads to decreased Acetylcholine levels[cite: 1]." 
+    },
+    { 
+        q: "The nurse is planning care for a client in Stage VII (Severe Alzheimer's). Based on the disease progression, the nurse should anticipate the client will exhibit:", 
+        options: ["Only mild impairment in planning and organizing.", "Math being very challenging, but physical abilities remaining completely intact.", "Fading of learned abilities like eating, sitting, and walking, resulting in total dependence.", "Difficulty choosing appropriate clothes but retaining full conversational abilities."], 
+        answer: 2, 
+        rationale: "Stage VII (Severe Alzheimer's) is characterized by limited speech, a serious decline in basic abilities, the fading of learned physical abilities (such as eating, sitting, walking, and standing), and total dependence[cite: 1]." 
+    },
+    { 
+        q: "When communicating with a client who has Alzheimer's disease and is experiencing language difficulty (aphasia), the nurse should utilize which of the following approaches?", 
+        options: ["Argue with the client to force them back to reality.", "Scold the client when they cannot remember a word.", "Address the client by name and avoid arguing or reasoning with them.", "Place excessive demands on the client to exercise their cognitive function."], 
+        answer: 2, 
+        rationale: "Collaborative management for Alzheimer's emphasizes avoiding scolding, embarrassing, arguing, or reasoning with the client, as this causes agitation. The nurse should always address the client by their name[cite: 1]." 
+    },
+    { 
+        q: "A provider orders a diagnostic workup for a client suspected of having Alzheimer's disease. Which diagnostic test is utilized specifically to test for changes in the client's ability to think?", 
+        options: ["Electromyography (EMG)", "Neuropsycho Testing", "Electroencephalogram (EEG)", "High Resolution CT Scan"], 
+        answer: 1, 
+        rationale: "Neuropsycho Testing is used in the diagnostics of Alzheimer's disease specifically to test for changes in the ability to think[cite: 1]." 
+    },
+    { 
+        q: "Which of the following medications is a Cholinesterase Inhibitor used in mild to moderate Alzheimer's to improve cell communication and behavioral symptoms?", 
+        options: ["Donepezil", "Baclofen", "Bromocriptine", "Benztropine Mesylate"], 
+        answer: 0, 
+        rationale: "Donepezil (and Rivastigmine) are Cholinesterase inhibitors used in mild to moderate Alzheimer's to improve cell communication and behavioral symptoms by preventing the breakdown of acetylcholine[cite: 1]." 
+    },
+    { 
+        q: "The nurse is educating a client recently diagnosed with Amyotrophic Lateral Sclerosis (ALS), also known as Lou Gehrig's disease. The nurse accurately describes the disease as the progressive degeneration of:", 
+        options: ["Sensory neurons in the peripheral nervous system.", "Dopaminergic neurons in the basal ganglia.", "Upper motor neurons in the brain and lower motor neurons in the spinal cord.", "The myelin sheath of the central nervous system."], 
+        answer: 2, 
+        rationale: "ALS is a disease characterized by the loss of motor neurons in the anterior horns of the spinal cord (lower motor neurons) and the motor nuclei of the lower brain stem/brain (upper motor neurons)[cite: 1]." 
+    },
+    { 
+        q: "The nurse is assessing a client for early signs of ALS. Which clinical manifestation is often the first sign of the disease?", 
+        options: ["Total dependence and paralysis", "Dysphagia", "Resting tremors", "Severe memory decline"], 
+        answer: 1, 
+        rationale: "Dysphagia (difficulty swallowing) is frequently the 1st sign of ALS. Other early signs include awkwardness of fine finger movement[cite: 1]." 
+    },
+    { 
+        q: "A client with advanced ALS is admitted to the medical-surgical unit. The nurse understands that the most common cause of death in clients with ALS is:", 
+        options: ["Hypertensive crisis", "Renal failure", "Respiratory failure", "Cardiac arrest"], 
+        answer: 2, 
+        rationale: "The progressive paralysis in ALS eventually causes respiratory muscle involvement, leading to respiratory failure, which is the common cause of death for these patients[cite: 1]." 
+    },
+    { 
+        q: "To promote safe swallowing and prevent aspiration in a client with ALS who is still eating orally, the nurse should instruct the client to use which specific position?", 
+        options: ["Neck extended backward.", "Tucked chin position.", "Head tilted to the paralyzed side.", "Lying supine."], 
+        answer: 1, 
+        rationale: "To facilitate swallowing and avoid aspiration, the client should use a tucked chin position when eating and drinking[cite: 1]." 
+    },
+    { 
+        q: "A client with ALS is experiencing severe muscle spasticity of the flexor muscles. The nurse should anticipate an order for which medication to control this symptom?", 
+        options: ["Memantine", "Levodopa", "Baclofen", "Atropine"], 
+        answer: 2, 
+        rationale: "Baclofen is utilized in the symptom control of ALS specifically to treat muscle spasticity[cite: 1]." 
+    },
+    { 
+        q: "The nurse is caring for an ALS client who is experiencing breathlessness that is being severely worsened by anxiety. The physician is likely to prescribe which class of medications to alleviate this specific symptom complex?", 
+        options: ["Antimuscarinics", "Benzodiazepines", "Cholinesterase inhibitors", "Antihistamines"], 
+        answer: 1, 
+        rationale: "Benzodiazepines are prescribed for ALS patients to help manage breathlessness that is worsened by anxiety[cite: 1]." 
+    },
+    { 
+        q: "A client with ALS has excessive saliva production and is at high risk for aspiration due to severe dysphagia. The nurse anticipates administering which type of medication for symptom control?", 
+        options: ["Antiviral agents", "Dopamine agonists", "Antimuscarinics", "Benzodiazepines"], 
+        answer: 2, 
+        rationale: "Antimuscarinics are used in the symptom control of ALS to decrease excessive saliva[cite: 1]." 
+    },
+    { 
+        q: "A client undergoing evaluation for ALS asks the nurse, 'Is there a definitive blood test that will prove I have this disease?' What is the most accurate response by the nurse?", 
+        options: ["\"Yes, a high-resolution CT scan will definitively diagnose it.\"", "\"No, there is no definitive test, but an EMG may be used to measure the electrical activity of your muscles.\"", "\"Yes, we will test your cerebrospinal fluid for beta-amyloid proteins.\"", "\"No, the diagnosis is made solely by observing a resting tremor.\""], 
+        answer: 1, 
+        rationale: "There is \"no definitive test\" for ALS; however, an EMG (electromyography) is a diagnostic procedure utilized to measure the electrical activity of muscles at rest and during contraction to aid in diagnosis[cite: 1]." 
+    },
+    { 
+        q: "As ALS progresses, the nurse notes that the client is experiencing dysarthria, jaw clonus, and severe respiratory difficulty. The nurse understands these clinical manifestations are indicative of involvement of which structures?", 
+        options: ["The basal ganglia", "The hippocampus and cerebral cortex", "The brainstem and medulla oblongata", "The substantia nigra"], 
+        answer: 2, 
+        rationale: "Dysarthria, jaw clonus, and respiratory difficulty are specific clinical manifestations indicating the involvement of the brainstem and medulla oblongata in the progression of ALS[cite: 1]." 
+    },
+    { 
+        q: "The nurse is formulating a care plan for a client with late-stage ALS. Because the client's intellectual functions remain completely intact while their body undergoes progressive paralysis, what is a crucial collaborative management intervention?", 
+        options: ["Initiating rigorous physical therapy to rebuild atrophied muscles.", "Providing constant emotional support due to the client's complete dependency.", "Administering Donepezil to prevent cognitive decline.", "Teaching the client how to walk with a festinating gait."], 
+        answer: 1, 
+        rationale: "In ALS, the progressive degeneration affects motor neurons, leaving the patient's intellect fully intact as they enter a state of progressive paralysis. Therefore, providing emotional support is a critical collaborative management intervention as the patient faces complete dependency as the disease progresses[cite: 1]." 
+    }
+];
 
+// --- NEW CATEGORY: NEURODEVELOPMENTAL DISORDERS ---
+const neurodevQuestions = [
+    { 
+        q: "The nurse is assessing a pediatric client who has difficulty communicating, lacks abstract cognitive abilities, and cannot describe their feelings. The nurse understands that diagnosing psychiatric disorders in children is often difficult primarily because:", 
+        options: ["Children have a fully developed and stable sense of a normal self.", "Children usually lack the abstract cognitive abilities and verbal skills to describe what is happening.", "Children do not experience the same mental health problems as adults.", "Psychiatric disorders in children use entirely different diagnostic criteria than adults."], 
+        answer: 1, 
+        rationale: "Psychiatric disorders are not diagnosed as easily in children because they usually lack the abstract cognitive abilities and verbal skills to describe what is happening. Furthermore, children have a limited sense of a stable, normal self, but they are diagnosed using the same criteria as adults[cite: 1]." 
+    },
+    { 
+        q: "The nurse is reviewing the chart of a child diagnosed with Intellectual Developmental Disorder. The nurse notes that the child requires extensive supervision and has limited communication. Which category of intellectual disability does this describe?", 
+        options: ["Mild", "Moderate", "Severe", "Profound"], 
+        answer: 2, 
+        rationale: "Severe intellectual disability requires extensive supervision and is characterized by limited communication. The \"profound\" category indicates the child is dependent on caregivers for all needs, while \"mild\" involves basic academic skills and being semi-independent[cite: 1]." 
+    },
+    { 
+        q: "Which of the following maternal factors during pregnancy is a known cause of Intellectual Developmental Disorder in infants?", 
+        options: ["High folic acid intake", "Maternal alcohol intake", "Gestational diabetes", "Mild maternal anxiety"], 
+        answer: 1, 
+        rationale: "Causes of Intellectual Developmental Disorder include alterations in embryonic development such as maternal alcohol intake, which leads to Fetal Alcohol Syndrome[cite: 1]." 
+    },
+    { 
+        q: "A mother brings her 2-year-old son to the clinic, stating that he avoids eye contact, flaps his hands, and does not engage in play. The nurse recognizes these behaviors as hallmark signs of which disorder?", 
+        options: ["Attention-Deficit Hyperactivity Disorder (ADHD)", "Autism Spectrum Disorder (ASD)", "Tourette's Disorder", "Childhood Disintegrative Disorder"], 
+        answer: 1, 
+        rationale: "Autism Spectrum Disorder (ASD) is characterized by persistent deficits in communication and social interaction, such as little eye contact and not engaging in play, as well as restricted and stereotyped motor behaviors like hand flapping[cite: 1]." 
+    },
+    { 
+        q: "When comparing the symptomatology of Autism Spectrum Disorder (ASD) between genders, the nurse expects female children to more commonly exhibit:", 
+        options: ["Externalizing behaviors such as property destruction.", "Rule-breaking and disruptive actions.", "Internalizing behaviors such as depression, anxiety, and fearfulness.", "Severe physical aggression towards peers."], 
+        answer: 2, 
+        rationale: "Female children with ASD tend to exhibit internalizing behaviors, including introversion, depression, anxiety, and fearfulness. Male children typically display externalizing behaviors such as aggression, property destruction, and rule-breaking[cite: 1]." 
+    },
+    { 
+        q: "A pediatric nurse is explaining behavioral therapies to the parents of a child with ASD. The nurse correctly states that Applied Behavior Analysis (ABA) is best accomplished in which environment?", 
+        options: ["A highly structured clinical laboratory", "An inpatient psychiatric unit", "A natural setting, such as the home", "A crowded community playground"], 
+        answer: 2, 
+        rationale: "Applied behavior analysis (ABA) is used to encourage desired behaviors and reduce unwanted behaviors by helping the child understand the connection between behaviors and consequences. It is best accomplished in a natural setting, such as the home[cite: 1]." 
+    },
+    { 
+        q: "The nurse is assessing a 15-month-old female client who previously developed normally but is now exhibiting a progressive loss of motor skills, spasticity, and repetitive hand-wringing. These signs are highly indicative of:", 
+        options: ["Asperger's Syndrome", "Rett Syndrome", "Heller's Syndrome", "Dyslexia"], 
+        answer: 1, 
+        rationale: "Rett Syndrome is a rare genetic neurodevelopmental disorder that affects females and causes a progressive loss of motor skills, language, and communication abilities. Signs and symptoms, such as repetitive hand movements and spasticity, appear between 6 to 18 months of age[cite: 1]." 
+    },
+    { 
+        q: "A parent asks the nurse why their child was diagnosed with 'Level 1 ASD' instead of Asperger's Syndrome. The nurse's best response is based on the knowledge that Level 1 ASD (formerly Asperger's) is characterized by:", 
+        options: ["A sudden, dramatic regression of self-care skills after 3 years of age.", "Severe delays in language and cognitive development.", "Difficulties in social interaction and restrictive behaviors without significant delays in language and cognition.", "Multiple motor tics and at least one vocal tic."], 
+        answer: 2, 
+        rationale: "Asperger's Syndrome is no longer an official medical diagnosis as of 2013 and is categorized as Level 1 ASD. It is characterized by difficulties in social interaction, restricted interests, and repetitive behaviors, but with no significant delay in language and cognitive developments[cite: 1]." 
+    },
+    { 
+        q: "A 4-year-old child who developed normally for the first 3 years of life suddenly experiences a dramatic regression, losing language, social, and motor skills. The nurse suspects which rare developmental condition?", 
+        options: ["Childhood Disintegrative Disorder (Heller's Syndrome)", "Rett Syndrome", "Stereotypic Movement Disorder", "Tourette's Disorder"], 
+        answer: 0, 
+        rationale: "Childhood Disintegrative Disorder (Heller's Syndrome) is a very rare developmental condition where a child develops normally for at least 2 to 3 years, then experiences a dramatic regression, losing language, social, motor, and self-care skills[cite: 1]." 
+    },
+    { 
+        q: "The nurse is caring for a school-aged child who exhibits frequent eye blinking, shoulder shrugging, and throat clearing. The nurse anticipates the provider will classify these manifestations as:", 
+        options: ["Stereotypic movement disorder", "Tic Disorder", "Compulsions", "Apraxia"], 
+        answer: 1, 
+        rationale: "A tic disorder involves sudden, rapid, recurrent, nonrhythmic, stereotyped motor movements (like blinking and shoulder shrugging) or vocalizations (like throat clearing)[cite: 1]." 
+    },
+    { 
+        q: "A child diagnosed with a Tic Disorder frequently repeats the last-heard sound, word, or phrase of the nurse. The nurse documents this complex vocal tic as:", 
+        options: ["Coprolalia", "Palilalia", "Echolalia", "Apraxia"], 
+        answer: 2, 
+        rationale: "Echolalia is a complex vocal tic characterized by repeating the last-heard sound, word, or phrase. Coprolalia is the use of socially unacceptable or obscene words, and palilalia is repeating one's own sounds or words[cite: 1]." 
+    },
+    { 
+        q: "Which of the following findings is required for a formal diagnosis of Tourette's Disorder?", 
+        options: ["Multiple motor tics and one or more vocal tics occurring many times a day for more than 1 year.", "A single motor tic present for less than 6 months.", "The presence of tics exclusively during sleep.", "Tics that only occur when the child is engaged in an absorbing activity."], 
+        answer: 0, 
+        rationale: "Tourette's Disorder is a tic disorder that involves multiple motor tics and one or more vocal tics that occur many times a day for more than 1 year. Tics typically diminish during sleep and when engaged in an absorbing activity, rather than exclusively occurring during them[cite: 1]." 
+    },
+    { 
+        q: "A pediatric client is diagnosed with Tourette's Disorder. The nurse should anticipate an order for which of the following medications to help manage the condition?", 
+        options: ["Imipramine (Tofranil)", "Desmopressin", "Risperidone (Risperdal)", "Methylphenidate (Ritalin)"], 
+        answer: 2, 
+        rationale: "Medications used for the treatment of Tourette's Disorder and Tic Disorders include Risperidone, Aripiprazole, Clonidine, and Guanfacine. Imipramine and Desmopressin are used for Enuresis, and Methylphenidate is for ADHD[cite: 1]." 
+    },
+    { 
+        q: "A 3-year-old child repeatedly bangs their head against the wall, causing self-inflicted injuries. The parents report that pain does not seem to stop the child from doing it. The nurse recognizes this presentation is most indicative of:", 
+        options: ["Tourette's Disorder", "Stereotypic Movement Disorder", "Childhood Disintegrative Disorder", "Dyslexia"], 
+        answer: 1, 
+        rationale: "Stereotypic Movement Disorder is characterized by rhythmic, repetitive behaviors (such as head banging, hand waving, or rocking) that have no purpose. Self-inflicted injuries are common, and pain is not a deterrent to the behavior[cite: 1]." 
+    },
+    { 
+        q: "A 7-year-old child frequently repeats words and struggles with the fluency and patterning of speech. The nurse recognizes this disturbance as:", 
+        options: ["Speech sound disorder", "Social communication disorder", "Stuttering", "Aphasia"], 
+        answer: 2, 
+        rationale: "Stuttering is a communication disorder characterized by a disturbance of fluency and patterning of speech, featuring sound and syllable repetitions[cite: 1]." 
+    },
+    { 
+        q: "A parent reports that their 5-year-old child repeatedly passes feces into their clothing. The child has a history of severe constipation. The nurse understands this condition is known as:", 
+        options: ["Enuresis", "Involuntary Encopresis", "Intentional Encopresis", "Apraxia"], 
+        answer: 1, 
+        rationale: "Encopresis is the repeated passage of feces into inappropriate places, diagnosed at 4 years of age. Involuntary encopresis is associated with constipation that occurs psychologically, whereas intentional encopresis is associated with oppositional defiant disorder or conduct disorder[cite: 1]." 
+    },
+    { 
+        q: "The nurse is planning care for a 6-year-old child diagnosed with Enuresis. Which pharmacological treatment should the nurse anticipate the provider ordering?", 
+        options: ["Imipramine (Tofranil)", "Clonidine (Catapres)", "Atomoxetine (Strattera)", "Aripiprazole (Abilify)"], 
+        answer: 0, 
+        rationale: "Medications utilized for the treatment of Enuresis (the repeated voiding into clothing or bed) include Imipramine (Tofranil) and Desmopressin[cite: 1]." 
+    },
+    { 
+        q: "A child is prescribed Imipramine (Tofranil) for the management of nocturnal enuresis. The nurse should closely monitor the child for which specific adverse side effect?", 
+        options: ["Severe hypotension", "Appetite suppression", "Urinary retention", "Coprolalia"], 
+        answer: 2, 
+        rationale: "Imipramine (Tofranil) is an antidepressant used for enuresis; its notable side effect that requires monitoring is urinary retention[cite: 1]." 
+    },
+    { 
+        q: "A teacher asks the school nurse for advice on managing a student with Attention-Deficit Hyperactivity Disorder (ADHD) in the classroom. Which intervention should the nurse recommend?", 
+        options: ["Place the child in a busy area of the classroom to promote social interaction.", "Give complex, multi-step instructions to challenge the child's cognition.", "Manage the environment by providing a quiet place free of distractions for task completion.", "Change the daily schedule frequently to keep the child engaged."], 
+        answer: 2, 
+        rationale: "Interventions for ADHD include managing the environment by providing a quiet place free of distractions for task completion, simplifying instructions by breaking complex tasks into small steps, and minimizing changes by establishing a structured daily routine[cite: 1]." 
+    },
+    { 
+        q: "When reviewing the prenatal history of a child diagnosed with ADHD, the nurse identifies which of the following as a significant risk factor?", 
+        options: ["Maternal intake of high-protein diets", "Pre-natal exposure to alcohol, tobacco, and lead", "Fetal macrosomia", "Advanced maternal age"], 
+        answer: 1, 
+        rationale: "Risk factors for ADHD include prenatal influences such as pre-natal exposure to alcohol, tobacco, and lead, as well as environmental toxins and severe malnutrition[cite: 1]." 
+    },
+    { 
+        q: "A 10-year-old client with ADHD is prescribed Methylphenidate (Ritalin). The nurse should educate the parents to monitor for which primary side effects?", 
+        options: ["Elevated liver function and dry mouth", "Hypotension and dizziness", "Appetite suppression and growth delay", "Urinary retention and weight gain"], 
+        answer: 2, 
+        rationale: "Methylphenidate (Ritalin) requires monitoring for appetite suppression and growth delay. Elevated liver function and dry mouth are monitored with Atomoxetine, while hypotension is monitored with Clonidine[cite: 1]." 
+    },
+    { 
+        q: "The nurse is reviewing the medication profile of a pediatric client taking Atomoxetine (Strattera) for ADHD. The nurse understands this medication belongs to which pharmacological classification?", 
+        options: ["Central nervous system stimulant", "Selective Norepinephrine Re-uptake Inhibitor (SNRI)", "Tricyclic Antidepressant", "Atypical Antipsychotic"], 
+        answer: 1, 
+        rationale: "Atomoxetine (Strattera) is classified as a Selective Norepinephrine Re-uptake Inhibitor (SNRI) used for ADHD[cite: 1]." 
+    },
+    { 
+        q: "A pediatric client with ADHD is prescribed off-label Clonidine (Catapres). Because of its mechanism of action in the brain, the nurse must assess the client for which adverse effects?", 
+        options: ["Tachycardia and insomnia", "Hypotension and dizziness", "Urinary retention and constipation", "Excessive weight gain"], 
+        answer: 1, 
+        rationale: "Clonidine (Catapres) is an extended-release medication that reduces norepinephrine in the brain. The nurse must monitor the child for hypotension, dizziness, and somnolence[cite: 1]." 
+    },
+    { 
+        q: "A mother brings her infant to the clinic and expresses concern over the baby's fussy, temperamental behavior and poor sleeping patterns. The nurse recognizes these behaviors may be early infant presentations of which disorder?", 
+        options: ["Intellectual Developmental Disorder", "Attention-Deficit Hyperactivity Disorder (ADHD)", "Tourette's Disorder", "Encopresis"], 
+        answer: 1, 
+        rationale: "The onset of ADHD is typically recognized in preschool, but in infancy, it can present as fussy, temperamental behavior and poor sleeping patterns. By toddlerhood, these children are often described as 'always on the go'[cite: 1]." 
+    },
+    { 
+        q: "The nurse is observing a child who constantly fidgets, leaves their assigned seat, makes excessive noise by tapping objects, and carelessly forgets homework. These behaviors align with the core presentation of:", 
+        options: ["Autism Spectrum Disorder", "Stereotypic Movement Disorder", "Attention-Deficit Hyperactivity Disorder (ADHD)", "Childhood Disintegrative Disorder"], 
+        answer: 2, 
+        rationale: "ADHD is characterized by a persistent pattern of inattentiveness, overactivity, and impulsiveness. Signs and symptoms include fidgeting constantly, being in and out of assigned seats, making excessive noise, careless mistakes in schoolwork, and losing homework[cite: 1]." 
+    },
+    { 
+        q: "A child is prescribed Dextroamphetamine for the management of ADHD. To prevent a common side effect of this medication, the nurse should advise the parents to:", 
+        options: ["Monitor the child's liver enzymes monthly.", "Avoid administering the medication close to bedtime.", "Check the child's blood pressure daily for hypertension.", "Restrict the child's fluid intake to prevent enuresis."], 
+        answer: 1, 
+        rationale: "Dextroamphetamine is used for ADHD and requires monitoring for insomnia. Therefore, avoiding administration close to bedtime is a standard nursing intervention for stimulant medications[cite: 1]." 
+    },
+    { 
+        q: "The nurse is creating a care plan for a client with Autism Spectrum Disorder (ASD). To help the child improve their response to overwhelming loud and noisy situations, the nurse should recommend a referral for:", 
+        options: ["Speech Language Therapy", "Sensory Integration Therapy", "Cognitive Behavioral Therapy", "Applied Behavior Analysis"], 
+        answer: 1, 
+        rationale: "Sensory Integration Therapy helps to improve the child's response to overwhelming or specific sensory stimulation, such as loud, noisy, and unstructured situations[cite: 1]." 
+    },
+    { 
+        q: "A child diagnosed with a Social Communication Disorder will primarily display which of the following deficits?", 
+        options: ["An inability to produce intelligible speech sounds.", "Rhythmic, repetitive behaviors with no purpose.", "An inability to observe social 'rules' of conversation and take turns talking and listening.", "A dramatic regression of motor skills and language at 3 years of age."], 
+        answer: 2, 
+        rationale: "Social communication disorder is characterized by the inability to observe social 'rules' of conversation, deficits in applying context to conversation, and the inability to take turns talking and listening with another[cite: 1]." 
+    },
+    { 
+        q: "Which of the following represents the most effective overall treatment strategy for a school-aged child diagnosed with ADHD?", 
+        options: ["Pharmacotherapy alone", "Strict dietary modifications and vitamin supplementation", "A combination of Pharmacotherapy with Behavioral, Psychosocial, and Educational Interventions", "Long-term inpatient residential placement"], 
+        answer: 2, 
+        rationale: "The most effective treatment for ADHD is a combination of Pharmacotherapy with Behavioral, Psychosocial, and Educational Interventions[cite: 1]." 
+    },
+    { 
+        q: "The nurse is collaborating with a physical education teacher to design a program for a child with Developmental Coordination Disorder. Which management strategy is most appropriate for this child?", 
+        options: ["Applied behavior analysis", "Adaptive physical education and sensory integration programs", "High-intensity cardiovascular interval training", "Intensive speech-language therapy"], 
+        answer: 1, 
+        rationale: "Developmental Coordination Disorder involves impaired coordination severe enough to interfere with academic achievement or daily living. Management includes adaptive physical education and sensory integration programs to target improvement in areas of difficulty[cite: 1]." 
+    }
+    // --- NEW CATEGORY: BEHAVIOR & SUBSTANCE DISORDERS ---
+const behaviorSubstanceQuestions = [
+    { 
+        q: "The nurse is assessing a 4-year-old child whose parents report an enduring pattern of uncooperative, defiant, and disobedient behavior toward them. The child does not engage in major antisocial violations like property destruction. The nurse suspects which of the following disorders?", 
+        options: ["Conduct Disorder", "Intermittent Explosive Disorder", "Oppositional Defiant Disorder", "Antisocial Personality Disorder"], 
+        answer: 2, 
+        rationale: "Oppositional Defiant Disorder is an enduring pattern of uncooperative, defiant, disobedient, and hostile behavior towards authority figures without major antisocial violations. The onset typically occurs between 2 to 3 years old and early adolescence[cite: 1]." 
+    },
+    { 
+        q: "A 15-year-old client has a history of aggression toward people and animals, destruction of property, and serious violations of rules. The nurse identifies these behaviors as characteristic of which disorder?", 
+        options: ["Oppositional Defiant Disorder", "Conduct Disorder", "Intermittent Explosive Disorder", "Pyromania"], 
+        answer: 1, 
+        rationale: "Conduct Disorder is characterized by persistent behavior that violates societal norms, rules, laws, and the rights of others. Signs and symptoms include aggression to people and animals, destruction of property, deceitfulness and theft, and serious violation of rules[cite: 1]." 
+    },
+    { 
+        q: "The nurse is reviewing the history of a client diagnosed with Intermittent Explosive Disorder (IED). The nurse understands that the typical duration of an explosive episode in this disorder is approximately:", 
+        options: ["5 minutes", "30 minutes", "2 hours", "24 hours"], 
+        answer: 1, 
+        rationale: "Intermittent Explosive Disorder involves repeated episodes of impulsive, aggressive, violent behavior, and angry verbal outbursts, with a typical duration of 30 minutes[cite: 1]." 
+    },
+    { 
+        q: "A client with Intermittent Explosive Disorder (IED) asks the nurse about the long-term physical risks associated with their condition. The nurse should educate the client about an increased risk for which adverse physical outcomes?", 
+        options: ["Renal failure and hepatic cirrhosis", "Coronary heart disease, hypertension, stroke, and diabetes", "Pulmonary fibrosis and chronic obstructive pulmonary disease", "Peptic ulcer disease and ulcerative colitis"], 
+        answer: 1, 
+        rationale: "Adverse physical outcomes associated with Intermittent Explosive Disorder include coronary heart disease, hypertension, stroke, and diabetes[cite: 1]." 
+    },
+    { 
+        q: "When assessing an adolescent for Conduct Disorder, the nurse categorizes the client's behaviors. Which of the following is considered an 'internalizing' behavior rather than an 'externalizing' behavior?", 
+        options: ["Vandalism", "Swearing", "Somatic aches and pains", "Truancy"], 
+        answer: 2, 
+        rationale: "Internalizing behaviors include somatic aches and pains, preferring to be alone, withdrawing, sulking, being overly shy, and crying spells. Vandalism, swearing, and truancy are externalizing behaviors[cite: 1]." 
+    },
+    { 
+        q: "A pediatric client with Conduct Disorder is caught participating in minor shoplifting, repeated lying, and staying out late without permission. The nurse classifies the intensity of these behaviors as:", 
+        options: ["Mild", "Moderate", "Severe", "Profound"], 
+        answer: 0, 
+        rationale: "Mild intensity behaviors associated with Conduct Disorder include the child having some conduct problems that cause minor harm to others, repeated lying, truancy, minor shoplifting, and staying out late without permission[cite: 1]." 
+    },
+    { 
+        q: "A client is admitted to the psychiatric unit with a diagnosis of Pyromania. The nurse understands that the client's primary motivation for setting fires is:", 
+        options: ["To conceal evidence of other crimes.", "For monetary gain through insurance fraud.", "Fascination with fire and a feeling of pleasure or relief of tension.", "To seek revenge against an authority figure."], 
+        answer: 2, 
+        rationale: "In Pyromania, the person is fascinated by fire and feels pleasure or relief of tension while setting and watching the fires. There is no monetary gain, revenge, or other reason such as concealing other crimes[cite: 1]." 
+    },
+    { 
+        q: "Which of the following classes of medications should the nurse anticipate the healthcare provider prescribing to manage the impulsive and aggressive outbursts in a client with Intermittent Explosive Disorder?", 
+        options: ["CNS Depressants", "Anticonvulsants and SSRIs", "Opiate agonists", "Cholinesterase inhibitors"], 
+        answer: 1, 
+        rationale: "Medications used to treat Intermittent Explosive Disorder include Fluoxetine (Prozac), Lithium, Anticonvulsants (such as Valproic Acid and Phenytoin), and SSRIs[cite: 1]." 
+    },
+    { 
+        q: "When distinguishing between normal adolescent behavior and abnormal behavior, the nurse recognizes which of the following as a sign of abnormal behavior?", 
+        options: ["Eagerness for peer approval", "Competitiveness in play", "Occasional psychosomatic complaints", "Inability to postpone gratification"], 
+        answer: 3, 
+        rationale: "An inability to postpone gratification is an abnormal behavior in adolescence. Acceptable characteristics include an eagerness for peer approval, competitiveness in play, and occasional psychosomatic complaints[cite: 1]." 
+    },
+    { 
+        q: "A client diagnosed with Kleptomania describes their experience to the nurse. Which pattern of feelings does the nurse expect the client to report surrounding the act of theft?", 
+        options: ["High tension and anxiety prior to the theft, followed by relief, exhilaration, or gratification.", "Extreme guilt and depression prior to the theft, followed by paranoia.", "Complete apathy before, during, and after the theft.", "Intense anger prior to the theft, followed by violent outbursts."], 
+        answer: 0, 
+        rationale: "Kleptomania involves high tension and anxiety prior to the theft, followed by relief, exhilaration, or gratification when committing the theft[cite: 1]." 
+    },
+    { 
+        q: "The nurse is planning care for an adolescent with Conduct Disorder. The nurse recognizes that clients with this disorder typically exhibit which emotional trait?", 
+        options: ["Intense guilt after acting out", "Hyper-empathy for others", "Callous and unemotional traits", "High self-esteem"], 
+        answer: 2, 
+        rationale: "Signs and symptoms of Conduct Disorder include a callous and unemotional trait, little empathy for others, not feeling bad or guilty, shallow and superficial emotion, and low self-esteem[cite: 1]." 
+    },
+    { 
+        q: "Which psychotherapeutic intervention is considered an effective specific behavioral intervention model for treating Oppositional Defiant Disorder?", 
+        options: ["Psychoanalysis", "Parent Management Training Models and Coping Power Program", "Electroconvulsive Therapy (ECT)", "Exposure and Response Prevention (ERP)"], 
+        answer: 1, 
+        rationale: "Treatments for Oppositional Defiant Disorder include Parent Management Training Models of Behavioral Intervention and the Coping Power Program[cite: 1]." 
+    },
+    { 
+        q: "The nurse evaluates a client with Intermittent Explosive Disorder immediately after an explosive verbal and physical outburst. The nurse anticipates the client will display which emotional response?", 
+        options: ["Pride and boastfulness", "Feeling embarrassed, guilty, and remorseful", "Callousness and a lack of empathy", "Persistent, escalating rage"], 
+        answer: 1, 
+        rationale: "After an episode of Intermittent Explosive Disorder, the individual typically experiences feelings of being embarrassed, guilty, and remorseful[cite: 1]." 
+    },
+    { 
+        q: "A mother states that her 12-year-old son began showing signs of physical aggression, deceitfulness, and severe rule violations at age 8. The nurse documents this as which subtype of Conduct Disorder?", 
+        options: ["Adolescent-onset", "Mild-intensity onset", "Before 10 years old (childhood-onset)", "Intermittent-onset"], 
+        answer: 2, 
+        rationale: "The subtype of Conduct Disorder with onset before 10 years old is characterized by physical aggression toward others, disturbed peer relationships, and persistent conduct disorder that can develop into antisocial personality disorder as an adult[cite: 1]." 
+    },
+    { 
+        q: "The nurse notes that a client with Intermittent Explosive Disorder (IED) also has a comorbid psychiatric diagnosis. According to statistical prevalence, which comorbid disorder is the most common in clients with IED?", 
+        options: ["Schizophrenia", "Bipolar I Disorder", "Substance Use Disorder", "Obsessive-Compulsive Disorder"], 
+        answer: 2, 
+        rationale: "In clients with Intermittent Explosive Disorder, the most common comorbid psychiatric disorder is Substance Use Disorder. Other comorbidities include ADHD, Conduct Disorder, and ODD[cite: 1]." 
+    },
+    { 
+        q: "A client is admitted for alcohol withdrawal. The nurse observes the client for early signs of withdrawal. Which timeline accurately reflects when early signs of alcohol withdrawal typically develop and peak?", 
+        options: ["Develops within 1-2 weeks; peaks at 1 month.", "Develops within a few hours after cessation; peaks at 24 to 48 hours.", "Develops exactly at 48 hours; peaks at 72 hours.", "Develops after 7 days; peaks at 14 days."], 
+        answer: 1, 
+        rationale: "Early signs of alcohol withdrawal develop within a few hours after the cessation of alcohol intake, and they peak at 24 to 48 hours[cite: 1]." 
+    },
+    { 
+        q: "The nurse is caring for a client with a long history of chronic alcohol use. The client presents with severe memory problems. The nurse understands that this alcohol-induced persistent amnestic disorder (Korsakoff’s syndrome) is caused by a deficiency in which vitamin?", 
+        options: ["Vitamin C", "Vitamin D", "Thiamine", "Riboflavin"], 
+        answer: 2, 
+        rationale: "Thiamine deficiency associated with chronic alcohol use causes Korsakoff’s syndrome, and an alcohol-induced persistent amnestic disorder leading to severe memory problems[cite: 1]." 
+    },
+    { 
+        q: "A client is brought to the emergency department comatose after overdosing on a benzodiazepine. The nurse should anticipate the healthcare provider ordering which specific intravenous antidote?", 
+        options: ["Naloxone", "Flumazenil", "Phenobarbital", "Bupropion"], 
+        answer: 1, 
+        rationale: "Flumazenil (IV) is used for the overdose of Benzodiazepines[cite: 1]." 
+    },
+    { 
+        q: "A client asks the nurse what the term 'codependency' means in the context of their spouse's alcoholism. The nurse accurately explains that codependency is:", 
+        options: ["The physical biological need for alcohol to avoid withdrawal.", "A psychological craving for the subjective effect of alcohol.", "The presence of coexisting behaviors in significant others that serves to enable the alcoholic to continue irresponsible patterns without experiencing consequences.", "Using rationalization to justify unacceptable behavior."], 
+        answer: 2, 
+        rationale: "Codependency is the presence of coexisting behaviors present in significant others, which serves to enable the addict or alcoholic to continue the irresponsible patterns of use without experiencing consequences[cite: 1]." 
+    },
+    { 
+        q: "The nurse is utilizing the CAGE questionnaire to screen a client for potential alcohol use problems. What does the 'E' in the CAGE acronym stand for?", 
+        options: ["Escalation - Have your drinking habits escalated recently?", "Eye-opener - Have you ever had a drink first thing in the morning to steady your nerves or get rid of a hangover?", "Emotion - Do you lack emotion when you drink?", "Energy - Do you drink to increase your energy?"], 
+        answer: 1, 
+        rationale: "In the CAGE questionnaire, 'Eye-opener' stands for: Have you ever had a drink first thing in the morning to steady your nerves or get rid of a hangover?[cite: 1]." 
+    },
+    { 
+        q: "The nurse assesses a client who recently used an opioid. Which of the following classic physical signs indicates opioid intoxication?", 
+        options: ["Dilated pupils and tachycardia", "Constricted pupils and bradypnea", "Rhinorrhea and lacrimation", "Diarrhea and vomiting"], 
+        answer: 1, 
+        rationale: "Signs of opioid intoxication include constricted pupils, bradypnea, drowsiness, hypotension, and psychomotor retardation. Dilated pupils, rhinorrhea, lacrimation, and diarrhea are signs of opioid withdrawal[cite: 1]." 
+    },
+    { 
+        q: "A client is admitted to the emergency department after an overdose of Phencyclidine (PCP). The nurse should anticipate which specific medical treatment to facilitate the excretion of the drug?", 
+        options: ["Administration of IV Flumazenil", "Gastric lavage and acidifying the urine", "Administration of anxiolytics in a low stimuli environment", "Immediate hemodialysis"], 
+        answer: 1, 
+        rationale: "The treatment for Phencyclidine (PCP) overdose involves gastric lavage and acidifying the urine to excrete the drug[cite: 1]." 
+    },
+    { 
+        q: "A client experiencing alcohol withdrawal delirium (Delirium Tremens) requires close monitoring. How frequently should the nurse monitor the client's vital signs and neurological signs?", 
+        options: ["Every 15 minutes", "Every 1 hour", "Every 4 hours", "Once a shift"], 
+        answer: 0, 
+        rationale: "Interventions for alcohol withdrawal include monitoring vital signs and neurological signs every 15 minutes[cite: 1]." 
+    },
+    { 
+        q: "Which of the following clinical assessment tools is specifically designed to assess the severity of opiate withdrawal symptoms?", 
+        options: ["CIWA (Clinical Institute Withdrawal Assessment)", "MAST (Michigan-Alcohol Screening Test)", "COWS (Clinical Opiate Withdrawal Scale)", "DAST (Drug Abuse Screening Test)"], 
+        answer: 2, 
+        rationale: "The COWS (Clinical Opiate Withdrawal Scale) is a withdrawal assessment tool specifically used for opioid withdrawal[cite: 1]." 
+    },
+    { 
+        q: "A young adult is brought to the emergency department after consuming MDMA (Ecstasy) at a club. The client is presenting with hyperthermia and muscle tissue breakdown. The nurse recognizes this life-threatening adverse effect as:", 
+        options: ["Wernicke’s encephalopathy", "Korsakoff's syndrome", "Rhabdomyolysis", "Delirium tremens"], 
+        answer: 2, 
+        rationale: "An adverse effect of recreational and club drugs like MDMA (Ecstasy) is Rhabdomyolysis, a life-threatening condition where muscle tissues breakdown and release toxic substances into the bloodstream[cite: 1]." 
+    },
+    { 
+        q: "The nurse is caring for a client attempting to quit smoking. The healthcare provider prescribes a medication to aid in the reduction of withdrawal symptoms and cravings. The nurse anticipates administering:", 
+        options: ["Bupropion", "Phenobarbital", "Bromocriptine", "Methadone"], 
+        answer: 0, 
+        rationale: "Bupropion is used in psychopharmacology for nicotine withdrawal to aid in the reduction of withdrawal symptoms and cravings[cite: 1]." 
+    },
+    { 
+        q: "A client is diagnosed with a 'Dual Diagnosis.' The nurse understands that to accurately make this separate psychiatric diagnosis alongside a substance use disorder, it must be done:", 
+        options: ["Within 24 hours of hospital admission.", "During the peak of the withdrawal phase.", "Over time after a sustained period of abstinence.", "Only through the use of the DAST screening tool."], 
+        answer: 2, 
+        rationale: "A dual diagnosis occurs when a psychiatric disorder and substance use are present together. A separate diagnosis can only be done over time after a sustained period of abstinence[cite: 1]." 
+    },
+    { 
+        q: "A nursing supervisor is observing staff for suspicious signs of addiction and substance use. Which of the following work patterns should alert the supervisor to potential impairment in a nurse?", 
+        options: ["Consistently avoiding assignments in the Trauma or Anesthesia units.", "Always volunteering to carry the narcotics key (opioids).", "Requesting to work shifts with maximum supervision and mentorship.", "Refusing to administer maximum dosages of controlled substances to clients."], 
+        answer: 1, 
+        rationale: "Suspicious work patterns for addiction and substance use in healthcare professionals include always volunteering to carry the narcotics key (opioids), choosing shifts in which less supervision is present, and choosing work areas where the use of controlled substances is high (CCU, OR, Trauma, Anesthesia)[cite: 1]." 
+    },
+    { 
+        q: "A client is admitted to the medical unit undergoing withdrawal from a CNS depressant. The nurse anticipates the provider will initiate withdrawal treatment using a carefully titrated dose of which type of medication?", 
+        options: ["A barbiturate (such as phenobarbital)", "A dopamine agonist", "An SSRI antidepressant", "An opioid antagonist"], 
+        answer: 0, 
+        rationale: "Withdrawal from CNS depressants is generally treated with a carefully titrated similar drug, typically a barbiturate such as phenobarbital[cite: 1]." 
+    },
+    { 
+        q: "The nurse is planning care for a client in acute substance withdrawal. Due to the severe physiological stress of withdrawal, the nurse ensures which of the following diagnostic tests is prioritized to monitor for organ damage?", 
+        options: ["Electroencephalogram (EEG)", "Lumbar puncture", "ECG and Cardiac markers", "Pulmonary function tests"], 
+        answer: 2, 
+        rationale: "Interventions for withdrawal include cardiac monitoring and diagnostic tests such as an ECG and Cardiac markers because there is a risk for cardiac damage[cite: 1]." 
+    }
+];
+
+// --- NEW CATEGORY: ABUSE & VIOLENCE ---
+const abuseViolenceQuestions = [
+    { 
+        q: "The nurse is approached by a client who is pacing, agitated, and making verbal threats. To de-escalate the situation safely, which physical posture should the nurse adopt?", 
+        options: ["Stand close to the client with arms folded across the chest to establish authority.", "Maintain a large personal space with hands and arms placed on the hips.", "Maintain a large personal space with hands and arms kept at the side.", "Sit down immediately to show submission and calm the client."], 
+        answer: 2, 
+        rationale: "When dealing with an abusive or aggressive client, the nurse must maintain a large personal space and use a non-aggressive posture, such as keeping hands and arms at the side rather than folded across the chest or placed on the hips[cite: 1]." 
+    },
+    { 
+        q: "A client with a history of poor impulse control becomes violently aggressive. The healthcare team determines that less restrictive measures are insufficient to protect the client and others from harm. When applying physical restraints, the nurse understands that restraints:", 
+        options: ["Can be used temporarily for the convenience of the nursing staff if the unit is understaffed.", "Should never be used as punishment or for the convenience of the health care staff.", "Require a written prescription from the provider at least 24 hours before application.", "Do not require ongoing documentation once applied."], 
+        answer: 1, 
+        rationale: "Restraints and seclusions should never be used as punishment or for the convenience of the health care staff. They are strictly used when behavior is physically harmful and alternative measures are insufficient[cite: 1]." 
+    },
+    { 
+        q: "A client on the psychiatric unit suddenly becomes physically violent, posing an immediate danger to peers. The provider is not currently on the unit. What is the most appropriate action by the nurse?", 
+        options: ["Wait until the provider arrives to obtain a written prescription before taking action.", "Place the client in restraints or seclusion immediately and obtain a written or verbal prescription as soon as possible thereafter.", "Administer a chemical restraint without a prescription.", "Ask the security guards to handle the client until the provider can be reached."], 
+        answer: 1, 
+        rationale: "In an emergency, a qualified nurse may place a client in restraints or seclusion to ensure safety, and must obtain a written or verbal prescription as soon as possible thereafter[cite: 1]." 
+    },
+    { 
+        q: "A client has been placed in physical restraints due to violent behavior. How frequently must the nurse assess and document the client's physical, safety, and comfort needs (such as food, fluids, and bathroom needs)?", 
+        options: ["Every 15 to 30 minutes", "Every 1 hour", "Every 2 hours", "Once a shift"], 
+        answer: 0, 
+        rationale: "The client in restraints or seclusion needs constant one-to-one supervision, and their physical, safety, and comfort needs must be assessed and documented every 15 to 30 minutes[cite: 1]." 
+    },
+    { 
+        q: "A school nurse is educating teachers about the manifestations of bullying. The nurse correctly identifies which of the following as a potential severe consequence of bullying for the victim?", 
+        options: ["Narcissistic personality disorder", "Pyromania", "Self-harm, cutting, suicide, or murder", "Statutory rape"], 
+        answer: 2, 
+        rationale: "The acts of bullying can lead to depression, low self-esteem, humiliation, and isolation, and could result in severe outcomes such as self-harm (cutting), suicide, or murder[cite: 1]." 
+    },
+    { 
+        q: "The nurse is assessing a severely depressed client. Which of the following behavior changes should immediately alert the nurse to a high risk of imminent suicide?", 
+        options: ["The client begins crying uncontrollably during group therapy.", "The client reports an increase in appetite and weight gain.", "The client exhibits a sudden calmness or improvement in their depressed mood.", "The client requests to speak with a hospital chaplain."], 
+        answer: 2, 
+        rationale: "A sudden calmness or improvement in a depressed client is a classic suicidal cue, often indicating that the client has made the decision to end their life and feels relieved[cite: 1]." 
+    },
+    { 
+        q: "A client is placed on suicide precautions. Which specific nursing intervention is required for documenting the client's status?", 
+        options: ["Document the client's statements, behaviors, and mood every 15 minutes.", "Check on the client every hour and document their location.", "Document the client's vital signs every 4 hours.", "Have the client sign a no-harm contract once a day."], 
+        answer: 0, 
+        rationale: "For a client on suicide precautions, the client's statements, behaviors, and mood must be documented every 15 minutes. Furthermore, the nurse must not leave the client alone[cite: 1]." 
+    },
+    { 
+        q: "When assessing a client's suicide plan, the nurse must determine three critical elements. These include whether the client has a plan, when they intend to carry it out, and:", 
+        options: ["Whether the client has a history of substance abuse.", "Whether the client has the means to carry out the plan.", "Whether the client has a family history of suicide.", "Whether the client has canceled social engagements recently."], 
+        answer: 1, 
+        rationale: "A comprehensive suicidal client assessment regarding their 'Plan' involves asking: Does the client have a plan? Does the client have the means to carry out the plan? Has the client decided when to carry out the plan?[cite: 1]." 
+    },
+    { 
+        q: "Under the Philippine National Suicide Prevention Framework, which legal agency is specifically noted for operating the national crisis hotline and providing psychiatric emergency services?", 
+        options: ["Department of Health (DOH)", "National Center for Mental Health (NCMH)", "Tabang Paglaom", "Department of Social Welfare and Development (DSWD)"], 
+        answer: 1, 
+        rationale: "The National Center for Mental Health (NCMH) operates the national crisis hotline (0917-899-USAP / 989-USAP) and provides psychiatric emergency services[cite: 1]." 
+    },
+    { 
+        q: "A client reveals they are a victim of domestic violence. They describe a phase where their partner becomes sensitive, yells, and isolates them, while the client tries to avoid conflict and please the partner. The nurse recognizes this as which phase of the cycle of violence?", 
+        options: ["Acute Explosion", "Calmness and diffusion of tension", "Tension Building", "Honeymoon"], 
+        answer: 2, 
+        rationale: "The Tension Building phase occurs when the abuser is sensitive, yells, withholds affection, and isolates the partner, while the victim tries to calm the situation by avoiding, giving in, or pleasing the abuser[cite: 1]." 
+    },
+    { 
+        q: "Following an episode of acute battering, the abuser apologizes, buys gifts, cries, and promises to get help. The nurse understands this behavior is characteristic of which phase of the cycle of violence?", 
+        options: ["Tension Building", "Honeymoon (calmness and diffusion of tension)", "Denial", "Acute Explosion"], 
+        answer: 1, 
+        rationale: "After the battering, the abuser becomes loving and attempts to make peace (calmness and diffusion of tension), utilizing undoing behavior. In this Honeymoon phase, the abuser apologizes, buys gifts, declares love, and promises to get help[cite: 1]." 
+    },
+    { 
+        q: "The nurse is planning care for a client who is a victim of chronic domestic abuse. The nurse understands that victims of chronic abuse typically exhibit which psychological characteristic?", 
+        options: ["Narcissism and suspiciousness", "A strong sense of autonomy and independence", "Blaming themselves for the violence due to diminished self-esteem", "A belief that they are entitled to special treatment"], 
+        answer: 2, 
+        rationale: "As victims' self-esteem becomes diminished with chronic abuse, they may blame themselves for the violence and be unable to see a way out of the situation[cite: 1]." 
+    },
+    { 
+        q: "A nurse assessing a family for domestic violence knows that the individuals most vulnerable to becoming victims of violence in the family unit are:", 
+        options: ["Young adults and middle-aged men", "Adolescents and pregnant women", "Children and older adults", "Individuals with antisocial personality disorder"], 
+        answer: 2, 
+        rationale: "Children and older adults are the most vulnerable individuals in the family unit against whom violence is perpetrated[cite: 1]." 
+    },
+    { 
+        q: "An infant is brought to the emergency department. External signs of trauma are absent, but an ophthalmoscopic examination reveals retinal hemorrhages, and the infant has full, bulging fontanels. The nurse suspects which condition?", 
+        options: ["Fetal alcohol syndrome", "Shaken baby syndrome", "Sudden infant death syndrome (SIDS)", "Meningitis"], 
+        answer: 1, 
+        rationale: "Shaken baby syndrome often presents without external signs of trauma, but an ophthalmoscopic examination reveals retinal hemorrhages, and the infant may have full bulging fontanels and a head circumference greater than expected due to intracranial trauma[cite: 1]." 
+    },
+    { 
+        q: "If Shaken Baby Syndrome is suspected, the nurse must closely monitor the infant for a decrease in the level of consciousness because this finding specifically indicates:", 
+        options: ["Retinal detachment", "Spinal cord severing", "Increased intracranial pressure", "Severe dehydration"], 
+        answer: 2, 
+        rationale: "If shaken baby syndrome is suspected, the nurse must monitor the infant for a decrease in the level of consciousness, which can indicate increased intracranial pressure[cite: 1]." 
+    },
+    { 
+        q: "A pediatric nurse is assessing a child and notes spiral fractures but no history of trauma from sports injuries. The child also appears extremely apprehensive and shows a lack of crying when approached by strangers. These findings are most strongly associated with:", 
+        options: ["Emotional abuse", "Sexual abuse", "Physical abuse", "Child neglect"], 
+        answer: 2, 
+        rationale: "Unexplained bruises, burns, or fractures, an apprehensive child, a lack of crying when approached by a stranger, and spiral fractures without a history of trauma from sports injuries are assessment findings indicative of physical abuse[cite: 1]." 
+    },
+    { 
+        q: "During an assessment, a nurse suspects that a child is a victim of physical abuse. What is the nurse's legal responsibility in this situation?", 
+        options: ["Confront the parents immediately to demand an explanation.", "Wait to see if the child returns with more injuries before reporting.", "Report all cases of suspected child abuse to the appropriate local or state agency.", "Document the findings and discharge the child with a safety brochure."], 
+        answer: 2, 
+        rationale: "Nurses are legally required to report a case of suspected abuse (all cases of suspected child abuse) to the appropriate local or state agency[cite: 1]." 
+    },
+    { 
+        q: "A school nurse evaluates a student who consistently presents with inadequate weight gain, poor hygiene, constant fatigue, and inconsistent school attendance. The nurse identifies these findings as indicative of:", 
+        options: ["Physical abuse", "Sexual abuse", "Emotional abuse", "Child neglect"], 
+        answer: 3, 
+        rationale: "Assessment findings for child neglect include inadequate weight gain, poor hygiene, consistent hunger, inconsistent school attendance, constant fatigue, and reports of a lack of child supervision[cite: 1]." 
+    },
+    { 
+        q: "A nurse assessing a child notes habit disorders such as excessive sucking, biting, and rocking, as well as speech disorders. These assessment findings are most closely linked to which type of maltreatment?", 
+        options: ["Emotional abuse", "Physical neglect", "Sexual abuse", "Educational neglect"], 
+        answer: 0, 
+        rationale: "Emotional abuse assessment findings include speech disorders, habit disorders (sucking, biting, and rocking), psychoneurotic reactions, learning disorders, and suicide attempts[cite: 1]." 
+    },
+    { 
+        q: "Which type of neglect specifically involves the failure to provide physical and cognitive stimulation needed to prevent developmental deficits?", 
+        options: ["Educational Neglect", "Developmental Neglect", "Physical Neglect", "Emotional Neglect"], 
+        answer: 1, 
+        rationale: "Developmental neglect is defined as the failure to provide physical and cognitive stimulation needed to prevent developmental deficits[cite: 1]." 
+    },
+    { 
+        q: "A home health nurse is assessing an older adult client. Which finding would most strongly suggest the older adult is a victim of economic exploitation?", 
+        options: ["The client has torn or stained underclothing.", "The client has unexplained skin tears and pressure sores.", "The client shows an inability to pay bills, is fearful when discussing finances, and lacks knowledge of their finances.", "The client presents with severe dehydration and malnutrition."], 
+        answer: 2, 
+        rationale: "Signs of economic exploitation in an older adult include an inability to pay bills, being fearful when discussing finances, and showing confusion, inaccuracy, or having no knowledge of their finances[cite: 1]." 
+    },
+    { 
+        q: "When assessing an older adult who is a suspected victim of abuse, what is the priority intervention to ensure the client's safety while the abuse is investigated?", 
+        options: ["Confront the suspected abuser with the evidence.", "Separate the older adult from the abusive environment and contact adult protective services for assistance in placement.", "Prescribe antidepressant medications for the older adult.", "Enroll the older adult in an anger management class."], 
+        answer: 1, 
+        rationale: "The nurse should separate the older adult from the abusive environment, if possible, and contact adult protective services for assistance in placement while the abuse is being investigated[cite: 1]." 
+    },
+    { 
+        q: "Which statement accurately describes the legal dynamic of Statutory Rape?", 
+        options: ["It involves sexual intercourse with an acquaintance known to the victim.", "It is the act of sexual intercourse with a person younger than the age of legal consent, even if the minor consents.", "It occurs within a marriage without the consent of the partner.", "It requires the use of a weapon to coerce the victim."], 
+        answer: 1, 
+        rationale: "Statutory Rape is defined as the act of sexual intercourse with a person younger than the age of legal consent, even if the minor consents[cite: 1]." 
+    },
+    { 
+        q: "A client arrives at the emergency department reporting a sexual assault. The nurse explains to the victim that they cannot shower, bathe, douche, or change clothes until the examination is performed. The primary reason for this restriction is to:", 
+        options: ["Prevent the spread of sexually transmitted infections.", "Allow the client time to calm down before the exam.", "Preserve any physical and biological evidence.", "Ensure the client's vital signs remain stable."], 
+        answer: 2, 
+        rationale: "The nurse explains to the victim why showering, bathing, douching, or changing clothes cannot be done until an examination is performed to preserve any evidences[cite: 1]." 
+    },
+    { 
+        q: "Before a physical examination is performed on a victim of sexual assault, the nurse must obtain written consent for which of the following?", 
+        options: ["Police interrogation", "Examination, photographs, laboratory tests, release of information, and laboratory samples.", "Psychiatric commitment", "Mandatory reporting to the abuser's employer"], 
+        answer: 1, 
+        rationale: "The nurse must obtain written consent from the victim for the examination, photograph, laboratory tests, release of information, and laboratory samples[cite: 1]." 
+    },
+    { 
+        q: "A client who is a survivor of a recent sexual assault presents with sleep disturbances, somatic complaints, fear, anxiety, and a feeling of self-blame and worthlessness. The nurse recognizes this cluster of symptoms as:", 
+        options: ["Bipolar affective disorder", "Factitious disorder", "Rape Trauma Syndrome", "Conversion disorder"], 
+        answer: 2, 
+        rationale: "Rape Trauma Syndrome includes symptoms such as sleep disturbance, nightmares, loss of appetite, fear, anxiety, self-blame, guilt, shame, lowered self-esteem, feelings of worthlessness, and somatic complaints[cite: 1]." 
+    },
+    { 
+        q: "When providing emotional support to a survivor of sexual assault, what is the most important concept for the nurse to reinforce?", 
+        options: ["The victim should have fought back harder against the attacker.", "Surviving the assault is most important; if the victim survived, they did exactly what was necessary to stay alive.", "The victim must report the crime to the police immediately to heal.", "The victim will completely forget the trauma within a few weeks."], 
+        answer: 1, 
+        rationale: "The nurse reinforces to the victim that surviving assault is most important. If the victim survived the rape, then the victim did exactly what was necessary to stay alive[cite: 1]." 
+    },
+    { 
+        q: "A victim of domestic violence asks the nurse why their partner believes they have the right to abuse them. The nurse understands that abusers often share which characteristic?", 
+        options: ["High self-esteem and independence", "Complete lack of dependency needs", "Perceiving victims as their property and believing they are entitled to abuse them", "A history of growing up in an overly supportive, non-violent household"], 
+        answer: 2, 
+        rationale: "Characteristics of abusers include perceiving victims as their property and believing that they are entitled to abuse them. They also often have impaired self-esteem, strong dependency needs, and a history of abuse during childhood[cite: 1]." 
+    },
+    { 
+        q: "A nurse is assigned to care for a suicidal client. To ensure maximum safety from potential self-harm, what is an essential nursing intervention regarding the client's visitors?", 
+        options: ["Restrict all visitors indefinitely.", "Check that visitors do not leave harmful objects in the client's room.", "Require visitors to sign a legal waiver before entering the room.", "Allow visitors to stay with the client unsupervised to build a support system."], 
+        answer: 1, 
+        rationale: "A key intervention for suicidal behavior is to check that visitors do not leave harmful objects in the client’s room[cite: 1]." 
+    },
+    { 
+        q: "Which of the following is considered an environmental form of physical restraint?", 
+        options: ["Administering a sedative medication.", "Applying wrist and mitt restraints.", "Seclusion in a room specially designed for protection from which the client cannot freely exit.", "Placing a tray table on a wheelchair."], 
+        answer: 2, 
+        rationale: "Seclusion is a type of restraint in which a client is confined in a room specially designed for protection and close supervision from which the client cannot freely exit. Physical restraints (like wrist restraints and tray tables) control behavior by inhibiting free movement, and chemical restraints use medications[cite: 1]." 
+    }
+];
+         // --- NEW CATEGORY: SLEEP DISORDERS ---
+const sleepQuestions = [
+    { 
+        q: "The nurse is educating a client about the stages of sleep. The nurse correctly identifies that Rapid Eye Movement (REM) sleep is primarily important for:", 
+        options: ["Deep, restorative physical healing", "Memory and learning", "Restoring immune function only", "Decreasing daytime irritability"], 
+        answer: 1, 
+        rationale: "REM (Rapid Eye Movement) is dream sleep and is important for memory and learning. NREM (Non-Rapid Eye Movement) is deep, restorative sleep[cite: 1]." 
+    },
+    { 
+        q: "A client reports difficulty falling asleep and states they have started drinking a glass of wine before bed to help them relax. What is the nurse's best response regarding sleep hygiene?", 
+        options: ["\"A small amount of alcohol is acceptable if it helps you initiate sleep.\"", "\"You should replace the wine with a caffeinated beverage.\"", "\"Do not drink alcohol in an attempt to sleep, as alcohol worsens sleep disturbance.\"", "\"Drink the alcohol at least 4 hours before bedtime instead.\""], 
+        answer: 2, 
+        rationale: "Sleep hygiene measures explicitly state: \"Do not drink alcohol in an attempt to sleep. Alcohol worsens sleep disturbance\"[cite: 1]." 
+    },
+    { 
+        q: "A client complains of excessive worry about sleep problems, trying too hard to sleep, and increased muscle tension at night. The nurse recognizes these characteristics are associated with which subtype of insomnia?", 
+        options: ["Paradoxical Insomnia", "Idiopathic Insomnia", "Psychophysiological Insomnia", "Inadequate Sleep Hygiene"], 
+        answer: 2, 
+        rationale: "Psychophysiological Insomnia involves conditioned arousal associated with thoughts of sleep, stress, and anxiety. Its characteristics include excessive worry about sleep problems, trying too hard to sleep, rumination, and increased muscle tension[cite: 1]." 
+    },
+    { 
+        q: "A client undergoes a sleep study and reports they were awake the entire night. However, the nurse notes that the client's brain wave activity was consistent with normal sleep. This presentation is characteristic of:", 
+        options: ["Narcolepsy", "Paradoxical Insomnia", "Sleep Terror Disorder", "Delayed Sleep Phase"], 
+        answer: 1, 
+        rationale: "Paradoxical Insomnia occurs when an individual thinks they are awake or are not sleeping, but their brain wave activity is consistent with normal sleep. It is caused by ruminative worrying[cite: 1]." 
+    },
+    { 
+        q: "The nurse is counseling a client on sleep hygiene. Which instruction regarding daily exercise is most appropriate to promote healthy sleep?", 
+        options: ["Exercise vigorously immediately before getting into bed.", "Avoid all exercise, as it overstimulates the central nervous system.", "Exercise daily in the late afternoon or early evening.", "Exercise primarily in the early morning upon waking."], 
+        answer: 2, 
+        rationale: "Proper sleep hygiene measures recommend exercising daily in the late afternoon or early evening[cite: 1]." 
+    },
+    { 
+        q: "A client is diagnosed with Hypersomnolence Disorder. When assessing the client's sleep patterns, the nurse anticipates the client's major sleep episodes to last approximately:", 
+        options: ["4 to 6 hours", "6 to 8 hours", "8 to 12 hours", "14 to 18 hours"], 
+        answer: 2, 
+        rationale: "Hypersomnolence Disorder is characterized by major sleep episodes that are 8 to 12 hours long, with the person feeling unrefreshed upon awakening from daytime naps[cite: 1]." 
+    },
+    { 
+        q: "A client with Narcolepsy describes sudden episodes of bilateral, reversible loss of muscle tone that last for a few seconds. The nurse documents this clinical manifestation as:", 
+        options: ["Apnea", "Cataplexy", "Rumination", "Sleep paralysis"], 
+        answer: 1, 
+        rationale: "Cataplexy is defined as sudden episodes of bilateral, reversible loss of muscle tone that lasts for seconds to minutes, and it frequently occurs in clients with Narcolepsy[cite: 1]." 
+    },
+    { 
+        q: "Which pharmacological class of medications should the nurse anticipate the healthcare provider will prescribe for a client with Narcolepsy?", 
+        options: ["Antimuscarinics", "CNS Depressants", "CNS Stimulants", "Beta-blockers"], 
+        answer: 2, 
+        rationale: "The treatment for Narcolepsy and Hypersomnolence Disorder includes medications such as CNS Stimulants[cite: 1]." 
+    },
+    { 
+        q: "The nurse is reviewing the sleep study of an older adult client who experiences episodic cessation of ventilation without airway obstruction. The nurse identifies this sleep-related breathing disorder as:", 
+        options: ["Obstructive sleep apnea", "Central sleep apnea", "Central alveolar hypoventilation", "Nightmare disorder"], 
+        answer: 1, 
+        rationale: "Central sleep apnea is the episodic cessation of ventilation without airway obstruction and is more common in older adults. By contrast, Obstructive sleep apnea involves upper airway obstruction and is more common in obese individuals[cite: 1]." 
+    },
+    { 
+        q: "A client is newly diagnosed with Obstructive Sleep Apnea. What is typically considered the first line of treatment that the nurse should educate the client about?", 
+        options: ["Tracheotomy", "Continuous Positive Airway Pressure (CPAP) machine", "Hypoglossal nerve stimulation", "Benzodiazepines"], 
+        answer: 1, 
+        rationale: "The first line of treatment for sleep apnea usually includes positive airway pressure (PAP) devices, such as a Continuous Positive Airway Pressure (CPAP) machine used during sleep, and oral appliances[cite: 1]." 
+    },
+    { 
+        q: "A client who works rotating night shifts reports a persistent disruption in their sleep-wake schedule. The nurse understands this is a Circadian Rhythm Sleep-Wake Disorder caused by:", 
+        options: ["A conflict between the circadian rhythm and demands of wakefulness for shift work.", "The client's circadian schedule being incongruent with the needed timing of sleep.", "Ruminative worrying and conditioned arousal.", "An underlying viral infection."], 
+        answer: 0, 
+        rationale: "The Shift Work subtype of Circadian Rhythm Sleep-Wake Disorder is caused by a conflict between the circadian rhythm and demands of wakefulness for shift work[cite: 1]." 
+    },
+    { 
+        q: "The nurse is implementing bright light therapy for a client with a Circadian Rhythm Disorder. To effectively reset the circadian rhythm, the client should be exposed to bright light when:", 
+        options: ["Sleep is desired.", "Waking up in the middle of the night.", "Wakefulness is initiated.", "Experiencing a sleep attack."], 
+        answer: 2, 
+        rationale: "In bright light therapy, the client is exposed to bright light when wakefulness is initiated and avoids bright lights when sleep is desired[cite: 1]." 
+    },
+    { 
+        q: "A parent reports that their 5-year-old child frequently wakes up abruptly from sleep with a panicky scream, appearing confused and upset. The nurse recognizes this as Sleep Terror Disorder and advises the parent that:", 
+        options: ["This condition requires long-term use of sleep-inducing medications.", "It tends to go away in adolescence.", "It is caused by engaging in behaviors not conducive to sleep.", "The child is experiencing lengthy and elaborate frightening dreams."], 
+        answer: 1, 
+        rationale: "Sleep Terror Disorder in children involves abrupt awakening with a panicky scream or cry, leaving them confused and upset; however, it tends to go away in adolescence[cite: 1]." 
+    },
+    { 
+        q: "A 7-year-old client frequently gets out of bed and walks around the house while sleeping, appearing disoriented. Which statement by the nurse regarding Sleep Walking Disorder is accurate?", 
+        options: ["\"This requires immediate surgical intervention.\"", "\"We need to begin relaxation therapy and bright light therapy.\"", "\"This disorder typically dissipates by adolescence and no treatment is required.\"", "\"This is an early sign of Narcolepsy and requires CNS stimulants.\""], 
+        answer: 2, 
+        rationale: "Sleep Walking Disorder occurs in children 4 to 8 years old, is dissipated by adolescence, and requires no treatment[cite: 1]." 
+    },
+    { 
+        q: "During a sleep assessment, a client with Narcolepsy asks how long a typical \"sleep attack\" lasts. The nurse correctly informs the client that these attacks generally last:", 
+        options: ["1 to 2 minutes", "10 to 20 minutes", "1 to 2 hours", "8 to 12 hours"], 
+        answer: 1, 
+        rationale: "Narcolepsy is characterized by repeated irresistible sleep attacks where the person sleeps for 10-20 minutes and is briefly refreshed until the next attack[cite: 1]." 
+    }
+];
+
+// --- NEW CATEGORY: SEXUAL & GENDER DISORDERS ---
+const sexualGenderQuestions = [
+    { 
+        q: "The nurse is educating a client about the physiological stages of the human sexual response cycle. In which order do these stages occur?", 
+        options: ["Arousal, Excitement, Plateau, Resolution", "Excitement, Plateau, Orgasm, Resolution", "Desire, Plateau, Excitement, Orgasm", "Excitement, Orgasm, Plateau, Resolution"], 
+        answer: 1, 
+        rationale: "The four stages of the sexual response cycle (orgasm) are Excitement, Plateau, Orgasm, and Resolution[cite: 1]." 
+    },
+    { 
+        q: "A male client reports an absence of sexual fantasies and a complete lack of desire for sexual activity, which is causing severe distress in his marriage. The nurse suspects the client is experiencing:", 
+        options: ["Male Erectile Disorder", "Delayed Ejaculation Disorder", "Male Hypoactive Sexual Desire Disorder", "Genitopelvic Pain Disorder"], 
+        answer: 2, 
+        rationale: "Male Hypoactive Sexual Desire Disorder is characterized by a deficiency or absence of sexual fantasies and a lack of desire for sexual activity that causes marked distress or interpersonal difficulty[cite: 1]." 
+    },
+    { 
+        q: "A female client reports a persistent inability to attain or maintain an adequate lubrication or swelling response during sexual excitement. This clinical presentation aligns with:", 
+        options: ["Female Orgasmic Disorder", "Vaginismus", "Dyspareunia", "Female Sexual Interest/Arousal Disorder"], 
+        answer: 3, 
+        rationale: "Female Sexual Interest/Arousal Disorder involves a persistent or recurrent inability to attain or to maintain, until completion of sexual activity, an adequate lubrication or swelling response of sexual excitement[cite: 1]." 
+    },
+    { 
+        q: "A client is diagnosed with Dyspareunia. The nurse understands that this specific Genitopelvic Pain/Penetration Disorder is characterized by:", 
+        options: ["A persistent delay in orgasm.", "Persistent or recurrent pain before, during, or after intercourse.", "The involuntary spasm of pelvic floor muscles preventing penetration.", "A deficiency of sexual fantasies."], 
+        answer: 1, 
+        rationale: "Dyspareunia is defined as persistent or recurrent pain before, during, or after intercourse[cite: 1]." 
+    },
+    { 
+        q: "The nurse is reviewing the diagnostic criteria for Paraphilias. The nurse knows that recurrent, intensely sexually arousing fantasies or urges become a diagnosable Paraphilic Disorder when:", 
+        options: ["They involve another consenting adult.", "The person has acted on these urges with a nonconsenting person, or the urges cause marked distress or interpersonal difficulty.", "They are exclusively related to physiological effects of a medical condition.", "They occur only during the resolution phase of the sexual response cycle."], 
+        answer: 1, 
+        rationale: "A Paraphilia is diagnosed as a disorder if the person has acted on these urges with a nonconsenting person, or if the urges or fantasies cause marked distress or interpersonal difficulty[cite: 1]." 
+    },
+    { 
+        q: "A client is court-mandated to attend therapy after exposing his genitals to an unsuspecting, nonconsenting person in a public park. The nurse identifies this behavior as:", 
+        options: ["Voyeuristic Disorder", "Frotteuristic Disorder", "Exhibitionistic Disorder", "Fetishistic Disorder"], 
+        answer: 2, 
+        rationale: "Exhibitionistic Disorder involves the exposure of the genitals to an unsuspecting, nonconsenting person, often involving masturbation, and primarily affects men[cite: 1]." 
+    },
+    { 
+        q: "A client admits to recurrently touching and rubbing their genitals against nonconsenting victims' thighs and buttocks in crowded subway trains. The nurse documents this behavior as:", 
+        options: ["Sexual Sadism Disorder", "Frotteuristic Disorder", "Exhibitionistic Disorder", "Voyeuristic Disorder"], 
+        answer: 1, 
+        rationale: "Frotteuristic Disorder involves touching and rubbing against a nonconsenting person in crowded places, such as rubbing genitals against the victim's thighs or buttocks[cite: 1]." 
+    },
+    { 
+        q: "Which statement accurately describes the diagnostic criteria for Pedophilic Disorder regarding the target victim?", 
+        options: ["The sexual activity involves nonliving objects.", "The sexual activity involves an unsuspecting person who is undressing.", "The sexual activity involves a prepubescent child who is 13 years old or younger.", "The sexual activity involves humiliating a consenting adult partner."], 
+        answer: 2, 
+        rationale: "Pedophilic Disorder involves sexual activity with a prepubescent child who is 13 years old or younger[cite: 1]." 
+    },
+    { 
+        q: "A client reports recurrent, intensely sexually arousing fantasies involving the act of being humiliated, beaten, and bound. The nurse recognizes this paraphilia as:", 
+        options: ["Sexual Sadism Disorder", "Sexual Masochism Disorder", "Voyeuristic Disorder", "Fetishistic Disorder"], 
+        answer: 1, 
+        rationale: "Sexual Masochism Disorder involves recurrent, intensely sexually arousing fantasies, sexual urges, or behaviors involving the act of being humiliated, beaten, bound, or otherwise made to suffer[cite: 1]." 
+    },
+    { 
+        q: "The nurse distinguishes Sexual Sadism Disorder from Sexual Masochism Disorder by recognizing that Sexual Sadism involves:", 
+        options: ["The psychological or physical suffering of the victim being sexually arousing to the person.", "The use of nonliving objects to achieve orgasm.", "The act of being beaten or bound by a partner.", "Observing an unsuspecting person engaging in sexual activity."], 
+        answer: 0, 
+        rationale: "Sexual Sadism Disorder involves acts where the psychological or physical suffering of the victim is sexually arousing to the person (involving domination, restraint, spanking, beating)[cite: 1]." 
+    },
+    { 
+        q: "A 14-year-old client is caught observing unsuspecting neighbors through their windows while they are undressing, an act that causes the client intense sexual arousal. The nurse identifies this condition as:", 
+        options: ["Frotteuristic Disorder", "Voyeuristic Disorder", "Exhibitionistic Disorder", "Pedophilic Disorder"], 
+        answer: 1, 
+        rationale: "Voyeuristic Disorder involves the act of observing an unsuspecting person who is naked, undressing, or engaging in sexual activity, and its onset is typically before 15 years old[cite: 1]." 
+    },
+    { 
+        q: "The nurse evaluates a client experiencing persistent discomfort with their assigned anatomic (natal) sex and a strong sense of incongruence between their experienced gender and the gender assigned at birth. The appropriate clinical term for this condition is:", 
+        options: ["Paraphilia", "Transvestism", "Gender Dysphoria", "Hypoactive Sexual Desire Disorder"], 
+        answer: 2, 
+        rationale: "Gender Dysphoria is diagnosed when an individual has a strong and persistent sense of incongruence between experienced or expressed gender and the gender assigned at birth (anatomic/natal), alongside a persistent discomfort of their assigned sex[cite: 1]." 
+    },
+    { 
+        q: "A client is diagnosed with Fetishistic Disorder. The nurse understands that this disorder involves sexual excitement and orgasm primarily obtained through the use of:", 
+        options: ["Nonconsenting prepubescent children.", "Nonliving objects or nonsexual body parts (the fetish).", "Physical pain inflicted upon oneself.", "Exposing oneself to strangers."], 
+        answer: 1, 
+        rationale: "Fetishistic Disorder involves the use of nonliving objects or nonsexual body parts—the fetish—to obtain sexual excitement and/or achieve orgasm, often involving masturbation while holding or rubbing the object[cite: 1]." 
+    },
+    { 
+        q: "A male client reports a persistent or recurrent onset of orgasm and ejaculation with minimal sexual stimulation shortly after penetration and before he wishes it. The nurse identifies this sexual dysfunction as:", 
+        options: ["Delayed Ejaculation Disorder", "Early (Premature) Ejaculation", "Male Erectile Disorder", "Male Hypoactive Sexual Desire Disorder"], 
+        answer: 1, 
+        rationale: "Early (Premature) Ejaculation is the persistent or recurrent onset of orgasm and ejaculation with minimal sexual stimulation before, on, or shortly after penetration and before the person wishes it[cite: 1]." 
+    },
+    { 
+        q: "A female client experiences a persistent delay in or absence of orgasm following a normal sexual excitement phase, causing marked interpersonal difficulty. The nurse documents this clinical finding as:", 
+        options: ["Dyspareunia", "Vaginismus", "Female Sexual Interest Disorder", "Female Orgasmic Disorder"], 
+        answer: 3, 
+        rationale: "Female Orgasmic Disorder is a persistent or recurrent delay in, or absence of orgasm, following a normal sexual excitement phase, causing marked distress or interpersonal difficulty[cite: 1]." 
+    }
+];
+         // --- NEW CATEGORY: MUSCULOSKELETAL DISORDERS (JOINT DISEASES) ---
+const musculoskeletalQuestions = [
+    { 
+        q: "The nurse is reviewing the pathophysiology of Rheumatoid Arthritis (RA). The nurse understands that the thickening of the synovium and the formation of hyperplastic synovial tissue is referred to as:", 
+        options: ["Tophi", "Pannus", "Bouchard’s nodes", "Heberden’s nodes"], 
+        answer: 1, 
+        rationale: "In Rheumatoid Arthritis, synovial cell proliferation and angiogenesis lead to the thickening of the synovium and the forming of hyperplastic synovial tissue known as \"pannus\". Tophi are associated with gout. Bouchard's and Heberden's nodes are associated with osteoarthritis." 
+    },
+    { 
+        q: "A client is being evaluated for joint pain. Which statement by the client would lead the nurse to suspect Osteoarthritis (OA) rather than Rheumatoid Arthritis (RA)?", 
+        options: ["\"My joint stiffness in the morning usually lasts for more than an hour.\"", "\"The pain is primarily in my right knee and gets worse when I use it, but feels better when I rest.\"", "\"I have noticed a severe loss of appetite, fatigue, and a slight fever.\"", "\"Both of my wrists and both of my ankles are swollen and painful.\""], 
+        answer: 1, 
+        rationale: "Osteoarthritis is characterized by asymmetrical joint involvement (e.g., 1 joint on 1 side of the body) and pain that is aggravated by use and relieved by rest. RA involves symmetrical joint involvement, systemic symptoms (fatigue, anorexia, slight temperature elevation), and morning stiffness lasting for more than an hour." 
+    },
+    { 
+        q: "A client is admitted with an acute flare of Gout. The nurse provides dietary teaching. Which of the following foods should the nurse instruct the client to strictly avoid?", 
+        options: ["Low-fat yogurt and skim milk", "Green vegetables and tomatoes", "Organ meats and sardines", "Peanut butter and nuts"], 
+        answer: 2, 
+        rationale: "Clients with gout should be instructed to consume a low purine diet and avoid high-purine foods such as organ meats, shellfish, legumes, sardines, salted anchovies, mushrooms, herring, sweetbreads, and beer/wine. Low-fat dairy, green vegetables, and nuts are considered safe or may even lower the risk of gout." 
+    },
+    { 
+        q: "During the assessment of a client with long-standing Rheumatoid Arthritis, the nurse notes severe dryness of the client's eyes and mouth. The nurse recognizes this as a manifestation of:", 
+        options: ["Felty’s Syndrome", "Sjogren’s Syndrome", "Asymptomatic Hyperuricemic Phase", "Chronic Tophaceous Phase"], 
+        answer: 1, 
+        rationale: "Sjogren’s Syndrome is an assessment finding in Rheumatoid Arthritis characterized by excessive dryness of the eyes, mouth, and vagina." 
+    },
+    { 
+        q: "A client experiencing an acute gout attack is prescribed colchicine. The nurse should instruct the client to discontinue the medication and notify the provider if they experience which of the following?", 
+        options: ["Increased urinary output", "Diarrhea or nausea and vomiting (N&V)", "A mild headache", "Stiffness in the morning"], 
+        answer: 1, 
+        rationale: "Colchicine is used for the drug therapy of an acute gout attack, but it must be discontinued if diarrhea or nausea and vomiting (N&V) occur." 
+    },
+    { 
+        q: "A client with severe Rheumatoid Arthritis is diagnosed with Felty’s Syndrome. The nurse should anticipate which specific clinical findings associated with this syndrome?", 
+        options: ["Hyperuricemia and tophi", "Leukopenia and splenomegaly", "Bony overgrowth at the terminal interphalangeal joints", "Excessive dryness of mucous membranes"], 
+        answer: 1, 
+        rationale: "Felty’s Syndrome is an assessment finding associated with Rheumatoid Arthritis that is characterized by leukopenia and splenomegaly." 
+    },
+    { 
+        q: "The nurse is examining the hands of a client diagnosed with Osteoarthritis. The nurse notes bony overgrowths at the terminal (distal) interphalangeal joints. How should the nurse document this finding?", 
+        options: ["Bouchard’s Nodes", "Heberden’s Nodes", "Swan Neck Deformity", "Boutonniere’s Deformity"], 
+        answer: 1, 
+        rationale: "Heberden’s Nodes are a clinical manifestation of Osteoarthritis described as bony overgrowth at the terminal interphalangeal joints. Bouchard’s Nodes are proximal to the hand." 
+    },
+    { 
+        q: "A client with unmanaged gout presents to the clinic with large, visible, chalky-white deposits under the skin around their joints. The nurse identifies this as the most severe stage of the disease, known as:", 
+        options: ["Asymptomatic Hyperuricemic Phase", "Acute Gout Flare", "Intercritical Phase", "Chronic Tophaceous Phase"], 
+        answer: 3, 
+        rationale: "The Chronic Tophaceous Phase is the most severe stage of gout resulting from long-term, unmanaged disease. It is characterized by the formation of tophi (large, visible, chalky-white deposits of urate crystals under the skin or around joints)." 
+    },
+    { 
+        q: "The nurse is planning non-pharmacological collaborative management for a client experiencing acute pain from Rheumatoid Arthritis. Which intervention is most appropriate?", 
+        options: ["Apply a cold application to the painful joints for 20 minutes at a time.", "Encourage continuous weight-bearing exercises to prevent muscle weakness.", "Apply a heat compress for 1 hour to reduce acute inflammation.", "Recommend vigorous physical therapy during the acute pain phase."], 
+        answer: 0, 
+        rationale: "Collaborative management for Rheumatoid Arthritis during acute pain includes bed rest, splinting painful joints, and cold application for 20 minutes at a time. A warm bath in the morning is used to relieve morning stiffness." 
+    },
+    { 
+        q: "A client is prescribed Allopurinol for the prevention of gout. The nurse understands that the primary mechanism of action of this medication is to:", 
+        options: ["Increase the renal excretion of uric acid.", "Inhibit uric acid formation.", "Treat acute inflammation during a gout flare.", "Reconstitute synovial fluid viscosity."], 
+        answer: 1, 
+        rationale: "In the prevention of gout, Allopurinol works by inhibiting uric acid formation. Probenecid and sulfinpyrazone are the medications that increase the renal excretion of uric acid." 
+    },
+    { 
+        q: "The nurse is educating a community group about Osteoarthritis (OA). Which statement accurately describes the pathology of this disease?", 
+        options: ["It is an autoimmune disease causing systemic inflammation.", "It is a chronic, nonsystemic disorder characterized by the degeneration of articular cartilage.", "It is caused by the accumulation of uric acid crystals in the joints.", "It involves an immune reaction to the citrullination of proteins."], 
+        answer: 1, 
+        rationale: "Osteoarthritis is a chronic, nonsystemic disorder of joints characterized by the degeneration of articular cartilage and is related to \"wear and tear\" specific to the joints only. It is a non-inflammatory and degenerative pathology, not an autoimmune disease." 
+    },
+    { 
+        q: "A client with Rheumatoid Arthritis is prescribed oral Auranofin, a gold compound. The nurse should educate the client to monitor for which common side effect?", 
+        options: ["Leukopenia", "Urinary retention", "Diarrhea", "Splenomegaly"], 
+        answer: 2, 
+        rationale: "Auranofin is an oral form of gold compounds (chrysotherapy) where smaller doses are effective, and a common side effect (S/E) is diarrhea." 
+    },
+    { 
+        q: "When administering anti-gout drugs to a client, the nurse must strongly encourage an oral fluid intake (OFI) of 2 to 3 Liters per day. What is the primary rationale for this intervention?", 
+        options: ["To prevent dehydration from colchicine-induced diarrhea.", "To dilute the blood and reduce systemic inflammation.", "To prevent the formation of kidney stones.", "To stimulate the production of synoviocytes."], 
+        answer: 2, 
+        rationale: "The nurse should encourage an OFI of 2L-3L/day when giving anti-gout drugs to prevent the formation of kidney stones." 
+    },
+    { 
+        q: "A client has been diagnosed with Rheumatoid Arthritis. The nurse explains that the progressive destruction of articular structures and loss of function in this disease is primarily driven by the release of:", 
+        options: ["Matrix Metalloproteinases and RANKL", "Uric acid and sodium urate", "Hyaluronic acid and synoviocytes", "Glucosamine and chondroitin"], 
+        answer: 0, 
+        rationale: "In the pathophysiology of Rheumatoid Arthritis, the release of Matrix Metalloproteinases leads to the loss of cartilage, and the release of RANKL leads to osteoclast bony erosion, culminating in the progressive destruction of articular structures." 
+    },
+    { 
+        q: "A client with severe Osteoarthritis of the knee is scheduled for a procedure involving the introduction and removal of a large volume of saline into the joint through cannulas to provide pain relief. The nurse recognizes this procedure as:", 
+        options: ["Viscosupplementation", "Tidal irrigation", "Osteotomy", "Synovectomy"], 
+        answer: 1, 
+        rationale: "Tidal irrigation (lavage of the knee) involves the introduction and removal of a large volume of saline into the joint through cannulas, providing pain relief for 6 months." 
+    },
+    { 
+        q: "A male client presents to the clinic with sudden, intense pain, redness, and swelling in his foot. The nurse knows that the most common site for a gout attack is the:", 
+        options: ["Proximal interphalangeal joint of the hand", "Base of the thumb (Carpometacarpal joint)", "Base of the big toe (Metatarsophalangeal joint)", "Spine"], 
+        answer: 2, 
+        rationale: "The common sites of gout include the base of the big toe (Metatarsophalangeal joint), which is the most common, as well as the base of the thumb, wrist, knee, and ankle." 
+    },
+    { 
+        q: "The nurse is reviewing the lab results of a client suspected of having a joint disease. A positive result for Rheumatoid Factor is a key indicator for which condition?", 
+        options: ["Primary Gout", "Osteoarthritis", "Rheumatoid Arthritis", "Secondary Gout"], 
+        answer: 2, 
+        rationale: "Rheumatoid Arthritis is an autoimmune disease that yields a positive (+) result for Rheumatoid factor. Osteoarthritis yields a negative (-) result for Rheumatoid factor." 
+    },
+    { 
+        q: "Which of the following is an identified environmental risk factor for the development of Rheumatoid Arthritis?", 
+        options: ["High purine diet", "Cigarette smoking", "Repetitive occupational use", "Diuretic therapy"], 
+        answer: 1, 
+        rationale: "Environmental risk factors for Rheumatoid Arthritis include cigarette smoking (which causes an inflammatory response and destruction of the synovial layer) and obesity. Pollution and bacterial/viral infections are also listed." 
+    },
+    { 
+        q: "A client with renal insufficiency develops hyperuricemia and subsequent joint inflammation. The nurse understands this is classified as:", 
+        options: ["Primary Gout", "Secondary Gout", "Osteoarthritis", "Felty's Syndrome"], 
+        answer: 1, 
+        rationale: "Secondary gout involves hyperuricemia caused by another disease, such as renal insufficiency, diuretic therapy, or certain chemotherapeutic agents that cause a decrease in the normal excretion of uric acid." 
+    },
+    { 
+        q: "Which genetic marker is specifically associated with an increased susceptibility to Rheumatoid Arthritis?", 
+        options: ["X-linked trait carrier", "HLA – DRB1 Locus", "Trisomy 21", "BRCA1"], 
+        answer: 1, 
+        rationale: "The genetic factor associated with Rheumatoid Arthritis is the HLA – DRB1 Locus." 
+    },
+    { 
+        q: "The nurse is discussing over-the-counter medications and supplements with a client who has Osteoarthritis. Which specific supplements are commonly used for joint health in clients with OA?", 
+        options: ["Calcium and Vitamin D", "Glucosamine and chondroitin", "Probenecid and sulfinpyrazone", "Folic acid and iron"], 
+        answer: 1, 
+        rationale: "Medications and treatments for Osteoarthritis include NSAIDs, corticosteroid injections, and the supplements Glucosamine and chondroitin (for joints)." 
+    },
+    { 
+        q: "A 35-year-old male is diagnosed with Primary Gout. The nurse explains to the client that this specific type of gout results from:", 
+        options: ["An autoimmune attack on the synovial membrane.", "Inborn errors of purine metabolism where uric acid production exceeds the kidneys' excretion capability.", "Excessive \"wear and tear\" on weight-bearing joints.", "The side effects of a recently prescribed diuretic."], 
+        answer: 1, 
+        rationale: "Primary gout results from inborn errors of purine metabolism where the end product is uric acid, and the production of uric acid exceeds the excretion capability of the kidneys. It is inherited as an X-linked trait and the peak time of onset is during a person's 30s and 40s." 
+    },
+    { 
+        q: "When assessing the demographic risk factors for joint diseases, the nurse knows that the peak incidence for Rheumatoid Arthritis typically occurs:", 
+        options: ["In men during their 30s and 40s.", "In men and women equally after the age of 65.", "Between 40 and 60 years of age, occurring in women more than men.", "Exclusively in post-menopausal women."], 
+        answer: 2, 
+        rationale: "Rheumatoid Arthritis occurs in women more than men, with a peak incidence between 40 and 60 years of age." 
+    },
+    { 
+        q: "During an acute gout flare, the client asks how long the attack is likely to last. The nurse's best response, based on typical disease progression, is that a treated flare typically lasts:", 
+        options: ["12 to 24 hours", "3 to 10 days", "6 months", "Less than 30 minutes"], 
+        answer: 1, 
+        rationale: "A typical acute gout flare lasts between 3 to 10 days if treated, though it can linger for weeks if left alone. Symptoms typically peak within 12 to 24 hours." 
+    },
+    { 
+        q: "The nurse is counseling a client with gout on dietary choices. Which dairy products should the nurse recommend as they may lower the risk of gout?", 
+        options: ["Full-fat cheese and butter", "Low-fat or skim milk and low-fat yogurt", "Buttermilk and eggs", "Chocolate and cocoa"], 
+        answer: 1, 
+        rationale: "Dairy products that may lower the risk of gout include low-fat or skim milk and low-fat yogurt." 
+    },
+    { 
+        q: "A client with severe Rheumatoid Arthritis is scheduled for a Synovectomy. The nurse explains to the client that this surgical procedure involves:", 
+        options: ["The removal of a wedge from the joint.", "The replacement of joints with prostheses.", "The removal of the synovium to reduce inflammation and stop progression.", "The reconstitution of synovial fluid viscosity."], 
+        answer: 2, 
+        rationale: "A Synovectomy is the surgical removal of synovia (the synovium) used in Rheumatoid Arthritis to reduce inflammation and stop disease progression." 
+    },
+    { 
+        q: "Which of the following is considered a hallmark clinical manifestation of Osteoarthritis regarding joint stiffness?", 
+        options: ["Stiffness in the morning lasting for more than an hour.", "Stiffness after weight-bearing exercises lasting less than 30 minutes.", "Stiffness that is relieved entirely by cold application.", "Stiffness accompanied by systemic fever and malaise."], 
+        answer: 1, 
+        rationale: "A sign of Osteoarthritis is stiffness after weight-bearing exercises lasting less than 30 minutes. Stiffness in the morning lasting for more than an hour is characteristic of Rheumatoid Arthritis." 
+    },
+    { 
+        q: "A client with Rheumatoid Arthritis has a history of remissions and exacerbations. What is the mainstay of drug treatment that provides both analgesic and anti-inflammatory effects for this condition?", 
+        options: ["Colchicine", "Allopurinol", "Aspirin", "Hyaluronic acid"], 
+        answer: 2, 
+        rationale: "In the drug therapy for Rheumatoid Arthritis, Aspirin is the mainstay of treatment as it has both analgesic and anti-inflammatory effects." 
+    },
+    { 
+        q: "A client is diagnosed with Osteoarthritis. The nurse plans collaborative management focusing on relieving strain and preventing further trauma. Which of the following is an appropriate intervention?", 
+        options: ["Encouraging continuous standing to build endurance.", "Utilizing a cane or walker when indicated.", "Prescribing a high-purine diet to rebuild cartilage.", "Administering auranofin daily."], 
+        answer: 1, 
+        rationale: "Collaborative management for Osteoarthritis to relieve strain and prevent further trauma includes using a cane or walker when indicated, as well as proper posture and body mechanics to avoid excessive weight-bearing and continuous standing." 
+    },
+    { 
+        q: "The nurse observes a client's fingers and notes a deformity characterized by DIP extension and DIP flexion. Based on the provided terminology, the nurse documents this specific presentation as:", 
+        options: ["Swan Neck deformity", "Boutonniere’s deformity", "Bouchard’s nodes", "Wrist subluxation"], 
+        answer: 1, 
+        rationale: "Boutonniere’s deformity is listed as a manifestation of Rheumatoid Arthritis characterized by DIP extension and DIP flexion. Swan Neck is characterized by DIP hyperflexion and DIP hyperextension." 
+    }
+];
+];
     // Splitting the massive list into the intended categories
     const endocrineQuestions = allNewQuestions.slice(0, 40).concat(allNewQuestions.slice(130, 140));
     const neuroQuestions = allNewQuestions.slice(40, 60).concat(allNewQuestions.slice(140, 150));
@@ -2127,31 +3198,70 @@
         document.querySelector('header').style.background = "var(--primary)";
     }
 
-    function startQuiz(topic) {
+function startQuiz(topic) {
         let sourceDeck;
         let themeColor;
         let title;
 
+        // --- MED-SURG ---
         if (topic === 'gi') {
             sourceDeck = [...giQuestions];
             themeColor = "#008080";
             title = "GI Disorders";
+        } else if (topic === 'endocrine') {
+            sourceDeck = [...endocrineQuestions]; 
+            themeColor = "#e67e22"; 
+            title = "Endocrine System";
+        } else if (topic === 'neuro') {
+            sourceDeck = [...neuroQuestions]; 
+            themeColor = "#3498db"; 
+            title = "Neurologic System";
+        } else if (topic === 'neuro_new') {
+            sourceDeck = [...neuroNewQuestions]; 
+            themeColor = "#2980b9"; 
+            title = "Neuro Disorders (New)";
+        } else if (topic === 'eye') {
+            sourceDeck = [...eyeQuestions]; 
+            themeColor = "#1abc9c"; 
+            title = "Eye Disorders";
+        } else if (topic === 'ear') {
+            sourceDeck = [...earQuestions]; 
+            themeColor = "#16a085"; 
+            title = "Ear Disorders";
+        } else if (topic === 'msk') {
+            sourceDeck = [...musculoskeletalQuestions]; 
+            themeColor = "#d35400"; 
+            title = "Musculoskeletal System";
+        
+        // --- PSYCH ---
         } else if (topic === 'psych') {
             sourceDeck = [...psychQuestions];
             themeColor = "#20B2AA";
             title = "Psychiatric & Neuro (V1)";
-        } else if (topic === 'endocrine') {
-            sourceDeck = [...endocrineQuestions]; 
-            themeColor = "#e67e22"; // Orange
-            title = "Endocrine System";
-        } else if (topic === 'neuro') {
-            sourceDeck = [...neuroQuestions]; 
-            themeColor = "#3498db"; // Blue
-            title = "Neurologic System";
         } else if (topic === 'advPsych') {
             sourceDeck = [...advPsychQuestions]; 
-            themeColor = "#9b59b6"; // Purple
+            themeColor = "#9b59b6"; 
             title = "Advanced Psychiatric";
+        } else if (topic === 'neurodev') {
+            sourceDeck = [...neurodevQuestions]; 
+            themeColor = "#f1c40f"; 
+            title = "Neurodevelopmental Disorders";
+        } else if (topic === 'behavior_substance') {
+            sourceDeck = [...behaviorSubstanceQuestions]; 
+            themeColor = "#c0392b"; 
+            title = "Behavior & Substance Disorders";
+        } else if (topic === 'abuse_violence') {
+            sourceDeck = [...abuseViolenceQuestions]; 
+            themeColor = "#e74c3c"; 
+            title = "Abuse & Violence";
+        } else if (topic === 'sleep') {
+            sourceDeck = [...sleepQuestions]; 
+            themeColor = "#34495e"; 
+            title = "Sleep Disorders";
+        } else if (topic === 'sexual_gender') {
+            sourceDeck = [...sexualGenderQuestions]; 
+            themeColor = "#e84393"; 
+            title = "Sexual & Gender Dysphoria";
         }
 
         if (document.getElementById('randomize-toggle').checked) {
