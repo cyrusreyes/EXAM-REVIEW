@@ -33,16 +33,17 @@
         .option-btn.correct { background: #d4edda !important; border-color: var(--success) !important; color: #155724; }
         .option-btn.wrong { background: #f8d7da !important; border-color: var(--error) !important; color: #721c24; }
         .rationale { background: #e8f4fd; border-left: 6px solid var(--secondary); padding: 15px; margin-top: 20px; border-radius: 4px; display: none; }
-        .btn { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-size: 1rem; margin-top: 20px; font-weight: bold; }
-        .btn:hover { opacity: 0.9; }
+        .btn { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-size: 1rem; margin-top: 20px; font-weight: bold; transition: all 0.2s; }
+        .btn:hover { opacity: 0.9; transform: translateY(-2px); }
         .btn-skip { background: var(--skip); margin-right: 10px; }
         .btn-skip:hover { background: #e67e22; }
+        .btn-exit { background: white; color: var(--error); border: 2px solid var(--error); padding: 8px 15px; margin: 0; }
+        .btn-exit:hover { background: var(--error); color: white; }
         .score-box { text-align: center; margin-bottom: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px; }
         .score-number { font-size: 3rem; font-weight: bold; color: var(--primary); display: block; }
         .rundown-item { border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px; padding: 15px; background: white; border-left: 6px solid #ccc; }
         .rundown-item.correct { border-left-color: var(--success); }
         .rundown-item.wrong { border-left-color: var(--error); }
-        .rundown-item.skipped { border-left-color: var(--skip); }
         .controls-area { margin-bottom: 20px; display: flex; align-items: center; gap: 10px; background: #f1f1f1; padding: 15px; border-radius: 8px; border-left: 5px solid var(--accent); }
         .tabs-container { display: flex; gap: 10px; margin-top: 30px; border-bottom: 2px solid #ccc; padding-bottom: 15px; }
         .tab-btn { background: none; border: 2px solid transparent; padding: 10px 20px; font-size: 1.1rem; font-weight: bold; color: #777; cursor: pointer; border-radius: 8px; transition: all 0.2s; }
@@ -170,8 +171,15 @@
         </div>
     </div>
 
+    <!-- QUIZ VIEW WITH NEW EXIT BUTTON -->
     <div id="view-quiz" class="view">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom:2px solid #eee; padding-bottom:15px;">
+            <button class="btn btn-exit" onclick="exitQuiz()">⬅ Exit Quiz</button>
+            <span id="quiz-topic-display" style="font-weight:bold; color:var(--primary); font-size:1.1rem;">Topic Name</span>
+        </div>
+
         <div class="progress-container"><div class="progress-fill" id="progress-fill"></div></div>
+        
         <div style="margin-top:10px; color:#666; font-size:0.9rem; display:flex; justify-content:space-between;">
             <span>Question <span id="q-current">1</span> of <span id="q-total">10</span></span>
             <span id="score-tracker" style="font-weight:bold; color:var(--primary);">Score: 0</span>
@@ -3240,11 +3248,16 @@ const behaviorSubstanceQuestions = [
     ];
 
 
-let activeDeck = [];
+// ================= APP LOGIC & NEW SKIP/EXIT FEATURES =================
+    let activeDeck = [];
     let currentIdx = 0;
     let score = 0;
     let isAnswered = false;
     let userHistory = [];
+    
+    // NEW TRACKING VARIABLES
+    let totalQuestions = 0;
+    let answeredCount = 0; 
 
     function showView(viewId) {
         document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
@@ -3266,6 +3279,12 @@ let activeDeck = [];
         document.getElementById('tab-content-' + tabId).classList.add('active');
     }
 
+    function exitQuiz() {
+        if(confirm("Are you sure you want to exit? Your current quiz progress will be lost.")) {
+            showMenu();
+        }
+    }
+
     function startQuiz(topic) {
         let sourceDeck;
         let themeColor;
@@ -3273,19 +3292,20 @@ let activeDeck = [];
 
         const topicMap = {
             'gi': { deck: giQuestions, color: "#008080", title: "GI Disorders" },
-            'endocrine': { deck: endocrineQuestions, color: "#e67e22", title: "Endocrine System" },
-            'neuro': { deck: neuroQuestions, color: "#3498db", title: "Neurologic System" },
-            'neuro_new': { deck: neuroNewQuestions, color: "#2980b9", title: "Neuro Disorders (New)" },
-            'eye': { deck: eyeQuestions, color: "#1abc9c", title: "Eye Disorders" },
-            'ear': { deck: earQuestions, color: "#16a085", title: "Ear Disorders" },
-            'msk': { deck: musculoskeletalQuestions, color: "#d35400", title: "Musculoskeletal System" },
-            'psych': { deck: psychQuestions, color: "#20B2AA", title: "Psychiatric & Neuro (V1)" },
-            'advPsych': { deck: advPsychQuestions, color: "#9b59b6", title: "Advanced Psychiatric" },
-            'neurodev': { deck: neurodevQuestions, color: "#f1c40f", title: "Neurodevelopmental Disorders" },
-            'behavior_substance': { deck: behaviorSubstanceQuestions, color: "#c0392b", title: "Behavior & Substance Disorders" },
-            'abuse_violence': { deck: abuseViolenceQuestions, color: "#e74c3c", title: "Abuse & Violence" },
-            'sleep': { deck: sleepQuestions, color: "#34495e", title: "Sleep Disorders" },
-            'sexual_gender': { deck: sexualGenderQuestions, color: "#e84393", title: "Sexual & Gender Dysphoria" }
+            // Make sure these variables match the names of your pasted arrays!
+            'endocrine': { deck: typeof endocrineQuestions !== 'undefined' ? endocrineQuestions : giQuestions, color: "#e67e22", title: "Endocrine System" },
+            'neuro': { deck: typeof neuroQuestions !== 'undefined' ? neuroQuestions : giQuestions, color: "#3498db", title: "Neurologic System" },
+            'neuro_new': { deck: typeof neuroNewQuestions !== 'undefined' ? neuroNewQuestions : giQuestions, color: "#2980b9", title: "Neuro Disorders (New)" },
+            'eye': { deck: typeof eyeQuestions !== 'undefined' ? eyeQuestions : giQuestions, color: "#1abc9c", title: "Eye Disorders" },
+            'ear': { deck: typeof earQuestions !== 'undefined' ? earQuestions : giQuestions, color: "#16a085", title: "Ear Disorders" },
+            'msk': { deck: typeof musculoskeletalQuestions !== 'undefined' ? musculoskeletalQuestions : giQuestions, color: "#d35400", title: "Musculoskeletal System" },
+            'psych': { deck: typeof psychQuestions !== 'undefined' ? psychQuestions : giQuestions, color: "#20B2AA", title: "Psychiatric & Neuro" },
+            'advPsych': { deck: typeof advPsychQuestions !== 'undefined' ? advPsychQuestions : giQuestions, color: "#9b59b6", title: "Advanced Psychiatric" },
+            'neurodev': { deck: typeof neurodevQuestions !== 'undefined' ? neurodevQuestions : giQuestions, color: "#f1c40f", title: "Neurodevelopmental" },
+            'behavior_substance': { deck: typeof behaviorSubstanceQuestions !== 'undefined' ? behaviorSubstanceQuestions : giQuestions, color: "#c0392b", title: "Behavior & Substance" },
+            'abuse_violence': { deck: typeof abuseViolenceQuestions !== 'undefined' ? abuseViolenceQuestions : giQuestions, color: "#e74c3c", title: "Abuse & Violence" },
+            'sleep': { deck: typeof sleepQuestions !== 'undefined' ? sleepQuestions : giQuestions, color: "#34495e", title: "Sleep Disorders" },
+            'sexual_gender': { deck: typeof sexualGenderQuestions !== 'undefined' ? sexualGenderQuestions : giQuestions, color: "#e84393", title: "Sexual & Gender Dysphoria" }
         };
 
         const config = topicMap[topic];
@@ -3296,15 +3316,20 @@ let activeDeck = [];
         if (document.getElementById('randomize-toggle').checked) {
             sourceDeck.sort(() => Math.random() - 0.5);
         }
-        activeDeck = sourceDeck;
         
-        document.getElementById('header-title').innerText = title;
-        document.getElementById('topic-badge').innerText = "Quiz Active";
-        document.querySelector('header').style.background = themeColor;
-
+        activeDeck = sourceDeck;
+        totalQuestions = activeDeck.length; // Fix total count
+        answeredCount = 0; // Reset answered count
         currentIdx = 0;
         score = 0;
         userHistory = [];
+        
+        document.getElementById('header-title').innerText = title;
+        document.getElementById('quiz-topic-display').innerText = title;
+        document.getElementById('quiz-topic-display').style.color = themeColor;
+        document.getElementById('topic-badge').innerText = "Quiz Active";
+        document.querySelector('header').style.background = themeColor;
+
         showView('view-quiz');
         loadQuestion();
     }
@@ -3313,12 +3338,13 @@ let activeDeck = [];
         isAnswered = false;
         const qData = activeDeck[currentIdx];
         
-        document.getElementById('q-current').innerText = currentIdx + 1;
-        document.getElementById('q-total').innerText = activeDeck.length;
+        // Update UI counters based on answered vs total, NOT currentIdx (to hide loop)
+        document.getElementById('q-current').innerText = Math.min(answeredCount + 1, totalQuestions);
+        document.getElementById('q-total').innerText = totalQuestions;
         document.getElementById('score-tracker').innerText = `Score: ${score}`;
         document.getElementById('question-text').innerText = qData.q;
         
-        const pct = ((currentIdx) / activeDeck.length) * 100;
+        const pct = (answeredCount / totalQuestions) * 100;
         document.getElementById('progress-fill').style.width = pct + '%';
         
         document.getElementById('rationale-display').style.display = 'none';
@@ -3327,7 +3353,6 @@ let activeDeck = [];
         
         const optContainer = document.getElementById('options-container');
         optContainer.innerHTML = '';
-        
         qData.options.forEach((optText, index) => {
             const btn = document.createElement('button');
             btn.className = 'option-btn';
@@ -3340,58 +3365,42 @@ let activeDeck = [];
     function handleAnswer(selectedIndex, btnElement) {
         if (isAnswered) return;
         isAnswered = true;
-
         const currentQ = activeDeck[currentIdx];
-        const correctIndex = currentQ.answer;
-        const isCorrect = (selectedIndex === correctIndex);
-        
+        const isCorrect = (selectedIndex === currentQ.answer);
         const allBtns = document.getElementById('options-container').children;
 
-        if (isCorrect) {
-            btnElement.classList.add('correct');
-            score++;
-        } else {
-            btnElement.classList.add('wrong');
-            allBtns[correctIndex].classList.add('correct');
-        }
+        if (isCorrect) { btnElement.classList.add('correct'); score++; } 
+        else { btnElement.classList.add('wrong'); allBtns[currentQ.answer].classList.add('correct'); }
 
-        userHistory.push({
-            q: currentQ.q,
-            user: currentQ.options[selectedIndex],
-            correct: currentQ.options[correctIndex],
-            isCorrect: isCorrect,
-            skipped: false,
-            rationale: currentQ.rationale
-        });
+        answeredCount++; // Add to answered progress
+        
+        // Update progress bar immediately on answer
+        document.getElementById('progress-fill').style.width = ((answeredCount / totalQuestions) * 100) + '%';
+
+        userHistory.push({ q: currentQ.q, user: currentQ.options[selectedIndex], correct: currentQ.options[currentQ.answer], isCorrect, rationale: currentQ.rationale });
 
         document.getElementById('rationale-text').innerText = currentQ.rationale;
         document.getElementById('rationale-display').style.display = 'block';
         document.getElementById('btn-next').style.display = 'inline-block';
         document.getElementById('btn-skip').style.display = 'none';
         document.getElementById('score-tracker').innerText = `Score: ${score}`;
-
         for (let btn of allBtns) btn.disabled = true;
     }
 
     function skipQuestion() {
         if (isAnswered) return;
-        isAnswered = true;
         
-        userHistory.push({
-            q: activeDeck[currentIdx].q,
-            user: "SKIPPED",
-            correct: activeDeck[currentIdx].options[activeDeck[currentIdx].answer],
-            isCorrect: false,
-            skipped: true,
-            rationale: activeDeck[currentIdx].rationale
-        });
-
-        nextQuestion();
+        // Take the current question and push it to the BACK of the active deck array
+        activeDeck.push(activeDeck[currentIdx]);
+        currentIdx++;
+        
+        loadQuestion();
     }
 
     function nextQuestion() {
         currentIdx++;
-        if (currentIdx < activeDeck.length) {
+        // If we still have questions to answer (including skipped ones added to the back), load them
+        if (answeredCount < totalQuestions) {
             loadQuestion();
         } else {
             finishQuiz();
@@ -3400,30 +3409,19 @@ let activeDeck = [];
 
     function finishQuiz() {
         showView('view-results');
-        
-        const finalPct = Math.round((score / activeDeck.length) * 100);
-        document.getElementById('final-score').innerText = finalPct;
-        document.getElementById('final-stats').innerText = `You answered ${score} out of ${activeDeck.length} correctly.`;
+        document.getElementById('final-score').innerText = Math.round((score / totalQuestions) * 100);
+        document.getElementById('final-stats').innerText = `You answered ${score} out of ${totalQuestions} correctly.`;
         
         const rundown = document.getElementById('rundown-container');
         rundown.innerHTML = '';
-
+        
         userHistory.forEach((item, index) => {
             const div = document.createElement('div');
-            div.className = `rundown-item ${item.skipped ? 'skipped' : (item.isCorrect ? 'correct' : 'wrong')}`;
-            div.innerHTML = `
-                <span class="rundown-q">Q${index + 1}: ${item.q}</span>
-                <div style="font-size:0.9rem;">
-                    Your Answer: <strong>${item.user}</strong> ${item.skipped ? '⏭' : (item.isCorrect ? '✅' : '❌')}
-                </div>
-                ${!item.isCorrect && !item.skipped ? `
-                <div style="font-size:0.9rem; color:var(--success);">
-                    Correct Answer: <strong>${item.correct}</strong>
-                </div>` : ''}
-                <div style="margin-top:8px; font-size:0.85rem; color:#666; background:#f9f9f9; padding:8px; border-radius:4px;">
-                    <strong>Rationale:</strong> ${item.rationale}
-                </div>
-            `;
+            div.className = `rundown-item ${item.isCorrect ? 'correct' : 'wrong'}`;
+            div.innerHTML = `<span>Q${index + 1}: ${item.q}</span>
+                <div>Your Answer: <strong>${item.user}</strong> ${item.isCorrect ? '✅' : '❌'}</div>
+                ${!item.isCorrect ? `<div style="color:var(--success);">Correct: <strong>${item.correct}</strong></div>` : ''}
+                <div style="font-size:0.85rem; color:#666; margin-top: 8px;"><strong>Rationale:</strong> ${item.rationale}</div>`;
             rundown.appendChild(div);
         });
     }
