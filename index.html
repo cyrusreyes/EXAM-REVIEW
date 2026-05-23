@@ -44,6 +44,12 @@
         .rundown-item.wrong { border-left-color: var(--error); }
         .rundown-item.skipped { border-left-color: var(--skip); }
         .controls-area { margin-bottom: 20px; display: flex; align-items: center; gap: 10px; background: #f1f1f1; padding: 15px; border-radius: 8px; border-left: 5px solid var(--accent); }
+       .tabs-container { display: flex; gap: 10px; margin-top: 30px; border-bottom: 2px solid #ccc; padding-bottom: 15px; }
+        .tab-btn { background: none; border: 2px solid transparent; padding: 10px 20px; font-size: 1.1rem; font-weight: bold; color: #777; cursor: pointer; border-radius: 8px; transition: all 0.2s; }
+        .tab-btn:hover { background: #f1f1f1; color: var(--dark); }
+        .tab-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .tab-content { display: none; animation: fadeIn 0.4s ease; }
+        .tab-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
@@ -55,97 +61,105 @@
             <label for="randomize-toggle"><strong>Randomize Order?</strong> (Questions will shuffle every time)</label>
         </div>
 
-        <!-- MED-SURG SECTION -->
-        <h2 style="border-bottom: 2px solid var(--primary); padding-bottom: 10px; color: var(--primary); margin-top: 30px;">Medical-Surgical Nursing</h2>
-        <div class="menu-grid">
-            <div class="menu-card" onclick="startQuiz('gi')">
-                <span style="font-size:3rem;">🩺</span>
-                <h3>GI Disorders</h3>
-                <p>100 Questions</p>
-                <p style="color:#777; font-size:0.9rem;">GERD, IBD, Liver, Pancreas</p>
-            </div>
-            <div class="menu-card" onclick="startQuiz('endocrine')">
-                <span style="font-size:3rem;">🦋</span>
-                <h3>Endocrine System</h3>
-                <p>20 Questions</p>
-                <p style="color:#777; font-size:0.9rem;">Thyroid, Adrenal, DM, Parathyroid</p>
-            </div>
-            <div class="menu-card" onclick="startQuiz('neuro')">
-                <span style="font-size:3rem;">⚡</span>
-                <h3>Neurologic System</h3>
-                <p>30 Questions</p>
-                <p style="color:#777; font-size:0.9rem;">Diagnostics, SCI, Trauma, Cognitive</p>
-            </div>
-            <div class="menu-card" onclick="startQuiz('neuro_new')">
-                <span style="font-size:3rem;">🔬</span>
-                <h3>Neuro Disorders (New)</h3>
-                <p>30 Questions</p>
-                <p style="color:#777; font-size:0.9rem;">Parkinson's, Alzheimer's, ALS</p>
-            </div>
-            <div class="menu-card" onclick="startQuiz('eye')">
-                <span style="font-size:3rem;">👁️</span>
-                <h3>Eye Disorders</h3>
-                <p>10 Questions</p>
-                <p style="color:#777; font-size:0.9rem;">Cataracts, Glaucoma, Macular</p>
-            </div>
-            <div class="menu-card" onclick="startQuiz('ear')">
-                <span style="font-size:3rem;">👂</span>
-                <h3>Ear Disorders</h3>
-                <p>5 Questions</p>
-                <p style="color:#777; font-size:0.9rem;">Otosclerosis, Meniere's, Surgery</p>
-            </div>
-            <div class="menu-card" onclick="startQuiz('msk')">
-                <span style="font-size:3rem;">🦴</span>
-                <h3>Musculoskeletal</h3>
-                <p>30 Questions</p>
-                <p style="color:#777; font-size:0.9rem;">RA, OA, Gout</p>
+        <!-- TAB BUTTONS -->
+        <div class="tabs-container">
+            <button class="tab-btn active" id="tab-btn-medsurg" onclick="switchTab('medsurg')">Medical-Surgical</button>
+            <button class="tab-btn" id="tab-btn-psych" onclick="switchTab('psych')">Psychiatric</button>
+        </div>
+
+        <!-- MED-SURG TAB CONTENT -->
+        <div id="tab-content-medsurg" class="tab-content active">
+            <div class="menu-grid">
+                <div class="menu-card" onclick="startQuiz('gi')">
+                    <span style="font-size:3rem;">🩺</span>
+                    <h3>GI Disorders</h3>
+                    <p>100 Questions</p>
+                    <p style="color:#777; font-size:0.9rem;">GERD, IBD, Liver, Pancreas</p>
+                </div>
+                <div class="menu-card" onclick="startQuiz('endocrine')">
+                    <span style="font-size:3rem;">🦋</span>
+                    <h3>Endocrine System</h3>
+                    <p>20 Questions</p>
+                    <p style="color:#777; font-size:0.9rem;">Thyroid, Adrenal, DM, Parathyroid</p>
+                </div>
+                <div class="menu-card" onclick="startQuiz('neuro')">
+                    <span style="font-size:3rem;">⚡</span>
+                    <h3>Neurologic System</h3>
+                    <p>30 Questions</p>
+                    <p style="color:#777; font-size:0.9rem;">Diagnostics, SCI, Trauma, Cognitive</p>
+                </div>
+                <div class="menu-card" onclick="startQuiz('neuro_new')">
+                    <span style="font-size:3rem;">🔬</span>
+                    <h3>Neuro Disorders (New)</h3>
+                    <p>30 Questions</p>
+                    <p style="color:#777; font-size:0.9rem;">Parkinson's, Alzheimer's, ALS</p>
+                </div>
+                <div class="menu-card" onclick="startQuiz('eye')">
+                    <span style="font-size:3rem;">👁️</span>
+                    <h3>Eye Disorders</h3>
+                    <p>30 Questions</p>
+                    <p style="color:#777; font-size:0.9rem;">Cataracts, Glaucoma, Macular</p>
+                </div>
+                <div class="menu-card" onclick="startQuiz('ear')">
+                    <span style="font-size:3rem;">👂</span>
+                    <h3>Ear Disorders</h3>
+                    <p>20 Questions</p>
+                    <p style="color:#777; font-size:0.9rem;">Otosclerosis, Meniere's, Surgery</p>
+                </div>
+                <div class="menu-card" onclick="startQuiz('msk')">
+                    <span style="font-size:3rem;">🦴</span>
+                    <h3>Musculoskeletal</h3>
+                    <p>30 Questions</p>
+                    <p style="color:#777; font-size:0.9rem;">RA, OA, Gout</p>
+                </div>
             </div>
         </div>
 
-        <!-- PSYCH SECTION -->
-        <h2 style="border-bottom: 2px solid var(--accent); padding-bottom: 10px; color: var(--accent); margin-top: 40px;">Psychiatric Nursing</h2>
-        <div class="menu-grid">
-            <div class="menu-card" onclick="startQuiz('psych')">
-                <span style="font-size:3rem;">🧠</span>
-                <h3>Psychiatric & Neuro (V1)</h3>
-                <p>80 Questions</p>
-                <p style="color:#777; font-size:0.9rem;">Meds, Neuroanatomy, Legal</p>
-            </div>
-            <div class="menu-card" onclick="startQuiz('advPsych')">
-                <span style="font-size:3rem;">🧩</span>
-                <h3>Advanced Psych</h3>
-                <p>70 Questions</p>
-                <p style="color:#777; font-size:0.9rem;">Schizophrenia, Bipolar, Personality</p>
-            </div>
-            <div class="menu-card" onclick="startQuiz('neurodev')">
-                <span style="font-size:3rem;">🧸</span>
-                <h3>Neurodevelopmental</h3>
-                <p>30 Questions</p>
-                <p style="color:#777; font-size:0.9rem;">ADHD, ASD, Tourette's</p>
-            </div>
-            <div class="menu-card" onclick="startQuiz('behavior_substance')">
-                <span style="font-size:3rem;">🍷</span>
-                <h3>Behavior & Substance</h3>
-                <p>30 Questions</p>
-                <p style="color:#777; font-size:0.9rem;">Conduct, IED, Withdrawal</p>
-            </div>
-            <div class="menu-card" onclick="startQuiz('abuse_violence')">
-                <span style="font-size:3rem;">🛑</span>
-                <h3>Abuse & Violence</h3>
-                <p>30 Questions</p>
-                <p style="color:#777; font-size:0.9rem;">Domestic, Child Abuse, Legal</p>
-            </div>
-            <div class="menu-card" onclick="startQuiz('sleep')">
-                <span style="font-size:3rem;">💤</span>
-                <h3>Sleep Disorders</h3>
-                <p>15 Questions</p>
-                <p style="color:#777; font-size:0.9rem;">Apnea, Insomnia, Narcolepsy</p>
-            </div>
-            <div class="menu-card" onclick="startQuiz('sexual_gender')">
-                <span style="font-size:3rem;">⚧️</span>
-                <h3>Sexual & Gender</h3>
-                <p>15 Questions</p>
-                <p style="color:#777; font-size:0.9rem;">Dysfunctions, Paraphilias</p>
+        <!-- PSYCH TAB CONTENT -->
+        <div id="tab-content-psych" class="tab-content">
+            <div class="menu-grid">
+                <div class="menu-card" onclick="startQuiz('psych')">
+                    <span style="font-size:3rem;">🧠</span>
+                    <h3>Psychiatric & Neuro (V1)</h3>
+                    <p>80 Questions</p>
+                    <p style="color:#777; font-size:0.9rem;">Meds, Neuroanatomy, Legal</p>
+                </div>
+                <div class="menu-card" onclick="startQuiz('advPsych')">
+                    <span style="font-size:3rem;">🧩</span>
+                    <h3>Advanced Psych</h3>
+                    <p>70 Questions</p>
+                    <p style="color:#777; font-size:0.9rem;">Schizophrenia, Bipolar, Personality</p>
+                </div>
+                <div class="menu-card" onclick="startQuiz('neurodev')">
+                    <span style="font-size:3rem;">🧸</span>
+                    <h3>Neurodevelopmental</h3>
+                    <p>30 Questions</p>
+                    <p style="color:#777; font-size:0.9rem;">ADHD, ASD, Tourette's</p>
+                </div>
+                <div class="menu-card" onclick="startQuiz('behavior_substance')">
+                    <span style="font-size:3rem;">🍷</span>
+                    <h3>Behavior & Substance</h3>
+                    <p>30 Questions</p>
+                    <p style="color:#777; font-size:0.9rem;">Conduct, IED, Withdrawal</p>
+                </div>
+                <div class="menu-card" onclick="startQuiz('abuse_violence')">
+                    <span style="font-size:3rem;">🛑</span>
+                    <h3>Abuse & Violence</h3>
+                    <p>30 Questions</p>
+                    <p style="color:#777; font-size:0.9rem;">Domestic, Child Abuse, Legal</p>
+                </div>
+                <div class="menu-card" onclick="startQuiz('sleep')">
+                    <span style="font-size:3rem;">💤</span>
+                    <h3>Sleep Disorders</h3>
+                    <p>15 Questions</p>
+                    <p style="color:#777; font-size:0.9rem;">Apnea, Insomnia, Narcolepsy</p>
+                </div>
+                <div class="menu-card" onclick="startQuiz('sexual_gender')">
+                    <span style="font-size:3rem;">⚧️</span>
+                    <h3>Sexual & Gender</h3>
+                    <p>15 Questions</p>
+                    <p style="color:#777; font-size:0.9rem;">Dysfunctions, Paraphilias</p>
+                </div>
             </div>
         </div>
     </div>
@@ -3397,7 +3411,15 @@ function skipQuestion() {
 
     nextQuestion();
 }
+function switchTab(tabId) {
+        // Remove 'active' class from all buttons and content
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
 
+        // Add 'active' class to the clicked button and its corresponding content
+        document.getElementById('tab-btn-' + tabId).classList.add('active');
+        document.getElementById('tab-content-' + tabId).classList.add('active');
+    }
 // ... existing nextQuestion() function ...
         });
     }
