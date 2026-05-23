@@ -6,23 +6,26 @@
     <title>EXAM REVIEW</title>
     <style>
         :root {
-            --primary: #008080;  /* Teal - NEW COLOR so you know it changed */
+            --primary: #008080;
             --secondary: #20B2AA;
             --accent: #9370DB;
             --success: #27ae60;
             --error: #c0392b;
+            --skip: #f39c12;
             --dark: #2c3e50;
         }
         body { font-family: 'Segoe UI', sans-serif; background: #e0f2f1; color: var(--dark); margin: 0; padding: 20px; display: flex; justify-content: center; min-height: 100vh; }
         .app-container { background: white; width: 100%; max-width: 900px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; display: flex; flex-direction: column; margin-bottom: 50px; }
-        header { background: var(--primary); color: white; padding: 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        header { background: var(--primary); color: white; padding: 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; transition: background 0.3s; }
         .badge { background: rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; }
         .view { padding: 30px; display: none; animation: fadeIn 0.4s ease; }
         .view.active { display: block; }
         .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
-        .menu-card { background: white; border: 2px solid #e0e0e0; border-radius: 10px; padding: 30px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .menu-card { background: white; border: 2px solid #e0e0e0; border-radius: 10px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.2s; }
         .menu-card:hover { transform: translateY(-3px); border-color: var(--secondary); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .progress-container { height: 8px; background: #eee; width: 100%; }
+        .menu-card h3 { margin: 10px 0 5px 0; }
+        .menu-card p { margin: 5px 0; }
+        .progress-container { height: 8px; background: #eee; width: 100%; border-radius: 4px; overflow: hidden; }
         .progress-fill { height: 100%; background: var(--secondary); width: 0%; transition: width 0.3s; }
         .question-text { font-size: 1.25rem; font-weight: 600; margin: 20px 0; line-height: 1.5; }
         .option-btn { background: white; border: 2px solid #bdc3c7; padding: 15px; border-radius: 8px; text-align: left; font-size: 1rem; cursor: pointer; width: 100%; margin-bottom: 10px; transition: all 0.2s; }
@@ -30,13 +33,16 @@
         .option-btn.correct { background: #d4edda !important; border-color: var(--success) !important; color: #155724; }
         .option-btn.wrong { background: #f8d7da !important; border-color: var(--error) !important; color: #721c24; }
         .rationale { background: #e8f4fd; border-left: 6px solid var(--secondary); padding: 15px; margin-top: 20px; border-radius: 4px; display: none; }
-        .btn { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-size: 1rem; margin-top: 20px; }
-        .btn:hover { background: var(--secondary); }
+        .btn { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-size: 1rem; margin-top: 20px; font-weight: bold; }
+        .btn:hover { opacity: 0.9; }
+        .btn-skip { background: var(--skip); margin-right: 10px; }
+        .btn-skip:hover { background: #e67e22; }
         .score-box { text-align: center; margin-bottom: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px; }
         .score-number { font-size: 3rem; font-weight: bold; color: var(--primary); display: block; }
         .rundown-item { border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px; padding: 15px; background: white; border-left: 6px solid #ccc; }
         .rundown-item.correct { border-left-color: var(--success); }
         .rundown-item.wrong { border-left-color: var(--error); }
+        .rundown-item.skipped { border-left-color: var(--skip); }
         .controls-area { margin-bottom: 20px; display: flex; align-items: center; gap: 10px; background: #f1f1f1; padding: 15px; border-radius: 8px; border-left: 5px solid var(--accent); }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
@@ -71,7 +77,7 @@
             <div class="menu-card" onclick="startQuiz('endocrine')">
                 <span style="font-size:3rem;">🦋</span>
                 <h3>Endocrine System</h3>
-                <p>60 Questions</p>
+                <p>20 Questions</p>
                 <p style="color:#777; font-size:0.9rem;">Thyroid, Adrenal, DM, Parathyroid</p>
             </div>
             <div class="menu-card" onclick="startQuiz('neuro')">
@@ -86,8 +92,59 @@
                 <p>70 Questions</p>
                 <p style="color:#777; font-size:0.9rem;">Schizophrenia, Bipolar, Personality</p>
             </div>
+            <!-- NEW CATEGORIES -->
+            <div class="menu-card" onclick="startQuiz('eye')">
+                <span style="font-size:3rem;">👁️</span>
+                <h3>Eye Disorders</h3>
+                <p>30 Questions</p>
+                <p style="color:#777; font-size:0.9rem;">Cataracts, Glaucoma, Macular</p>
+            </div>
+            <div class="menu-card" onclick="startQuiz('ear')">
+                <span style="font-size:3rem;">👂</span>
+                <h3>Ear Disorders</h3>
+                <p>20 Questions</p>
+                <p style="color:#777; font-size:0.9rem;">Otosclerosis, Meniere's, Surgery</p>
+            </div>
+            <div class="menu-card" onclick="startQuiz('neuro_new')">
+                <span style="font-size:3rem;">🔬</span>
+                <h3>Neuro Disorders (New)</h3>
+                <p>30 Questions</p>
+                <p style="color:#777; font-size:0.9rem;">Parkinson's, Alzheimer's, ALS</p>
+            </div>
+            <div class="menu-card" onclick="startQuiz('neurodev')">
+                <span style="font-size:3rem;">🧸</span>
+                <h3>Neurodevelopmental</h3>
+                <p>30 Questions</p>
+                <p style="color:#777; font-size:0.9rem;">ADHD, ASD, Tourette's</p>
+            </div>
+            <div class="menu-card" onclick="startQuiz('behavior_substance')">
+                <span style="font-size:3rem;">🍷</span>
+                <h3>Behavior & Substance</h3>
+                <p>30 Questions</p>
+                <p style="color:#777; font-size:0.9rem;">Conduct, IED, Withdrawal</p>
+            </div>
+            <div class="menu-card" onclick="startQuiz('abuse_violence')">
+                <span style="font-size:3rem;">🛑</span>
+                <h3>Abuse & Violence</h3>
+                <p>30 Questions</p>
+                <p style="color:#777; font-size:0.9rem;">Domestic, Child Abuse, Legal</p>
+            </div>
+            <div class="menu-card" onclick="startQuiz('sleep')">
+                <span style="font-size:3rem;">💤</span>
+                <h3>Sleep Disorders</h3>
+                <p>15 Questions</p>
+                <p style="color:#777; font-size:0.9rem;">Apnea, Insomnia, Narcolepsy</p>
+            </div>
+            <div class="menu-card" onclick="startQuiz('sexual_gender')">
+                <span style="font-size:3rem;">⚧️</span>
+                <h3>Sexual & Gender</h3>
+                <p>15 Questions</p>
+                <p style="color:#777; font-size:0.9rem;">Dysfunctions, Paraphilias</p>
+            </div>
         </div>
-    </div> <div id="view-quiz" class="view">
+    </div>
+
+    <div id="view-quiz" class="view">
         <div class="progress-container"><div class="progress-fill" id="progress-fill"></div></div>
         <div style="margin-top:10px; color:#666; font-size:0.9rem; display:flex; justify-content:space-between;">
             <span>Question <span id="q-current">1</span> of <span id="q-total">10</span></span>
@@ -97,12 +154,13 @@
         <div class="question-text" id="question-text"></div>
         <div id="options-container"></div>
         
+        <div style="text-align:right; margin-top: 20px;">
+            <button class="btn btn-skip" id="btn-skip" onclick="skipQuestion()">Skip Question ⏭</button>
+            <button class="btn" id="btn-next" onclick="nextQuestion()" style="display:none;">Next Question ➜</button>
+        </div>
+
         <div class="rationale" id="rationale-display">
             <strong>Rationale:</strong> <span id="rationale-text"></span>
-        </div>
-        
-        <div style="text-align:right;">
-            <button class="btn" id="btn-next" onclick="nextQuestion()" style="display:none;">Next Question ➜</button>
         </div>
     </div>
 
@@ -1995,6 +2053,51 @@
         answer: 0,
         rationale: "Delirium is typically caused by acute physiological or metabolic conditions, infections, or drugs. Hypoxemia (A), dehydration (B), UTIs (D), and prescription medications/drug toxicity (E) are all highly common causes of delirium. Pick's disease (C) and Huntington's disease (F) are genetic/degenerative causes of dementia, not acute delirium."
     }
+        const eyeQuestions = [
+        {q: "A patient is being discharged after undergoing cataract surgery. Which instruction should the nurse include in the discharge teaching to prevent complications?", options: ["A) \"You may sleep on the operated side to promote fluid drainage.\"", "B) \"If you need to sneeze or cough, make sure to keep your mouth open.\"", "C) \"You can resume bending forward and lifting objects after 24 hours.\"", "D) \"Expect to feel severe, sharp pain in your eye for the first few days.\""], answer: 1, rationale: "After eye surgeries, a general goal is to prevent increased intraocular pressure (IOP) and stress on the suture line. Patients should be instructed to open their mouths if they need to sneeze or cough to minimize pressure. Patients should lie on their back or with the unoperated side down. Bending, stooping, and lifting should be avoided for several weeks. A sensation of pressure and sharp pain may indicate bleeding and is not an expected finding."},
+        {q: "A 70-year-old client comes to the clinic reporting a gradual change in their vision. Which of the following client statements is most characteristic of a developing cataract?", options: ["A) \"I suddenly lost vision in the center of my eye.\"", "B) \"It looks like a dark curtain has been pulled over my eye.\"", "C) \"My vision is foggy, and I have a lot of trouble with the glare from car headlights at night.\"", "D) \"I am having severe eye pain and seeing halos around all the lights.\""], answer: 2, rationale: "Symptoms of a cataract include filmy, foggy, or cloudy vision, needing more light to read, and having difficulty with glare from bright lights and headlights at night. \"Sudden central vision loss\" is associated with wet macular degeneration. A \"curtain being drawn\" is a classic sign of a retinal detachment. Severe pain and halos are signs of acute closed-angle glaucoma."},
+        {q: "A patient arrives at the emergency department stating, \"I see sudden flashes of light and floaters, and it looks like a dark curtain is falling over my vision.\" The nurse suspects a retinal detachment. Which of the following is the most appropriate immediate nursing intervention?", options: ["A) Encourage the client to ambulate to promote circulation.", "B) Cover both of the patient's eyes with patches and place them on bedrest.", "C) Administer miotic eye drops to increase aqueous humor outflow.", "D) Elevate the patient's legs to prevent shock."], answer: 1, rationale: "Flashes of light, floaters, and a sense of a curtain being drawn are symptoms of retinal detachment. Immediate care requires placing the patient on bedrest, covering both eyes with patches to minimize eye stress, and instructing the patient to avoid jerky head movements."},
+        {q: "A client presents to the clinic with severe eye pain, nausea, vomiting, and headache. The intraocular pressure is dangerously high, and the physician diagnoses acute closed-angle glaucoma. The nurse should anticipate administering which of the following medications to rapidly reduce the volume of intraocular fluid?", options: ["A) Timolol maleate (Beta-Blocker)", "B) Pilocarpine HCI (Miotic)", "C) Intravenous Mannitol (Osmotic Agent)", "D) Acetazolamide (Carbonic Anhydrase Inhibitor)"], answer: 2, rationale: "Acute closed-angle glaucoma happens suddenly when the iris blocks drainage channels and is a medical emergency. Osmotic agents, such as Intravenous Mannitol (Osmitrol), are used in acute closed-angle glaucoma to rapidly reduce the volume of intraocular fluid and decrease intraocular pressure (IOP)."},
+        {q: "The nurse is conducting a community health screening for eye diseases. Which statement by a participant indicates a correct understanding of open-angle glaucoma?", options: ["A) \"I will experience severe, sudden eye pain if I develop this condition.\"", "B) \"This disease affects my central vision first, making it hard to read.\"", "C) \"In the early stages of this disease, I will likely have no symptoms at all.\"", "D) \"It is caused by a cloudy lens that needs to be surgically removed.\""], answer: 2, rationale: "Open-angle glaucoma is caused by a gradual blockage in the drainage channels. Open-angle and other chronic forms of glaucoma often have no symptoms in their early stages. When vision loss does occur in later stages, the side/peripheral vision is affected first."},
+        {q: "A 68-year-old Caucasian female complains of blurry vision and difficulty recognizing faces. During the assessment, the patient mentions that straight lines appear to be wavy and bent, and her central vision loss occurred very rapidly. These symptoms are most indicative of:", options: ["A) Wet Macular Degeneration", "B) Dry Macular Degeneration", "C) Open-angle glaucoma", "D) Astigmatism"], answer: 0, rationale: "Macular degeneration damages the central retina, causing blurry vision or blind spots in the center of the visual field. Wet macular degeneration is characterized by a rapid worsening of vision over days or weeks, sudden or severe central vision loss, and the distortion of straight lines so that they appear wavy or bent. Dry macular degeneration causes a gradual blurring over years."},
+        {q: "A nursing student is reviewing the management of refractive errors. Which of the following pairings of the refractive error and its typical optical correction is accurate?", options: ["A) Myopia - Convex lens", "B) Hypermetropia - Concave lens", "C) Astigmatism - Cylindrical lens", "D) Presbyopia - Intraocular lens implant"], answer: 2, rationale: "Astigmatism is an error where the cornea is more curved in one direction than the other, and it is corrected optically with a cylindrical lens. Myopia (nearsightedness) is corrected with a concave lens. Hypermetropia (farsightedness) is corrected with a convex lens. Presbyopia (aging eye) is corrected with bifocal lenses."},
+        {q: "A patient is struggling to see objects in dimly lit environments and at night. The nurse understands that this indicates a potential issue with which specific photoreceptor cells in the inner neural layer of the eye?", options: ["A) Cones", "B) Rods", "C) The Macula", "D) The Iris"], answer: 1, rationale: "The inner neural layer contains photoreceptor cells. Rods are concentrated along the outer perimeter of the retina and help us see in the dark and dimly lit environments, as well as providing our peripheral/side vision. Cones are concentrated in the macula and allow us to perceive color."},
+        {q: "A patient is in the recovery room 2 hours after a cataract extraction surgery. Which client complaint should the nurse prioritize and report immediately to the surgeon?", options: ["A) A mild burning sensation in the operated eye.", "B) A feeling of \"something in the eye.\"", "C) Mild edema of the eyelid.", "D) A sensation of pressure within the eye and sharp pain."], answer: 3, rationale: "A sensation of pressure within the eye and sharp pain may indicate bleeding into the anterior chamber (hyphema) and must be reported to the surgeon. A burning sensation 1 hour after the operation is expected as the anesthetic wears off. Edema of the eyelids and a feeling of \"something in the eye\" (due to sutures) are expected temporary occurrences that subside within a few days."},
+        {q: "The nurse is updating the care plan for a patient with Dry Age-Related Macular Degeneration (AMD). Which of the following management strategies should the nurse include in the teaching plan?", options: ["A) Scheduling for Anti-VEGF injectable medications.", "B) Planning for photodynamic laser therapy.", "C) Educating the patient on nutritional supplements like AREDS2 vitamins and smoking cessation.", "D) Preparing the patient for a scleral buckle procedure."], answer: 2, rationale: "Management for Dry Macular Degeneration includes lifestyle changes such as a healthy diet, quitting smoking, and utilizing nutritional supplements like AREDS2 vitamins (Vitamin C, Vitamin E, zinc, copper, lutein). Anti-VEGF injections and photodynamic/laser therapies are used for Wet Macular Degeneration. A scleral buckle is used for retinal detachments."},
+        {q: "A nurse is preparing to administer Timolol maleate eye drops to a client with chronic open-angle glaucoma. The nurse understands that the primary action of this medication is to:", options: ["A) Increase the outflow of aqueous humor.", "B) Decrease aqueous humor production.", "C) Reduce the volume of intraocular fluid rapidly.", "D) Constrict the pupil to relieve pressure on the meshwork."], answer: 1, rationale: "Timolol maleate is a Beta-Blocker. In the management of chronic open-angle glaucoma, Beta-Blockers and Carbonic Anhydrase Inhibitors (like Acetazolamide) act to decrease aqueous humor production, thereby lowering intraocular pressure (IOP). Miotics (like Pilocarpine) are used to increase the outflow of aqueous humor."},
+        {q: "A client is admitted to the emergency department with severe eye pain, nausea, and seeing halos around lights. The physician diagnoses acute closed-angle glaucoma. Which intravenous medication should the nurse anticipate administering immediately?", options: ["A) Pilocarpine HCI", "B) Timolol maleate", "C) Mannitol (Osmitrol)", "D) Acetazolamide (Diamox)"], answer: 2, rationale: "Acute closed-angle glaucoma is a medical emergency characterized by sudden blockage of the drainage channels. Intravenous osmotic agents, such as Mannitol, are administered to rapidly reduce the volume of intraocular fluid and quickly decrease intraocular pressure."},
+        {q: "Following an extracapsular cataract extraction (ECCE) on the right eye, how should the nurse position the client in bed?", options: ["A) Prone with the head turned to the right side.", "B) On the right side to promote fluid drainage.", "C) Flat on the back without any pillows.", "D) On the back or on the unoperated (left) side."], answer: 3, rationale: "Post-operative general care for eye surgeries dictates that the patient should lie on their back or with the unoperated side down. Lying on the operated side (the right side, in this case) would increase pressure and stress on the surgical site. The head of the bed should also be elevated 30-45 degrees, not kept completely flat."},
+        {q: "A client arrives at the outpatient surgery center for a scheduled phacoemulsification for a cataract. Which preoperative medications should the nurse expect to administer?", options: ["A) Miotics and osmotic agents", "B) Mydriatics and cycloplegics", "C) Anti-VEGF injections", "D) Topical corticosteroids"], answer: 1, rationale: "General pre-operative care for cataract surgeries includes preparing and administering medications to dilate the pupils (mydriatics and cycloplegics) to allow the surgeon visual and physical access to the lens."},
+        {q: "A client calls the clinic reporting a sudden onset of flashes of light, floaters, and a sensation like a dark curtain is being drawn over their vision. What is the nurse's priority instruction to the client?", options: ["A) \"Apply a warm compress to your eye and rest for a few hours.\"", "B) \"Drive yourself to the clinic immediately for an eye exam.\"", "C) \"Lie down, keep your head still, and have someone bring you to the emergency room.\"", "D) \"Take an over-the-counter analgesic and call back tomorrow if it persists.\""], answer: 2, rationale: "The symptoms described (flashes of light, floaters, and a curtain over the visual field) are hallmark signs of a retinal detachment. Immediate care requires bedrest, avoiding jerky head movements, and minimizing eye stress to prevent further separation of the retina from the underlying tissue."},
+        {q: "A nurse is assessing a client's vision. The client reports that straight lines appear wavy and bent, and there are dark, empty spots in the center of their vision. The client states this happened very quickly over the last week. These symptoms most strongly suggest which of the following conditions?", options: ["A) Dry Macular Degeneration", "B) Wet Macular Degeneration", "C) Retinal Detachment", "D) Open-Angle Glaucoma"], answer: 1, rationale: "Both types of macular degeneration affect central vision, but Wet Macular Degeneration progresses rapidly over days or weeks. Symptoms unique to the wet form (caused by atypical, leaking blood vessels) include sudden or severe central vision loss and the distortion of straight lines so they appear wavy or bent."},
+        {q: "The nurse is teaching a community health class about glaucoma. Which statement by a participant indicates a correct understanding of chronic open-angle glaucoma?", options: ["A) \"I will know I have it because my eyes will hurt terribly.\"", "B) \"It affects my central vision first, so I will have trouble reading.\"", "C) \"It often has no symptoms in the early stages and affects my side vision first.\"", "D) \"It is usually caused by an infection of the cornea.\""], answer: 2, rationale: "Open-angle glaucoma is caused by a gradual blockage of the drainage channels. In the early stages, it often presents with absolutely no symptoms. When vision loss does begin to occur in the later stages, the side (peripheral) vision is affected first. Severe pain is associated with closed-angle glaucoma."},
+        {q: "A client is scheduled for a tonometry test during an eye exam. How should the nurse explain this procedure to the client?", options: ["A) \"It will map out your visual field to check for blind spots.\"", "B) \"It is a painless procedure used to measure the pressure inside your eyes.\"", "C) \"It uses a special microscope to examine the drainage channels of your eye.\"", "D) \"It is an imaging test to look at the optic nerve at the back of your eye.\""], answer: 1, rationale: "Tonometry is a painless diagnostic procedure specifically used to measure intraocular pressure (IOP). Visual field testing checks for blind spots (Option A); Gonioscopy examines the drainage channels (Option C); and Ophthalmoscopy looks directly at the optic nerve (Option D)."},
+        {q: "A patient is recovering from a scleral buckle procedure to repair a retinal detachment. Which statement indicates that the patient understands their discharge instructions?", options: ["A) \"I can go back to my daily jogging routine in about a week.\"", "B) \"I need to keep my head elevated and avoid straining when having a bowel movement.\"", "C) \"I will need to use anti-VEGF injections every month to maintain the buckle.\"", "D) \"I should expect a sudden loss of peripheral vision as the eye heals.\""], answer: 1, rationale: "Following a scleral buckle procedure, patients must keep their head elevated and try not to bend over or strain with lifting or bowel movements. Vigorous exercise (like jogging) must be strictly avoided for 3 to 4 weeks. Anti-VEGF injections are a treatment for Wet Macular Degeneration, not retinal detachment."},
+        {q: "A nurse is reviewing the chart of a client diagnosed with Dry Age-Related Macular Degeneration (AMD). Which finding is a hallmark pathophysiological characteristic of this condition?", options: ["A) Atypical blood vessels growing beneath the retina.", "B) A tear or hole in the retina leaking fluid.", "C) The development of small, yellowish deposits known as \"drusen\" under the retina.", "D) A clouded, opaque area in the lens of the eye."], answer: 2, rationale: "Dry AMD leads to gradual thinning and vision loss, characterized by the development of small, yellowish deposits known as \"drusen\" under the retina. Atypical growing blood vessels are a hallmark of Wet AMD. A clouded lens is a cataract, and a tear leaking fluid is a retinal detachment."},
+        {q: "A post-operative client who just had a cataract extraction complains of a burning sensation in the operated eye one hour after the surgery. What is the nurse's most appropriate action?", options: ["A) Notify the surgeon immediately, as this is a sign of hemorrhage.", "B) Administer an intravenous osmotic agent to reduce pressure.", "C) Reassure the client that this is an expected sensation as the anesthetic wears off.", "D) Check the surgical dressing for signs of purulent drainage and infection."], answer: 2, rationale: "A burning sensation 1 hour after eye surgery is expected because the local anesthetic is wearing off. The nurse should advise the client of this. Sharp pain or a sensation of pressure within the eye would be an unexpected finding that indicates bleeding and requires notifying the surgeon."},
+        {q: "A 45-year-old client reports difficulty focusing on close objects, such as reading a menu, which started recently. The nurse understands this is a natural, age-related loss of accommodation known as:", options: ["A) Myopia", "B) Hypermetropia", "C) Astigmatism", "D) Presbyopia"], answer: 3, rationale: "Presbyopia is the \"aging eye,\" defined as the natural, age-related loss of the eye's ability to focus on close objects, typically beginning after age 40. It is often corrected with bifocal lenses."},
+        {q: "A client with a newly diagnosed refractive error asks the nurse how myopia is corrected. The nurse correctly explains that nearsightedness is typically corrected with:", options: ["A) Bifocal lenses", "B) A concave lens", "C) A convex lens", "D) A cylindrical lens"], answer: 1, rationale: "Myopia (short sight / nearsightedness) occurs when light rays focus in front of the retina. It is typically corrected with a concave lens. Hypermetropia (farsightedness) is corrected with a convex lens, and astigmatism is corrected with a cylindrical lens."},
+    const earQuestions = [
+        {q: "A client reports a slowly progressive conductive hearing loss that began at age 20. The client mentions that they hear their own voice very loudly compared to the environment. Which diagnosis should the nurse suspect?", options: ["A) Meniere's Disease", "B) Otosclerosis", "C) Sensorineural Hearing Loss", "D) Presbycusis"], answer: 1, rationale: "Otosclerosis typically begins around age 20. A classic symptom is that the patient hears their own voice very loudly because the sound is conducted via the skull bones rather than through the air (conductive loss)."},
+        {q: "Which finding on an otoscopic exam is considered a classic diagnostic sign of Otosclerosis?", options: ["A) Perforation of the tympanic membrane", "B) Schwartze's sign", "C) Excessive cerumen impaction", "D) Fluid in the middle ear"], answer: 1, rationale: "Schwartze's sign is a pink blush hue seen behind the tympanic membrane, indicating the hypervascularity of the spongy bone phase in otosclerosis."},
+        {q: "A client with Otosclerosis undergoes a stapedectomy. Which post-operative instruction is most important to protect the surgical site?", options: ["A) Change the ear cotton ball every 4 hours.", "B) Keep the ear dry for 6 weeks post-op.", "C) Use a straw for all liquid intake.", "D) Elevate the head of the bed for 3 months."], answer: 1, rationale: "Post-operative instructions for ear surgery include keeping the ear dry for 6 weeks. Cotton balls should be changed daily, not every 4 hours."},
+        {q: "A client with Meniere's disease is experiencing an acute exacerbation of vertigo. Which nursing action is most appropriate?", options: ["A) Encourage the client to read to keep their mind occupied.", "B) Keep the client on strict bed rest and maintain a quiet environment.", "C) Assist the client to ambulate frequently to improve balance.", "D) Encourage high fluid intake to flush the inner ear."], answer: 1, rationale: "Collaborative management for an acute exacerbation of Meniere's disease includes bed rest, avoiding reading (which worsens vertigo), and avoiding large volumes of fluids."},
+        {q: "In Meniere's disease, what is the primary pathophysiological trigger for the symptoms of vertigo, tinnitus, and hearing loss?", options: ["A) Bacterial infection of the external canal", "B) Accumulation of endolymph in the inner ear", "C) Fixation of the stapes bone", "D) Damage to the acoustic nerve from loud noise"], answer: 1, rationale: "Meniere's disease is characterized by the accumulation of endolymph in the inner ear (Endolymphatic Hydrops). Excess endolymph increases pressure, leading to membrane rupture and abnormal nerve signals."},
+        {q: "A client with Meniere's disease is advised to follow a low-sodium diet. What is the rationale for this intervention?", options: ["A) To reduce the risk of secondary hypertension.", "B) To prevent the retention of water in the inner ear.", "C) To decrease the production of endolymph.", "D) To prevent the development of tinnitus."], answer: 1, rationale: "A low sodium diet is recommended to prevent the retention of water, which contributes to the accumulation of endolymph and increased pressure in the inner ear."},
+        {q: "A nurse is preparing a client for ear surgery. Which pre-operative instruction is essential?", options: ["A) \"You will be under general anesthesia for the entire procedure.\"", "B) \"You must wash your hair with a mild soap before surgery.\"", "C) \"You should have a full meal before coming in.\"", "D) \"Report any symptoms of an upper respiratory tract infection to the nurse.\""], answer: 3, rationale: "Pre-operative care for ear surgery includes assessing for an upper respiratory tract infection. Clients are usually under local anesthesia but sedated."},
+        {q: "When communicating with a client with hearing impairment, the nurse should:", options: ["A) Shout loudly to ensure the client hears every word.", "B) Face the client directly and speak in a normal tone of voice.", "C) Stand behind the client so they can focus on listening.", "D) Smile broadly to show friendliness."], answer: 1, rationale: "The nurse should talk directly to the person while facing them and use a normal tone of voice; shouting is counterproductive. The nurse should not smile or chew gum, as this can interfere with lip-reading."},
+        {q: "Following ear surgery, a client reports dizziness when attempting to ambulate for the first time. What is the nurse's priority action?", options: ["A) Assist the client by providing supervision during ambulation.", "B) Immediately notify the surgeon of a neurological deficit.", "C) Instruct the client to stay in bed for the next 3 weeks.", "D) Administer an additional dose of a sedative."], answer: 0, rationale: "Dizziness or lightheadedness is a common post-operative occurrence; the nurse should provide supervision when the client ambulates for the first time to prevent falls."},
+        {q: "In the Rinne test, which finding indicates conductive hearing loss?", options: ["A) Air conduction is greater than bone conduction.", "B) Bone conduction is greater than air conduction.", "C) Bone conduction is equal to air conduction.", "D) The tone lateralizes to the good ear."], answer: 1, rationale: "In a normal ear, air conduction is greater than bone conduction (Air > Bone). In conductive hearing loss, bone conduction is greater than air conduction (Bone > Air)."},
+        {q: "Which medication class is included in the collaborative management of Meniere's disease to address the accumulation of endolymph?", options: ["A) Miotics", "B) Beta-blockers", "C) Diuretics", "D) Osmotic agents"], answer: 2, rationale: "Diuretics are listed as one of the medication classes used to manage Meniere's disease."},
+        {q: "A client with Otosclerosis can hear female speech better than male speech. This is because:", options: ["A) Women speak louder than men.", "B) Female speech is generally higher in pitch.", "C) The disease only affects low-pitched sound sensors.", "D) The client has learned to lip-read female voices."], answer: 1, rationale: "Otosclerosis affects the hearing of lower-pitched sounds more than high-pitched sounds; therefore, female speech is often easier to hear than male speech because it is generally higher in pitch."},
+        {q: "Which lifestyle choice should be avoided by a patient with Meniere's disease?", options: ["A) Consuming high-fiber foods.", "B) Regular low-impact exercise.", "C) Drinking caffeinated beverages.", "D) Wearing sunglasses outdoors."], answer: 2, rationale: "Clients with Meniere's disease should avoid alcohol, caffeine, and tobacco, as these can exacerbate symptoms."},
+        {q: "When changing the cotton ball in the ear after ear surgery, what technique should the nurse instruct the patient to use?", options: ["A) Pack the cotton ball firmly into the ear canal.", "B) Protect the ear with 2 pieces of cotton, with the outer piece saturated with petroleum jelly.", "C) Use a Q-tip to clean the canal before replacing the cotton.", "D) Do not use any cotton at all."], answer: 1, rationale: "To protect the ear post-operatively, the patient should use two pieces of cotton, with the outer piece saturated with petroleum jelly to keep the ear dry."},
+        {q: "A client reports hearing loss, ringing in the ears (tinnitus), and vertigo. Which diagnostic test would show the tone lateralizing better in the good ear?", options: ["A) Rinne test", "B) Weber's test", "C) Tympanometry", "D) High Resolution CT Scan"], answer: 1, rationale: "In Weber's test, if there is a unilateral sensorineural hearing loss (as seen in Meniere's), the sound lateralizes (is heard louder) in the normal/good ear."},
+        {q: "What is the primary function of an antihistamine in the management of Meniere's disease?", options: ["A) To lower blood pressure.", "B) To reduce fluid in the inner ear.", "C) To manage vertigo and associated nausea.", "D) To prevent secondary infections."], answer: 2, rationale: "Antihistamines are listed as part of the medication management for Meniere's disease, primarily to help manage the vertigo, nausea, and vomiting associated with an exacerbation."},
+        {q: "After ear surgery, how long should the client keep the ear dry?", options: ["A) 1 week", "B) 3 weeks", "C) 6 weeks", "D) 12 weeks"], answer: 2, rationale: "The client must keep the ear dry for 6 weeks post-operatively."},
+        {q: "What is the primary difference between a Stapedectomy and a Stapedotomy?", options: ["A) Stapedectomy removes the whole stapes; Stapedotomy removes only part of it.", "B) Stapedectomy is for Meniere's; Stapedotomy is for Otosclerosis.", "C) Stapedectomy is done under general anesthesia; Stapedotomy is local.", "D) There is no difference; they are the same procedure."], answer: 0, rationale: "A Stapedectomy involves removing the entire stapes and replacing it with a prosthesis. A Stapedotomy involves removing part of the stapes bone while leaving the base attached to the oval window."},
+        {q: "A client recovering from ear surgery asks why they cannot watch TV for a week. The nurse explains it is because:", options: ["A) It increases intracranial pressure.", "B) It causes eye movement that can lead to dizziness or lightheadedness.", "C) It interferes with the healing of the tympanic membrane.", "D) It prevents the client from hearing properly."], answer: 1, rationale: "The client should avoid reading, watching TV, or looking at fast-moving objects for 1 week post-operatively because these activities involve eye tracking, which can lead to dizziness or lightheadedness while the inner ear is healing."},
+        {q: "What should the nurse assess for when a patient with Otosclerosis is undergoing a Weber's test?", options: ["A) The sound lateralizes to the unaffected ear.", "B) The sound lateralizes to the affected ear.", "C) The sound is heard equally in both ears.", "D) The patient cannot hear the tuning fork at all."], answer: 1, rationale: "In Otosclerosis (a conductive hearing loss), the sound heard during a Weber test will lateralize (be heard louder) in the affected ear."}
     ];
 
     // Splitting the massive list into the intended categories
@@ -2162,6 +2265,28 @@
                 </div>
             `;
             rundown.appendChild(div);
+            // ... existing handleAnswer() function ...
+    for (let btn of allBtns) btn.disabled = true;
+}
+
+// PLACE THE NEW FUNCTION HERE
+function skipQuestion() {
+    if (isAnswered) return;
+    
+    // Track the skip in your history
+    userHistory.push({
+        q: activeDeck[currentIdx].q,
+        user: "SKIPPED",
+        correct: activeDeck[currentIdx].options[activeDeck[currentIdx].answer],
+        isCorrect: false,
+        skipped: true, // New property for styling
+        rationale: activeDeck[currentIdx].rationale
+    });
+
+    nextQuestion();
+}
+
+// ... existing nextQuestion() function ...
         });
     }
 </script>
